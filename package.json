@@ -2,7 +2,7 @@
   "name": "react-pagify",
   "description": "Simple pagination for React",
   "author": "Juho Vepsalainen <bebraw@gmail.com>",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "start": "node server.js",
     "gh-pages": "node_modules/.bin/webpack --config ./config/webpack.gh-pages.js",
