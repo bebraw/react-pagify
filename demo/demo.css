@@ -10,3 +10,8 @@ article {
 
     max-width: 768px;
 }
+
+pre {
+    background: #fafefe;
+    padding: 0.5em;
+}
