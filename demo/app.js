@@ -51,8 +51,8 @@ module.exports = React.createClass({
             <div className='data'>
                 <h3>Comics</h3>
 
-                <ul>{paginated.data.map((comic) =>
-                    <li>{comic.name}</li>
+                <ul>{paginated.data.map((comic, i) =>
+                    <li key={'comic-' + i}>{comic.name}</li>
                 )}</ul>
             </div>
         </article>;
