@@ -2,42 +2,39 @@
 
 var React = require('react');
 
+var segmentize = require('./segmentize');
+
 
 var Paginator = React.createClass({
     render() {
         var onSelect = this.props.onSelect || noop;
         var page = this.props.page;
-        var pages = this.props.pages;
+
+        var segments = segmentize(this.props);
+        if(segments.length > 1) {
+            segments = segments.reduce(function(a, b) {
+                return a.concat(-1).concat(b);
+            });
+        }
 
         return <ul className='pagination'>{
-            range(pages).map((i) =>
-                <li
+            segments.map((num, i) =>
+                num >= 0? <li
                     key={'pagination-' + i}
-                    onClick={onSelect.bind(null, i)}
-                    className={i === page && 'selected'}>
+                    onClick={onSelect.bind(null, num)}
+                    className={num === page && 'selected'}>
                     <a href='#' onClick={this.preventDefault}>
-                        {i + 1}
+                        {num + 1}
                     </a>
-                </li>
+                </li>: <li key={'pagination-' + i}>&hellip;</li>
             )
-        }</ul>;
+        }</ul>
     },
 
     preventDefault(e) {
         e.preventDefault();
     },
 });
-
-function range(amount) {
-    var ret = [];
-    var i;
-
-    for(i = 0; i < amount; i++) {
-        ret.push(i);
-    }
-
-    return ret;
-}
 
 function paginate(data, o) {
     data = data || [];

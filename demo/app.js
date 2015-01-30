@@ -10,7 +10,7 @@ var Fork = require('react-ghfork');
 var math = require('annomath');
 var randomName = require('node-random-name');
 
-var Paginator = require('../index.jsx');
+var Paginator = require('../lib/index.jsx');
 
 var readme = require('../README.md');
 
@@ -23,7 +23,8 @@ module.exports = React.createClass({
             data: generateNames(amount),
             pagination: {
                 page: 0,
-                perPage: amount / 10
+                perPage: amount / 10,
+                visiblePages: 5,
             },
         };
     },
@@ -46,7 +47,11 @@ module.exports = React.createClass({
                 Per page <input type='text' defaultValue={pagination.perPage} onChange={this.onPerPage}></input>
             </div>
 
-            <Paginator page={paginated.page} pages={paginated.amount} onSelect={this.onSelect}></Paginator>
+            <Paginator
+                page={paginated.page}
+                pages={paginated.amount}
+                visiblePages={pagination.visiblePages}
+                onSelect={this.onSelect}></Paginator>
 
             <div className='data'>
                 <h3>Comics</h3>

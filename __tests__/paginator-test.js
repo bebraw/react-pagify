@@ -1,11 +1,11 @@
 'use strict';
 
-jest.dontMock('../index.jsx');
+jest.dontMock('../lib/index.jsx');
 
 var React = require('react/addons');
 var TestUtils = React.addons.TestUtils;
 
-var Paginator = require('../index.jsx');
+var Paginator = require('../lib/index.jsx');
 
 
 describe('Paginator', function() {

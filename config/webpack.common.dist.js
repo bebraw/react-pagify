@@ -5,7 +5,7 @@ var common = require('./webpack.common');
 
 
 module.exports = extend(common, {
-    entry: './index',
+    entry: './lib/index',
     externals: {
         react: 'react',
     },

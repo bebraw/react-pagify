@@ -8,7 +8,8 @@
     "test": "node_modules/.bin/jest",
     "gh-pages": "node_modules/.bin/webpack --config ./config/webpack.gh-pages.js",
     "deploy-gh-pages": "node ./config/deploy-gh-pages.js",
-    "dist": "node_modules/.bin/webpack --config ./config/webpack.dist.js && node_modules/.bin/webpack --config ./config/webpack.dist.min.js"
+    "dist": "node_modules/.bin/webpack --config ./config/webpack.dist.js && node_modules/.bin/webpack --config ./config/webpack.dist.min.js",
+    "watch": "node_modules/.bin/npm-watch"
   },
   "dependencies": {
     "react": "^0.12.2"
@@ -25,6 +26,7 @@
     "jsx-loader": "^0.12.2",
     "marked": "^0.3.3",
     "node-random-name": "^1.0.1",
+    "npm-watch": "0.0.0",
     "react-ghfork": "^0.1.2",
     "react-hot-loader": "^1.1.1",
     "react-tools": "^0.12.2",
@@ -58,5 +60,8 @@
     "unmockedModulePathPatterns": [
       "./node_modules/react"
     ]
+  },
+  "watch": {
+    "test": "{lib,__tests__}/*.js"
   }
 }
