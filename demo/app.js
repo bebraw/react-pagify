@@ -7,6 +7,8 @@ require('../style.css');
 
 var React = require('react');
 var Fork = require('react-ghfork');
+var math = require('annomath');
+var randomName = require('node-random-name');
 
 var Paginator = require('../index.jsx');
 
@@ -15,36 +17,13 @@ var readme = require('../README.md');
 
 module.exports = React.createClass({
     getInitialState() {
+        var amount = 100;
+
         return {
-            data: [
-                {
-                    name: 'Zorro',
-                },
-                {
-                    name: 'Amazing Spiderman',
-                },
-                {
-                    name: 'Tarzan',
-                },
-                {
-                    name: 'Not so amazing Spiderman',
-                },
-                {
-                    name: 'Batman',
-                },
-                {
-                    name: 'Batmanuel',
-                },
-                {
-                    name: 'Donald Duck'
-                },
-                {
-                    name: 'Tintin',
-                },
-            ],
+            data: generateNames(amount),
             pagination: {
                 page: 0,
-                perPage: 5
+                perPage: amount / 10
             },
         };
     },
@@ -99,3 +78,13 @@ module.exports = React.createClass({
         });
     },
 });
+
+function generateNames(amount) {
+    return math.range(amount).map((i) => {
+        return {
+            name: randomName({
+                seed: i,
+            })
+        }
+    });
+}
