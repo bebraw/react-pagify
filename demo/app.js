@@ -17,14 +17,13 @@ var readme = require('../README.md');
 
 module.exports = React.createClass({
     getInitialState() {
-        var amount = 100;
+        var amount = 10000;
 
         return {
             data: generateNames(amount),
             pagination: {
                 page: 0,
-                perPage: amount / 10,
-                visiblePages: 5,
+                perPage: 10,
             },
         };
     },
@@ -50,7 +49,8 @@ module.exports = React.createClass({
             <Paginator
                 page={paginated.page}
                 pages={paginated.amount}
-                visiblePages={pagination.visiblePages}
+                beginPages='3'
+                endPages='3'
                 onSelect={this.onSelect}></Paginator>
 
             <div className='data'>

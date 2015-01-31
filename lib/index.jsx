@@ -11,11 +11,9 @@ var Paginator = React.createClass({
         var page = this.props.page;
 
         var segments = segmentize(this.props);
-        if(segments.length > 1) {
-            segments = segments.reduce(function(a, b) {
-                return a.concat(-1).concat(b);
-            });
-        }
+        segments = segments.reduce(function(a, b) {
+            return a.concat(-1).concat(b);
+        });
 
         return <ul className='pagination'>{
             segments.map((num, i) =>

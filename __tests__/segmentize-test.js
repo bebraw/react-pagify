@@ -1,84 +1,118 @@
 'use strict';
 
+jest.dontMock('intersect');
+jest.dontMock('uniq');
 jest.dontMock('../lib/segmentize');
+jest.dontMock('../lib/range');
 
 var segmentize = require('../lib/segmentize');
 
 
 describe('segmentize', function() {
-    it('should not segment if there are more visible pages than pages', function() {
-        var pages = 4;
+    it('should show current and next at start by default', function() {
+        var pageAmount = 4;
 
         expect(segmentize({
             page: 0,
-            pages: pages,
-            visiblePages: pages + 1,
-        }).length).toEqual(pages);
+            pages: pageAmount,
+        })).toEqual([[0, 1]]);
     });
 
-    it('should not segment if there are as many visible pages as pages', function() {
-        var pages = 4;
+    it('should show current and previous at end by default', function() {
+        var pageAmount = 4;
+
+        expect(segmentize({
+            page: pageAmount - 1,
+            pages: pageAmount,
+        })).toEqual([[pageAmount - 2, pageAmount - 1]]);
+    });
+
+    it('should show only current if there is only one page', function() {
+        var pageAmount = 1;
 
         expect(segmentize({
             page: 0,
-            pages: pages,
-            visiblePages: pages,
-        }).length).toEqual(pages);
+            pages: pageAmount,
+        })).toEqual([[0]]);
     });
 
-    it('should segment in two parts if segmented with begin hit', function() {
-        var pages = 10;
-        var segments = segmentize({
+    it('should show both previous and next page if at center', function() {
+        var pageAmount = 10;
+
+        expect(segmentize({
+            page: 5,
+            pages: pageAmount,
+        })).toEqual([[4, 5, 6]]);
+    });
+
+    it('should accept begin pages', function() {
+        var pageAmount = 10;
+
+        expect(segmentize({
+            page: 5,
+            pages: pageAmount,
+            beginPages: 2,
+        })).toEqual([[0, 1], [4, 5, 6]]);
+    });
+
+    it('should accept begin pages and end page', function() {
+        var pageAmount = 10;
+
+        expect(segmentize({
+            page: pageAmount - 1,
+            pages: pageAmount,
+            beginPages: 2,
+        })).toEqual([[0, 1], [pageAmount - 2, pageAmount - 1]]);
+    });
+
+    it('should accept begin pages with overlap', function() {
+        var pageAmount = 10;
+
+        expect(segmentize({
+            page: 2,
+            pages: pageAmount,
+            beginPages: 2,
+        })).toEqual([[0, 1, 2, 3]]);
+    });
+
+    it('should accept end pages', function() {
+        var pageAmount = 10;
+
+        expect(segmentize({
+            page: 5,
+            pages: pageAmount,
+            endPages: 2,
+        })).toEqual([[4, 5, 6], [8, 9]]);
+    });
+
+    it('should accept first page and end pages', function() {
+        var pageAmount = 10;
+
+        expect(segmentize({
             page: 0,
-            pages: pages,
-            visiblePages: 3,
-        });
-
-        expect(segments.length).toEqual(2);
-        expect(segments[0]).toEqual([0, 1]);
-        expect(segments[1]).toEqual([pages - 1]);
+            pages: pageAmount,
+            endPages: 2,
+        })).toEqual([[0, 1], [8, 9]]);
     });
 
-    it('should segment in two parts if segmented with end hit', function() {
-        var pages = 7;
-        var segments = segmentize({
-            page: pages - 1,
-            pages: pages,
-            visiblePages: 4,
-        });
+    it('should accept end pages with overlap', function() {
+        var pageAmount = 10;
 
-        expect(segments.length).toEqual(2);
-        expect(segments[0]).toEqual([0, 1]);
-        expect(segments[1]).toEqual([pages -2, pages - 1]);
+        expect(segmentize({
+            page: pageAmount - 3,
+            pages: pageAmount,
+            endPages: 2,
+        })).toEqual([[6, 7, 8, 9]]);
     });
 
-    it('should segment in three parts if segmented with center hit', function() {
-        var pages = 10;
-        var page = 5;
-        var segments = segmentize({
-            page: page,
-            pages: pages,
-            visiblePages: 3,
-        });
+    it('should accept both begin and end pages', function() {
+        var pageAmount = 10;
 
-        expect(segments.length).toEqual(3);
-        expect(segments[0]).toEqual([0]);
-        expect(segments[1]).toEqual([page]);
-        expect(segments[2]).toEqual([pages - 1]);
-    });
-
-    it('should segment in three parts if segmented with center hit and center should have padding', function() {
-        var pages = 20;
-        var page = 10;
-        var segments = segmentize({
-            page: page,
-            pages: pages,
-            visiblePages: 9,
-        });
-
-        expect(segments.length).toEqual(3);
-        expect(segments[0]).toEqual([0, 1, 2]);
-        expect(segments[1]).toEqual([page - 1, page, page + 1]);
-        expect(segments[2]).toEqual([pages - 3, pages - 2, pages - 1]);
+        expect(segmentize({
+            page: 5,
+            pages: pageAmount,
+            beginPages: 2,
+            endPages: 2,
+        })).toEqual([[0, 1], [4, 5, 6], [8, 9]]);
     });
 });

@@ -12,7 +12,9 @@
     "watch": "node_modules/.bin/npm-watch"
   },
   "dependencies": {
-    "react": "^0.12.2"
+    "intersect": "^0.1.0",
+    "react": "^0.12.2",
+    "uniq": "^1.0.1"
   },
   "devDependencies": {
     "annomath": "^0.4.1",
