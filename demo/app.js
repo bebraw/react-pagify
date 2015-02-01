@@ -36,10 +36,6 @@ module.exports = React.createClass({
         return <article>
             <Fork project='bebraw/react-pagify'></Fork>
 
-            <div dangerouslySetInnerHTML={{__html: readme}}></div>
-
-            <hr></hr>
-
             <h2>Demo</h2>
 
             <div className='per-page-container'>
@@ -60,6 +56,10 @@ module.exports = React.createClass({
                     <li key={'comic-' + i}>{comic.name}</li>
                 )}</ul>
             </div>
+
+            <hr></hr>
+
+            <div dangerouslySetInnerHTML={{__html: readme}}></div>
         </article>;
     },
 
