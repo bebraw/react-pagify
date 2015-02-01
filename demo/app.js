@@ -8,7 +8,7 @@ require('../style.css');
 var React = require('react');
 var Fork = require('react-ghfork');
 var math = require('annomath');
-var randomName = require('node-random-name');
+var cumberbatch = require('cumberbatch-name');
 
 var Paginator = require('../lib/index.jsx');
 
@@ -85,11 +85,9 @@ module.exports = React.createClass({
 });
 
 function generateNames(amount) {
-    return math.range(amount).map((i) => {
+    return math.range(amount).map(() => {
         return {
-            name: randomName({
-                seed: i,
-            })
+            name: cumberbatch()
         }
     });
 }

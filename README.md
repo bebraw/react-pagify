@@ -1,7 +1,7 @@
 [![build status](https://secure.travis-ci.org/bebraw/react-pagify.png)](http://travis-ci.org/bebraw/react-pagify)
 # react-pagify - Simple pagination for React
 
-`react-pagify` provides a simple interface for pagination. Consider the usage example below.
+`react-pagify` provides a simple interface for pagination Consider the usage example below.
 
 ## Usage
 
@@ -78,4 +78,3 @@ module.exports = React.createClass({
 ## License
 
 `react-pagify` is available under MIT. See LICENSE for more details.
-
