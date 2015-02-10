@@ -4,7 +4,6 @@
   "author": "Juho Vepsalainen <bebraw@gmail.com>",
   "version": "0.2.1",
   "scripts": {
-    "prepublish": "npm run dist",
     "start": "node server.js",
     "test": "node_modules/.bin/jest",
     "gh-pages": "node_modules/.bin/webpack --config ./config/webpack.gh-pages.js",
