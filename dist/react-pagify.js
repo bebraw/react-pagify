@@ -134,16 +134,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = function(o) {
 	    var page = o.page;
 	    var pages = o.pages;
-	    var beginPages = o.beginPages? range(o.beginPages): [];
-	    var endPages = o.endPages? range(pages - o.endPages, pages): [];
-	    var center;
+	    var beginPages = o.beginPages? range(Math.min(o.beginPages, pages)): [];
+	    var endPages = o.endPages? range(Math.max(pages - o.endPages, 0), pages): [];
+	    var center, ret;
 
 	    if(page === 0) {
-	        return (pages > 1? [[0, 1], endPages]: [[0]]).filter(function(a)  {return a.length;});
+	        ret = [[0]];
+
+	        if(pages > 1) {
+	            beginPages = [0, 1];
+
+	            ret = [beginPages, difference(endPages, beginPages)].filter(function(a)  {return a.length;});
+	        }
+
+	        return ret;
 	    }
 
 	    if(page === pages - 1) {
-	        return [beginPages, [pages - 2, pages - 1]].filter(function(a)  {return a.length;});
+	        endPages = [pages - 2, pages - 1];
+
+	        return [beginPages, difference(endPages, beginPages)].filter(function(a)  {return a.length;});
 	    }
 
 	    center = [page - 1, page, page + 1];
@@ -160,6 +170,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return[beginPages, center, endPages].filter(function(a)  {return a.length;});
 	};
+
+	function difference(a, b) {
+	    return a.filter(function(v)  {return b.indexOf(v) < 0;});
+	}
 
 
 /***/ },
