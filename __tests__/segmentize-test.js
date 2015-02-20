@@ -9,6 +9,24 @@ var segmentize = require('../lib/segmentize');
 
 
 describe('segmentize', function() {
+    it('should show only one page if there is one', function() {
+        var pageAmount = 1;
+
+        expect(segmentize({
+            page: 0,
+            pages: pageAmount,
+        })).toEqual([[0]]);
+    });
+
+    it('should show only two pages if there are two', function() {
+        var pageAmount = 2;
+
+        expect(segmentize({
+            page: 0,
+            pages: pageAmount,
+        })).toEqual([[0, 1]]);
+    });
+
     it('should show current and next at start by default', function() {
         var pageAmount = 4;
 
@@ -114,5 +132,38 @@ describe('segmentize', function() {
             beginPages: 2,
             endPages: 2,
         })).toEqual([[0, 1], [4, 5, 6], [8, 9]]);
+    });
+
+    it('should show only one page if there is one with both begin and end pages', function() {
+        var pageAmount = 1;
+
+        expect(segmentize({
+            page: 0,
+            pages: pageAmount,
+            beginPages: 3,
+            endPages: 3,
+        })).toEqual([[0]]);
+    });
+
+    it('should show only two pages if there are two with both begin and end pages', function() {
+        var pageAmount = 2;
+
+        expect(segmentize({
+            page: 0,
+            pages: pageAmount,
+            beginPages: 3,
+            endPages: 3,
+        })).toEqual([[0, 1]]);
+    });
+
+    it('should show only two pages if there are two with both begin and end pages and latter is selected', function() {
+        var pageAmount = 2;
+
+        expect(segmentize({
+            page: 1,
+            pages: pageAmount,
+            beginPages: 3,
+            endPages: 3,
+        })).toEqual([[0, 1]]);
     });
 });
