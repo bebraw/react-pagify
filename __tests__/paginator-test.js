@@ -6,8 +6,8 @@ jest.dontMock('../lib/segmentize');
 jest.dontMock('../lib/range');
 jest.dontMock('../lib/index.jsx');
 
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var TestUtils = require('react/addons').addons.TestUtils;
 
 var Paginator = require('../lib/index.jsx');
 
