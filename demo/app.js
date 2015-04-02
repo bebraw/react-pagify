@@ -1,7 +1,8 @@
 'use strict';
 
 require('highlight.js/styles/github.css');
-require('react-ghfork/style.css');
+require('react-ghfork/gh-fork-ribbon.ie.css');
+require('react-ghfork/gh-fork-ribbon.css');
 require('./demo.css');
 require('../style.css');
 
@@ -34,7 +35,7 @@ module.exports = React.createClass({
         var paginated = Paginator.paginate(data, pagination);
 
         return <article>
-            <Fork project='bebraw/react-pagify'></Fork>
+            <Fork className='right' project='bebraw/react-pagify'></Fork>
 
             <h2>Demo</h2>
 

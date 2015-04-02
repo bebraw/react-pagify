@@ -15,3 +15,9 @@ pre {
     background: #fafefe;
     padding: 0.5em;
 }
+
+.github-fork-ribbon {
+    position: fixed;
+
+    letter-spacing: 0.01em;
+}
