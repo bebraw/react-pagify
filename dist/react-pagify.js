@@ -11,41 +11,41 @@
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
+
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/
+
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-/******/
+
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
 /******/ 			loaded: false
 /******/ 		};
-/******/
+
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/
+
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
-/******/
+
+
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-/******/
+
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
+
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-/******/
+
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
 /******/ })
@@ -202,7 +202,34 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = intersect;
 
+	function many (sets) {
+	  var o = {};
+	  var l = sets.length - 1;
+	  var first = sets[0];
+	  var last = sets[l];
+	  
+	  for(var i in first) o[first[i]] = 0;
+	  
+	  for(var i = 1; i <= l; i++) {
+	    var row = sets[i];
+	    for(var j in row) {
+	      var key = row[j];
+	      if(o[key] === i - 1) o[key] = i;
+	    }
+	  }
+	  
+	  var a = [];
+	  for(var i in last) {
+	    var key = last[i];
+	    if(o[key] === l) a.push(key);
+	  }
+	  
+	  return a;
+	}
+
 	function intersect (a, b) {
+	  if (!b) return many(a);
+
 	  var res = [];
 	  for (var i = 0; i < a.length; i++) {
 	    if (indexOf(b, a[i]) > -1) res.push(a[i]);
@@ -211,6 +238,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	intersect.big = function(a, b) {
+	  if (!b) return many(a);
+	  
 	  var ret = [];
 	  var temp = {};
 	  
@@ -298,3 +327,4 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ }
 /******/ ])
 });
+;
