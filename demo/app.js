@@ -17,6 +17,8 @@ var readme = require('../README.md');
 
 
 module.exports = React.createClass({
+    displayName: 'App',
+
     getInitialState() {
         var amount = 10000;
 
@@ -34,34 +36,36 @@ module.exports = React.createClass({
         var pagination = this.state.pagination || {};
         var paginated = Paginator.paginate(data, pagination);
 
-        return <article>
-            <Fork className='right' project='bebraw/react-pagify'></Fork>
+        return (
+            <article>
+                <Fork className='right' project='bebraw/react-pagify' />
 
-            <h2>Demo</h2>
+                <h2>Demo</h2>
 
-            <div className='per-page-container'>
-                Per page <input type='text' defaultValue={pagination.perPage} onChange={this.onPerPage}></input>
-            </div>
+                <div className='per-page-container'>
+                    Per page <input type='text' defaultValue={pagination.perPage} onChange={this.onPerPage}></input>
+                </div>
 
-            <Paginator
-                page={paginated.page}
-                pages={paginated.amount}
-                beginPages='3'
-                endPages='3'
-                onSelect={this.onSelect}></Paginator>
+                <Paginator
+                    page={paginated.page}
+                    pages={paginated.amount}
+                    beginPages={3}
+                    endPages={3}
+                    onSelect={this.onSelect} />
 
-            <div className='data'>
-                <h3>Comics</h3>
+                <div className='data'>
+                    <h3>Comics</h3>
 
-                <ul>{paginated.data.map((comic, i) =>
-                    <li key={'comic-' + i}>{comic.name}</li>
-                )}</ul>
-            </div>
+                    <ul>{paginated.data.map((comic, i) =>
+                        <li key={'comic-' + i}>{comic.name}</li>
+                    )}</ul>
+                </div>
 
-            <hr></hr>
+                <hr></hr>
 
-            <div dangerouslySetInnerHTML={{__html: readme}}></div>
-        </article>;
+                <div dangerouslySetInnerHTML={{__html: readme}}></div>
+            </article>
+        );
     },
 
     onSelect(page) {
@@ -74,7 +78,7 @@ module.exports = React.createClass({
         });
     },
 
-    onPerPage(e) {
+    onPerPage() {
         var pagination = this.state.pagination || {};
 
         pagination.perPage = parseInt(event.target.value, 10);
@@ -89,6 +93,6 @@ function generateNames(amount) {
     return math.range(amount).map(() => {
         return {
             name: cumberbatch()
-        }
+        };
     });
 }

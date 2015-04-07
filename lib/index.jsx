@@ -6,8 +6,21 @@ var segmentize = require('./segmentize');
 
 
 var Paginator = React.createClass({
+    displayName: 'Paginator',
+
+    propTypes: {
+        onSelect: React.PropTypes.func,
+        page: React.PropTypes.number,
+        beginPages: React.PropTypes.number,
+        endPages: React.PropTypes.number,
+    },
+    getDefaultProps() {
+        return {
+            onSelect: noop
+        };
+    },
     render() {
-        var onSelect = this.props.onSelect || noop;
+        var onSelect = this.props.onSelect;
         var page = this.props.page;
 
         var segments = segmentize(this.props);
@@ -15,18 +28,20 @@ var Paginator = React.createClass({
             return a.concat(-1).concat(b);
         });
 
-        return <ul className='pagination'>{
-            segments.map((num, i) =>
-                num >= 0? <li
-                    key={'pagination-' + i}
-                    onClick={onSelect.bind(null, num)}
-                    className={num === page && 'selected'}>
-                    <a href='#' onClick={this.preventDefault}>
-                        {num + 1}
-                    </a>
-                </li>: <li key={'pagination-' + i}>&hellip;</li>
-            )
-        }</ul>
+        return (
+            <ul className='pagination'>{
+                segments.map((num, i) =>
+                    num >= 0? <li
+                        key={'pagination-' + i}
+                        onClick={onSelect.bind(null, num)}
+                        className={num === page && 'selected'}>
+                        <a href='#' onClick={this.preventDefault}>
+                            {num + 1}
+                        </a>
+                    </li>: <li key={'pagination-' + i}>&hellip;</li>
+                )
+            }</ul>
+        );
     },
 
     preventDefault(e) {

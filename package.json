@@ -5,11 +5,12 @@
   "version": "0.4.0",
   "scripts": {
     "start": "node server.js",
-    "test": "jest",
+    "test": "jest && npm run lint",
     "gh-pages": "webpack --config ./config/webpack.gh-pages.js",
     "deploy-gh-pages": "node ./config/deploy-gh-pages.js",
     "dist": "webpack --config ./config/webpack.dist.js && webpack --config ./config/webpack.dist.min.js",
-    "watch": "npm-watch"
+    "watch": "npm-watch",
+    "lint": "eslint . --ext .js --ext .jsx"
   },
   "dependencies": {
     "intersect": "^1.0.1",
@@ -17,8 +18,11 @@
   },
   "devDependencies": {
     "annomath": "^0.4.1",
+    "babel-eslint": "^2.0.2",
     "css-loader": "^0.9.1",
     "cumberbatch-name": "^1.0.9",
+    "eslint": "^0.18.0",
+    "eslint-plugin-react": "^2.1.0",
     "file-loader": "^0.8.1",
     "gh-pages": "^0.2.0",
     "highlight.js": "^8.4.0",
