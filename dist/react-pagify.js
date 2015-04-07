@@ -61,9 +61,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	var segmentize = __webpack_require__(2);
 
 
-	var Paginator = React.createClass({displayName: "Paginator",
+	var Paginator = React.createClass({
+	    displayName: 'Paginator',
+
+	    propTypes: {
+	        onSelect: React.PropTypes.func,
+	        page: React.PropTypes.number,
+	        beginPages: React.PropTypes.number,
+	        endPages: React.PropTypes.number,
+	    },
+	    getDefaultProps:function() {
+	        return {
+	            onSelect: noop
+	        };
+	    },
 	    render:function() {
-	        var onSelect = this.props.onSelect || noop;
+	        var onSelect = this.props.onSelect;
 	        var page = this.props.page;
 
 	        var segments = segmentize(this.props);
@@ -71,18 +84,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return a.concat(-1).concat(b);
 	        });
 
-	        return React.createElement("ul", {className: "pagination"}, 
-	            segments.map(function(num, i) 
-	                {return num >= 0? React.createElement("li", {
-	                    key: 'pagination-' + i, 
-	                    onClick: onSelect.bind(null, num), 
-	                    className: num === page && 'selected'}, 
-	                    React.createElement("a", {href: "#", onClick: this.preventDefault}, 
-	                        num + 1
-	                    )
-	                ): React.createElement("li", {key: 'pagination-' + i}, "…");}.bind(this)
+	        return (
+	            React.createElement("ul", {className: "pagination"}, 
+	                segments.map(function(num, i) 
+	                    {return num >= 0? React.createElement("li", {
+	                        key: 'pagination-' + i, 
+	                        onClick: onSelect.bind(null, num), 
+	                        className: num === page && 'selected'}, 
+	                        React.createElement("a", {href: "#", onClick: this.preventDefault}, 
+	                            num + 1
+	                        )
+	                    ): React.createElement("li", {key: 'pagination-' + i}, "…");}.bind(this)
+	                )
 	            )
-	        )
+	        );
 	    },
 
 	    preventDefault:function(e) {
@@ -168,7 +183,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        center = [];
 	    }
 
-	    return[beginPages, center, endPages].filter(function(a)  {return a.length;});
+	    if(!center.length && beginPages.length === endPages.length &&
+	        beginPages.every(function(page, i)  {return page === endPages[i];})) {
+	        return [beginPages];
+	    }
+
+	    return [beginPages, center, endPages].filter(function(a)  {return a.length;});
 	};
 
 	function difference(a, b) {
