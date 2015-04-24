@@ -157,7 +157,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        ret = [[0]];
 
 	        if(pages > 1) {
-	            beginPages = [0, 1];
+	            if(!beginPages.length) {
+	                beginPages = [0, 1];
+	            }
 
 	            ret = [beginPages, difference(endPages, beginPages)].filter(function(a)  {return a.length;});
 	        }
