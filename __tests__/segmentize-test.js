@@ -175,4 +175,13 @@ describe('segmentize', function() {
             endPages: 3,
         })).toEqual([[0, 1, 2]]);
     });
+
+    it('should segmentize #2 correctly', function() {
+        expect(segmentize({
+            page: 0,
+            pages: 3,
+            beginPages: 3,
+            endPages: 3,
+        })).toEqual([[0, 1, 2]]);
+    });
 });
