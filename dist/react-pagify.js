@@ -69,10 +69,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        page: React.PropTypes.number,
 	        beginPages: React.PropTypes.number,
 	        endPages: React.PropTypes.number,
+	        className: React.PropTypes.string,
 	    },
 	    getDefaultProps:function() {
 	        return {
-	            onSelect: noop
+	            onSelect: noop,
+	            className: 'pagify-pagination'
 	        };
 	    },
 	    render:function() {
@@ -85,7 +87,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 
 	        return (
-	            React.createElement("ul", {className: "pagination"}, 
+	            React.createElement("ul", {className: this.props.className}, 
 	                segments.map(function(num, i) 
 	                    {return num >= 0? React.createElement("li", {
 	                        key: 'pagination-' + i, 
