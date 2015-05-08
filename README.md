@@ -39,9 +39,8 @@ module.exports = React.createClass({
             </input>
         </div>
 
-        {/* replace className if needed. it defaults to pagination */}
         <Paginator
-            className='pagination'
+            className='pagify-pagination'
             page={paginated.page}
             pages={paginated.amount}
             beginPages={3}

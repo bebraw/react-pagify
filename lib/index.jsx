@@ -18,7 +18,7 @@ var Paginator = React.createClass({
     getDefaultProps() {
         return {
             onSelect: noop,
-            className: 'pagination'
+            className: 'pagify-pagination'
         };
     },
     render() {
