@@ -13,10 +13,12 @@ var Paginator = React.createClass({
         page: React.PropTypes.number,
         beginPages: React.PropTypes.number,
         endPages: React.PropTypes.number,
+        paginatorClass: React.PropTypes.string,
     },
     getDefaultProps() {
         return {
-            onSelect: noop
+            onSelect: noop,
+            paginatorClass: 'paginator'
         };
     },
     render() {
@@ -29,7 +31,7 @@ var Paginator = React.createClass({
         });
 
         return (
-            <ul className='pagination'>{
+            <ul className={this.props.paginatorClass}>{
                 segments.map((num, i) =>
                     num >= 0? <li
                         key={'pagination-' + i}
