@@ -39,7 +39,9 @@ module.exports = React.createClass({
             </input>
         </div>
 
+        {/* replace className if needed. it defaults to pagination */}
         <Paginator
+            className='pagination'
             page={paginated.page}
             pages={paginated.amount}
             beginPages={3}
@@ -74,6 +76,10 @@ module.exports = React.createClass({
     },
 });
 ```
+
+## Contributors
+
+* [rowbare](https://github.com/rowbare) - Allow usage in Bootstrap by making `className` customizable
 
 ## License
 
