@@ -155,6 +155,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var endPages = o.endPages? range(Math.max(pages - o.endPages, 0), pages): [];
 	    var center, ret;
 
+	    if(beginPages.length + endPages.length >= pages) {
+	        return [range(pages)];
+	    }
+
 	    if(page === 0) {
 	        ret = [[0]];
 
