@@ -30,19 +30,32 @@ var Paginator = React.createClass({
             return a.concat(-1).concat(b);
         });
 
-        return (
-            <ul className={this.props.className}>{
-                segments.map((num, i) =>
-                    num >= 0? <li
+        var items = segments.map((num, i) => {
+            if (num >= 0) {
+                return (
+                    <li
                         key={'pagination-' + i}
                         onClick={onSelect.bind(null, num)}
-                        className={num === page && 'selected'}>
+                        className={num === page && 'selected'}
+                    >
                         <a href='#' onClick={this.preventDefault}>
                             {num + 1}
                         </a>
-                    </li>: <li key={'pagination-' + i}>&hellip;</li>
-                )
-            }</ul>
+                    </li>
+                );
+            }
+
+            return (
+                <li key={'pagination-' + i}>
+                    &hellip;
+                </li>
+            );
+        });
+
+        return (
+            <ul className={this.props.className}>
+                {items}
+            </ul>
         );
     },
 
