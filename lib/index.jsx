@@ -14,11 +14,13 @@ var Paginator = React.createClass({
         beginPages: React.PropTypes.number,
         endPages: React.PropTypes.number,
         className: React.PropTypes.string,
+        ellipsesClassName: React.PropTypes.string,
     },
     getDefaultProps() {
         return {
             onSelect: noop,
-            className: 'pagify-pagination'
+            className: 'pagify-pagination',
+            ellipsesClassName: ''
         };
     },
     render() {
@@ -46,7 +48,10 @@ var Paginator = React.createClass({
             }
 
             return (
-                <li key={'pagination-' + i}>
+                <li
+                    key={'pagination-' + i}
+                    className={this.props.ellipsesClassName}
+                >
                     &hellip;
                 </li>
             );
