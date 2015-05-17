@@ -69,19 +69,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	        page: React.PropTypes.number,
 	        beginPages: React.PropTypes.number,
 	        endPages: React.PropTypes.number,
+	        showNextPrev: React.PropTypes.bool,
 	        className: React.PropTypes.string,
 	        ellipsesClassName: React.PropTypes.string,
+	        prevClassName: React.PropTypes.string,
+	        nextClassName: React.PropTypes.string
 	    },
 	    getDefaultProps:function() {
 	        return {
 	            onSelect: noop,
+	            showPrevNext: false,
 	            className: 'pagify-pagination',
-	            ellipsesClassName: ''
+	            ellipsesClassName: '',
+	            prevClassName: 'pagify-prev',
+	            nextClassName: 'pagify-next'
 	        };
 	    },
 	    render:function() {
-	        var onSelect = this.props.onSelect;
-	        var page = this.props.page;
+	        var $__0=
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	          this.props,onSelect=$__0.onSelect,page=$__0.page,ellipsesClassName=$__0.ellipsesClassName,className=$__0.className,showPrevNext=$__0.showPrevNext,prevClassName=$__0.prevClassName,nextClassName=$__0.nextClassName;
 
 	        var segments = segmentize(this.props);
 	        segments = segments.reduce(function(a, b) {
@@ -106,16 +119,43 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return (
 	                React.createElement("li", {
 	                    key: 'pagination-' + i, 
-	                    className: this.props.ellipsesClassName
+	                    className: ellipsesClassName
 	                }, 
 	                    "…"
 	                )
 	            );
 	        }.bind(this));
 
+	        var prevButton = (
+	            React.createElement("li", {
+	                onClick: onSelect.bind(null, page - 1), 
+	                className: prevClassName
+	            }, 
+	                React.createElement("a", {href: "#", onClick: this.preventDefault}, 
+	                    "Previous"
+	                )
+	            )
+	        );
+
+	        var isFirstPage = page === 0;
+	        var isLastPage = page === segments[segments.length - 1];
+
+	        var nextButton = (
+	            React.createElement("li", {
+	                onClick: onSelect.bind(null, page + 1), 
+	                className: nextClassName
+	            }, 
+	                React.createElement("a", {href: "#", onClick: this.preventDefault}, 
+	                    "Next"
+	                )
+	            )
+	        );
+
 	        return (
-	            React.createElement("ul", {className: this.props.className}, 
-	                items
+	            React.createElement("ul", {className: className}, 
+	                showPrevNext && !isFirstPage && prevButton, 
+	                items, 
+	                showPrevNext && !isLastPage && nextButton
 	            )
 	        );
 	    },
