@@ -13,19 +13,32 @@ var Paginator = React.createClass({
         page: React.PropTypes.number,
         beginPages: React.PropTypes.number,
         endPages: React.PropTypes.number,
+        showNextPrev: React.PropTypes.bool,
         className: React.PropTypes.string,
         ellipsesClassName: React.PropTypes.string,
+        prevClassName: React.PropTypes.string,
+        nextClassName: React.PropTypes.string
     },
     getDefaultProps() {
         return {
             onSelect: noop,
+            showPrevNext: false,
             className: 'pagify-pagination',
-            ellipsesClassName: ''
+            ellipsesClassName: '',
+            prevClassName: 'pagify-prev',
+            nextClassName: 'pagify-next'
         };
     },
     render() {
-        var onSelect = this.props.onSelect;
-        var page = this.props.page;
+        var {
+            onSelect,
+            page,
+            ellipsesClassName,
+            className,
+            showPrevNext,
+            prevClassName,
+            nextClassName
+        } = this.props;
 
         var segments = segmentize(this.props);
         segments = segments.reduce(function(a, b) {
@@ -50,16 +63,43 @@ var Paginator = React.createClass({
             return (
                 <li
                     key={'pagination-' + i}
-                    className={this.props.ellipsesClassName}
+                    className={ellipsesClassName}
                 >
                     &hellip;
                 </li>
             );
         });
 
+        var prevButton = (
+            <li
+                onClick={onSelect.bind(null, page - 1)}
+                className={prevClassName}
+            >
+                <a href='#' onClick={this.preventDefault}>
+                    Previous
+                </a>
+            </li>
+        );
+
+        var isFirstPage = page === 0;
+        var isLastPage = page === segments[segments.length - 1];
+
+        var nextButton = (
+            <li
+                onClick={onSelect.bind(null, page + 1)}
+                className={nextClassName}
+            >
+                <a href='#' onClick={this.preventDefault}>
+                    Next
+                </a>
+            </li>
+        );
+
         return (
-            <ul className={this.props.className}>
+            <ul className={className}>
+                {showPrevNext && !isFirstPage && prevButton}
                 {items}
+                {showPrevNext && !isLastPage && nextButton}
             </ul>
         );
     },
