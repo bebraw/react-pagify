@@ -24,8 +24,12 @@ var Paginator = React.createClass({
         };
     },
     render() {
-        var onSelect = this.props.onSelect;
-        var page = this.props.page;
+        var {
+            onSelect,
+            page,
+            ellipsesClassName,
+            className
+        } = this.props;
 
         var segments = segmentize(this.props);
         segments = segments.reduce(function(a, b) {
@@ -50,7 +54,7 @@ var Paginator = React.createClass({
             return (
                 <li
                     key={'pagination-' + i}
-                    className={this.props.ellipsesClassName}
+                    className={ellipsesClassName}
                 >
                     &hellip;
                 </li>
@@ -58,7 +62,7 @@ var Paginator = React.createClass({
         });
 
         return (
-            <ul className={this.props.className}>
+            <ul className={className}>
                 {items}
             </ul>
         );
