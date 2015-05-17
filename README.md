@@ -79,6 +79,7 @@ module.exports = React.createClass({
 ## Contributors
 
 * [rowbare](https://github.com/rowbare) - Allow usage in Bootstrap by making `className` customizable
+* [Nadav Spiegelman](https://github.com/nadavspi) - Add optional ellipsesClassName prop
 
 ## License
 
