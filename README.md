@@ -46,6 +46,7 @@ module.exports = React.createClass({
                 pages={paginated.amount}
                 beginPages={3}
                 endPages={3}
+                showPrevNext={true}
                 onSelect={this.onSelect}>
             </Paginator>
 
