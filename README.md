@@ -25,34 +25,34 @@ module.exports = React.createClass({
     },
 
     render() {
-    var data = this.state.data || [];
-    var pagination = this.state.pagination || {};
-    var paginated = Paginator.paginate(data, pagination);
+        var data = this.state.data || [];
+        var pagination = this.state.pagination || {};
+        var paginated = Paginator.paginate(data, pagination);
 
-    return <article>
-        <div className='per-page-container'>
-            <span>Per page</span>
-            <input
-                type='text'
-                defaultValue={pagination.perPage}
-                onChange={this.onPerPage}>
-            </input>
-        </div>
+        return <article>
+            <div className='per-page-container'>
+                <span>Per page</span>
+                <input
+                    type='text'
+                    defaultValue={pagination.perPage}
+                    onChange={this.onPerPage}>
+                </input>
+            </div>
 
-        <Paginator
-            className='pagify-pagination'
-            ellipsesClassName='pagify-ellipsis'
-            page={paginated.page}
-            pages={paginated.amount}
-            beginPages={3}
-            endPages={3}
-            onSelect={this.onSelect}>
-        </Paginator>
+            <Paginator
+                className='pagify-pagination'
+                ellipsesClassName='pagify-ellipsis'
+                page={paginated.page}
+                pages={paginated.amount}
+                beginPages={3}
+                endPages={3}
+                onSelect={this.onSelect}>
+            </Paginator>
 
-        <div className='data'>
-            ...
-        </div>
-    </article>;
+            <div className='data'>
+                ...
+            </div>
+        </article>;
     },
 
     onSelect(page) {
