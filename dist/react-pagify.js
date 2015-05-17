@@ -70,11 +70,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        beginPages: React.PropTypes.number,
 	        endPages: React.PropTypes.number,
 	        className: React.PropTypes.string,
+	        ellipsesClassName: React.PropTypes.string,
 	    },
 	    getDefaultProps:function() {
 	        return {
 	            onSelect: noop,
-	            className: 'pagify-pagination'
+	            className: 'pagify-pagination',
+	            ellipsesClassName: ''
 	        };
 	    },
 	    render:function() {
@@ -86,18 +88,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return a.concat(-1).concat(b);
 	        });
 
-	        return (
-	            React.createElement("ul", {className: this.props.className}, 
-	                segments.map(function(num, i) 
-	                    {return num >= 0? React.createElement("li", {
+	        var items = segments.map(function(num, i)  {
+	            if (num >= 0) {
+	                return (
+	                    React.createElement("li", {
 	                        key: 'pagination-' + i, 
 	                        onClick: onSelect.bind(null, num), 
-	                        className: num === page && 'selected'}, 
+	                        className: num === page && 'selected'
+	                    }, 
 	                        React.createElement("a", {href: "#", onClick: this.preventDefault}, 
 	                            num + 1
 	                        )
-	                    ): React.createElement("li", {key: 'pagination-' + i}, "…");}.bind(this)
+	                    )
+	                );
+	            }
+
+	            return (
+	                React.createElement("li", {
+	                    key: 'pagination-' + i, 
+	                    className: this.props.ellipsesClassName
+	                }, 
+	                    "…"
 	                )
+	            );
+	        }.bind(this));
+
+	        return (
+	            React.createElement("ul", {className: this.props.className}, 
+	                items
 	            )
 	        );
 	    },
