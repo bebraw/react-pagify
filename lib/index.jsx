@@ -13,7 +13,7 @@ var Paginator = React.createClass({
         page: React.PropTypes.number,
         beginPages: React.PropTypes.number,
         endPages: React.PropTypes.number,
-        showNextPrev: React.PropTypes.bool,
+        showPrevNext: React.PropTypes.bool,
         className: React.PropTypes.string,
         ellipsesClassName: React.PropTypes.string,
         prevClassName: React.PropTypes.string,
