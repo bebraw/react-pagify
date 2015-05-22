@@ -69,7 +69,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        page: React.PropTypes.number,
 	        beginPages: React.PropTypes.number,
 	        endPages: React.PropTypes.number,
-	        showNextPrev: React.PropTypes.bool,
+	        showPrevNext: React.PropTypes.bool,
 	        className: React.PropTypes.string,
 	        ellipsesClassName: React.PropTypes.string,
 	        prevClassName: React.PropTypes.string,
@@ -240,12 +240,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    center = [page - 1, page, page + 1];
 
 	    if(intersect(beginPages, center).length) {
-	        beginPages = uniq(beginPages.concat(center));
+	        beginPages = uniq(beginPages.concat(center)).sort(function(a, b) {
+	            return a > b;
+	        });
 	        center = [];
 	    }
 
 	    if(intersect(center, endPages).length) {
-	        endPages = uniq(center.concat(endPages));
+	        endPages = uniq(center.concat(endPages)).sort(function(a, b) {
+	            return a > b;
+	        });
 	        center = [];
 	    }
 
