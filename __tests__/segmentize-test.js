@@ -193,4 +193,22 @@ describe('segmentize', function() {
             endPages: 3,
         })).toEqual([[0, 1, 2, 3, 4, 5]]);
     });
+
+    it('should segmentize #6 correctly', function() {
+        expect(segmentize({
+            page: 8,
+            pages: 11,
+            beginPages: 3,
+            endPages: 3,
+        })).toEqual([[0, 1, 2], [7, 8, 9, 10]]);
+    });
+
+    it('should segmentize start correctly', function() {
+        expect(segmentize({
+            page: 2,
+            pages: 11,
+            beginPages: 3,
+            endPages: 3,
+        })).toEqual([[0, 1, 2, 3], [8, 9, 10]]);
+    });
 });
