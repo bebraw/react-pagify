@@ -17,7 +17,9 @@ var Paginator = React.createClass({
         className: React.PropTypes.string,
         ellipsesClassName: React.PropTypes.string,
         prevClassName: React.PropTypes.string,
-        nextClassName: React.PropTypes.string
+        nextClassName: React.PropTypes.string,
+        prevButtonLabel: React.PropTypes.string,
+        nextButtonLabel: React.PropTypes.string
     },
     getDefaultProps() {
         return {
@@ -75,8 +77,10 @@ var Paginator = React.createClass({
                 onClick={onSelect.bind(null, page - 1)}
                 className={prevClassName}
             >
-                <a href='#' onClick={this.preventDefault}>
-                    Previous
+                <a href='#'
+                    onClick={this.preventDefault}
+                    dangerouslySetInnerHTML={{__html: this.props.prevButtonLabel ? this.props.prevButtonLabel : 'Previous'}}
+                >
                 </a>
             </li>
         );
@@ -89,8 +93,10 @@ var Paginator = React.createClass({
                 onClick={onSelect.bind(null, page + 1)}
                 className={nextClassName}
             >
-                <a href='#' onClick={this.preventDefault}>
-                    Next
+                <a href='#'
+                    onClick={this.preventDefault}
+                    dangerouslySetInnerHTML={{__html: this.props.nextButtonLabel ? this.props.nextButtonLabel : 'Next'}}
+                >
                 </a>
             </li>
         );
