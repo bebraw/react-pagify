@@ -79,10 +79,7 @@ var Paginator = React.createClass({
             >
                 <a href='#' 
                     onClick={this.preventDefault}
-                    dangerouslySetInnerHTML={{__html: this.props.prevButtonLabel ? 
-                        this.props.prevButtonLabel : 
-                        "Prev"
-                    }} >
+                    dangerouslySetInnerHTML={{__html: this.props.prevButtonLabel ? this.props.prevButtonLabel : 'Previous'}} >
                 </a>
             </li>
         );
@@ -97,10 +94,7 @@ var Paginator = React.createClass({
             >
                 <a href='#' 
                     onClick={this.preventDefault}
-                    dangerouslySetInnerHTML={{__html: this.props.nextButtonLabel ? 
-                        this.props.nextButtonLabel : 
-                        "Next"
-                    }} >
+                    dangerouslySetInnerHTML={{__html: this.props.nextButtonLabel ? this.props.nextButtonLabel : 'Next'}} >
                 </a>
             </li>
         );
