@@ -62,6 +62,16 @@ module.exports = React.createClass({
                     )}</ul>
                 </div>
 
+                <Paginator
+                    page={paginated.page}
+                    pages={paginated.amount}
+                    beginPages={1}
+                    endPages={1}
+                    showPrevNext={true}
+                    prevButton={'Previous one'}
+                    nextButton={'Next one'}
+                    onSelect={this.onSelect} />
+
                 <hr></hr>
 
                 <div dangerouslySetInnerHTML={{__html: readme}}></div>
