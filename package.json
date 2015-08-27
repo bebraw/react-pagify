@@ -11,17 +11,20 @@
     "dist-all": "npm run dist && npm run dist-min",
     "dist": "webpack --config ./config/webpack.dist.js",
     "dist-min": "webpack --config ./config/webpack.dist.min.js",
+    "dist-modules": "babel ./lib --out-dir ./dist-modules",
     "watch": "npm-watch",
     "lint": "eslint . --ext .js --ext .jsx",
     "preversion": "npm run test && npm run dist-all && npm run dist-modules && git commit --allow-empty -am \"Update dist\"",
     "postpublish": "npm run gh-pages && npm run deploy-gh-pages"
   },
+  "main": "dist-modules/index.js",
   "dependencies": {
     "intersect": "^1.0.1",
     "uniq": "^1.0.1"
   },
   "devDependencies": {
     "annomath": "^0.4.1",
+    "babel": "^5.8.21",
     "babel-eslint": "^2.0.2",
     "css-loader": "^0.9.1",
     "cumberbatch-name": "^1.0.9",
@@ -48,7 +51,6 @@
   "peerDependencies": {
     "react": ">=0.11.0 <1.0.0"
   },
-  "main": "dist/react-pagify.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/bebraw/react-pagify.git"
