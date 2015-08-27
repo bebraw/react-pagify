@@ -73,7 +73,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        className: React.PropTypes.string,
 	        ellipsesClassName: React.PropTypes.string,
 	        prevClassName: React.PropTypes.string,
-	        nextClassName: React.PropTypes.string
+	        nextClassName: React.PropTypes.string,
+	        prevButton: React.PropTypes.node,
+	        nextButton: React.PropTypes.node
 	    },
 	    getDefaultProps:function() {
 	        return {
@@ -132,7 +134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                className: prevClassName
 	            }, 
 	                React.createElement("a", {href: "#", onClick: this.preventDefault}, 
-	                    "Previous"
+	                    this.props.prevButton ? this.props.prevButton : 'Previous'
 	                )
 	            )
 	        );
@@ -146,7 +148,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                className: nextClassName
 	            }, 
 	                React.createElement("a", {href: "#", onClick: this.preventDefault}, 
-	                    "Next"
+	                    this.props.nextButton ? this.props.nextButton : 'Next'
 	                )
 	            )
 	        );
