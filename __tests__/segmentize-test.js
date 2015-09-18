@@ -211,4 +211,24 @@ describe('segmentize', function() {
             endPages: 3,
         })).toEqual([[0, 1, 2, 3], [8, 9, 10]]);
     });
+
+    it('should segmentize #9 correctly', function() {
+        // given there's overlap between begin and end, this should merge
+        expect(segmentize({
+            page: 3,
+            pages: 7,
+            beginPages: 3,
+            endPages: 3,
+        })).toEqual([[0, 1, 2, 3, 4, 5, 6]]);
+    });
+
+    it('should segmentize #9 correctly, part 2', function() {
+        // given begin and end are right after each other, this should merge
+        expect(segmentize({
+            page: 4,
+            pages: 7,
+            beginPages: 3,
+            endPages: 3,
+        })).toEqual([[0, 1, 2, 3, 4, 5, 6]]);
+    });
 });
