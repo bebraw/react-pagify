@@ -62,6 +62,12 @@ module.exports = function (o) {
         return [beginPages];
     }
 
+    if (!center.length && intersect(beginPages, endPages).length || endPages[0] - beginPages.slice(-1)[0] === 1) {
+        return [uniq(beginPages.concat(endPages)).sort(function (a, b) {
+            return a > b;
+        })];
+    }
+
     return [beginPages, center, endPages].filter(function (a) {
         return a.length;
     });
