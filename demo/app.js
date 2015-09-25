@@ -8,7 +8,7 @@ require('../style.css');
 
 var React = require('react');
 var Fork = require('react-ghfork');
-var math = require('annomath');
+var range = require('lodash/utility/range');
 var cumberbatch = require('cumberbatch-name');
 
 var Paginator = require('../lib/index.jsx');
@@ -101,7 +101,7 @@ module.exports = React.createClass({
 });
 
 function generateNames(amount) {
-    return math.range(amount).map(() => {
+    return range(amount).map(() => {
         return {
             name: cumberbatch()
         };

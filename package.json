@@ -23,7 +23,6 @@
     "uniq": "^1.0.1"
   },
   "devDependencies": {
-    "annomath": "^0.4.1",
     "babel": "^5.8.21",
     "babel-eslint": "^2.0.2",
     "css-loader": "^0.9.1",
@@ -38,6 +37,7 @@
     "jest-cli": "^0.4.0",
     "json-loader": "^0.5.1",
     "jsx-loader": "^0.12.2",
+    "lodash": "^3.10.1",
     "marked": "^0.3.3",
     "npm-watch": "^0.0.0",
     "react-ghfork": "^0.3.0",
