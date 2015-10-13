@@ -45,11 +45,13 @@ module.exports = React.createClass({
                 <Paginator
                     className='pagify-pagination'
                     ellipsesClassName='pagify-ellipsis'
+                    inactiveClassName='inactive'
                     page={paginated.page}
                     pages={paginated.amount}
                     beginPages={3}
                     endPages={3}
                     showPrevNext={true}
+                    alwaysShowPrevNext={true}
                     prevButton={'Previous one'}
                     nextButton={'Next one'}
                     onSelect={this.onSelect}>
