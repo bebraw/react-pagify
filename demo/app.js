@@ -52,6 +52,7 @@ module.exports = React.createClass({
                     beginPages={3}
                     endPages={3}
                     showPrevNext={true}
+                    alwaysShowPrevNext={true}
                     onSelect={this.onSelect} />
 
                 <div className='data'>

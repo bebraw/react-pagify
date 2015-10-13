@@ -2,6 +2,7 @@
 
 var React = require('react');
 
+var pages = require('./pages');
 var segmentize = require('./segmentize');
 
 
@@ -14,10 +15,12 @@ var Paginator = React.createClass({
         beginPages: React.PropTypes.number,
         endPages: React.PropTypes.number,
         showPrevNext: React.PropTypes.bool,
+        alwaysShowPrevNext: React.PropTypes.bool,
         className: React.PropTypes.string,
         ellipsesClassName: React.PropTypes.string,
         prevClassName: React.PropTypes.string,
         nextClassName: React.PropTypes.string,
+        inactiveClassName: React.PropTypes.string,
         prevButton: React.PropTypes.node,
         nextButton: React.PropTypes.node
     },
@@ -28,7 +31,8 @@ var Paginator = React.createClass({
             className: 'pagify-pagination',
             ellipsesClassName: '',
             prevClassName: 'pagify-prev',
-            nextClassName: 'pagify-next'
+            nextClassName: 'pagify-next',
+            inactiveClassName: 'pagify-disabled',
         };
     },
     render() {
@@ -38,8 +42,10 @@ var Paginator = React.createClass({
             ellipsesClassName,
             className,
             showPrevNext,
+            alwaysShowPrevNext,
             prevClassName,
-            nextClassName
+            nextClassName,
+            inactiveClassName,
         } = this.props;
 
         var segments = segmentize(this.props);
@@ -72,9 +78,19 @@ var Paginator = React.createClass({
             );
         });
 
+        var lastPage = segments[segments.length - 1];
+
+        var isFirstPage = page === 0;
+        var isLastPage = page === lastPage;
+
+        prevClassName += pages.maybeAddInactive(isFirstPage, alwaysShowPrevNext,
+                                                inactiveClassName);
+        nextClassName += pages.maybeAddInactive(isLastPage, alwaysShowPrevNext,
+                                                inactiveClassName);
+
         var prevButton = (
             <li
-                onClick={onSelect.bind(null, page - 1)}
+                onClick={onSelect.bind(null, pages.prev(page))}
                 className={prevClassName}
             >
                 <a href='#' onClick={this.preventDefault}>
@@ -83,12 +99,9 @@ var Paginator = React.createClass({
             </li>
         );
 
-        var isFirstPage = page === 0;
-        var isLastPage = page === segments[segments.length - 1];
-
         var nextButton = (
             <li
-                onClick={onSelect.bind(null, page + 1)}
+                onClick={onSelect.bind(null, pages.next(page, lastPage))}
                 className={nextClassName}
             >
                 <a href='#' onClick={this.preventDefault}>
@@ -99,9 +112,9 @@ var Paginator = React.createClass({
 
         return (
             <ul className={className}>
-                {showPrevNext && !isFirstPage && prevButton}
+                {(alwaysShowPrevNext || (showPrevNext && !isFirstPage)) && prevButton}
                 {items}
-                {showPrevNext && !isLastPage && nextButton}
+                {(alwaysShowPrevNext || (showPrevNext && !isLastPage)) && nextButton}
             </ul>
         );
     },

@@ -4,6 +4,7 @@ jest.dontMock('intersect');
 jest.dontMock('uniq');
 jest.dontMock('../lib/segmentize');
 jest.dontMock('../lib/range');
+jest.dontMock('../lib/pages');
 jest.dontMock('../lib/index.jsx');
 
 var React = require('react');
