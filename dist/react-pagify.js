@@ -58,7 +58,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = __webpack_require__(1);
 
-	var segmentize = __webpack_require__(2);
+	var np = __webpack_require__(2);
+	var segmentize = __webpack_require__(3);
 
 
 	var Paginator = React.createClass({
@@ -70,10 +71,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        beginPages: React.PropTypes.number,
 	        endPages: React.PropTypes.number,
 	        showPrevNext: React.PropTypes.bool,
+	        alwaysShowPrevNext: React.PropTypes.bool,
 	        className: React.PropTypes.string,
 	        ellipsesClassName: React.PropTypes.string,
 	        prevClassName: React.PropTypes.string,
 	        nextClassName: React.PropTypes.string,
+	        inactiveClassName: React.PropTypes.string,
 	        prevButton: React.PropTypes.node,
 	        nextButton: React.PropTypes.node
 	    },
@@ -84,7 +87,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            className: 'pagify-pagination',
 	            ellipsesClassName: '',
 	            prevClassName: 'pagify-prev',
-	            nextClassName: 'pagify-next'
+	            nextClassName: 'pagify-next',
+	            inactiveClassName: 'pagify-disabled',
 	        };
 	    },
 	    render:function() {
@@ -96,7 +100,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            
 	            
 	            
-	          this.props,onSelect=$__0.onSelect,page=$__0.page,ellipsesClassName=$__0.ellipsesClassName,className=$__0.className,showPrevNext=$__0.showPrevNext,prevClassName=$__0.prevClassName,nextClassName=$__0.nextClassName;
+	            
+	            
+	          this.props,onSelect=$__0.onSelect,page=$__0.page,ellipsesClassName=$__0.ellipsesClassName,className=$__0.className,showPrevNext=$__0.showPrevNext,alwaysShowPrevNext=$__0.alwaysShowPrevNext,prevClassName=$__0.prevClassName,nextClassName=$__0.nextClassName,inactiveClassName=$__0.inactiveClassName;
 
 	        var segments = segmentize(this.props);
 	        segments = segments.reduce(function(a, b) {
@@ -128,9 +134,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	            );
 	        }.bind(this));
 
+	        var lastPage = segments[segments.length - 1];
+
+	        var isFirstPage = page === 0;
+	        var isLastPage = page === lastPage;
+
+	        prevClassName += np.maybeAddInactive(isFirstPage, alwaysShowPrevNext,
+	                                             inactiveClassName);
+	        nextClassName += np.maybeAddInactive(isLastPage, alwaysShowPrevNext,
+	                                             inactiveClassName);
+
 	        var prevButton = (
 	            React.createElement("li", {
-	                onClick: onSelect.bind(null, page - 1), 
+	                onClick: onSelect.bind(null, np.prev(page)), 
 	                className: prevClassName
 	            }, 
 	                React.createElement("a", {href: "#", onClick: this.preventDefault}, 
@@ -139,12 +155,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            )
 	        );
 
-	        var isFirstPage = page === 0;
-	        var isLastPage = page === segments[segments.length - 1];
-
 	        var nextButton = (
 	            React.createElement("li", {
-	                onClick: onSelect.bind(null, page + 1), 
+	                onClick: onSelect.bind(null, np.next(page, lastPage)), 
 	                className: nextClassName
 	            }, 
 	                React.createElement("a", {href: "#", onClick: this.preventDefault}, 
@@ -155,9 +168,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        return (
 	            React.createElement("ul", {className: className}, 
-	                showPrevNext && !isFirstPage && prevButton, 
+	                (alwaysShowPrevNext || (showPrevNext && !isFirstPage)) && prevButton, 
 	                items, 
-	                showPrevNext && !isLastPage && nextButton
+	                (alwaysShowPrevNext || (showPrevNext && !isLastPage)) && nextButton
 	            )
 	        );
 	    },
@@ -198,14 +211,43 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 2 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+
+	module.exports = {
+	    // Increment page, unless it is >= lastPage, then return lastPage.
+	    next:function(page, lastPage) {
+	        return page >= lastPage ? lastPage : page + 1;
+	    },
+
+	    // Decrement page, unless it is <= firstPage, then return firstPage.
+	    prev:function(page, firstPage) {
+	        firstPage = firstPage || 0;
+	        return page <= firstPage ? firstPage : page - 1;
+	    },
+
+	    // Return the inactiveClassName if it should be added.
+	    maybeAddInactive:function(isFirstOrLastPage, alwaysShowPrevNext, inactiveClassName) {
+	        if (isFirstOrLastPage && alwaysShowPrevNext && inactiveClassName) {
+	            return ' ' + inactiveClassName;
+	        }
+	        return '';
+	    }
+	}
+
+
+/***/ },
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var intersect = __webpack_require__(3);
-	var uniq = __webpack_require__(4);
+	var intersect = __webpack_require__(4);
+	var uniq = __webpack_require__(5);
 
-	var range = __webpack_require__(5);
+	var range = __webpack_require__(6);
 
 
 	module.exports = function(o) {
@@ -276,7 +318,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports) {
 
 	module.exports = intersect;
@@ -341,7 +383,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	"use strict"
@@ -404,7 +446,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';
