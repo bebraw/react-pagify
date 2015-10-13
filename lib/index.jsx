@@ -2,7 +2,7 @@
 
 var React = require('react');
 
-var pages = require('./pages');
+var np = require('./np');
 var segmentize = require('./segmentize');
 
 
@@ -83,14 +83,14 @@ var Paginator = React.createClass({
         var isFirstPage = page === 0;
         var isLastPage = page === lastPage;
 
-        prevClassName += pages.maybeAddInactive(isFirstPage, alwaysShowPrevNext,
-                                                inactiveClassName);
-        nextClassName += pages.maybeAddInactive(isLastPage, alwaysShowPrevNext,
-                                                inactiveClassName);
+        prevClassName += np.maybeAddInactive(isFirstPage, alwaysShowPrevNext,
+                                             inactiveClassName);
+        nextClassName += np.maybeAddInactive(isLastPage, alwaysShowPrevNext,
+                                             inactiveClassName);
 
         var prevButton = (
             <li
-                onClick={onSelect.bind(null, pages.prev(page))}
+                onClick={onSelect.bind(null, np.prev(page))}
                 className={prevClassName}
             >
                 <a href='#' onClick={this.preventDefault}>
@@ -101,7 +101,7 @@ var Paginator = React.createClass({
 
         var nextButton = (
             <li
-                onClick={onSelect.bind(null, pages.next(page, lastPage))}
+                onClick={onSelect.bind(null, np.next(page, lastPage))}
                 className={nextClassName}
             >
                 <a href='#' onClick={this.preventDefault}>
