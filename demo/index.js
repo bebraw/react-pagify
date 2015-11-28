@@ -1,6 +1,13 @@
-'use strict';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './app';
 
-var React = require('react'),
-    App = require('./app');
+main();
 
-React.render(<App />, document.body);
+function main() {
+  const app = document.createElement('div');
+
+  document.body.appendChild(app);
+
+  ReactDOM.render(<App />, app);
+}
