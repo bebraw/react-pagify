@@ -1,17 +1,11 @@
 'use strict';
 
-jest.dontMock('intersect');
-jest.dontMock('uniq');
-jest.dontMock('../lib/segmentize');
-jest.dontMock('../lib/range');
-jest.dontMock('../lib/np');
-jest.dontMock('../lib/index.jsx');
+jest.autoMockOff();
 
 var React = require('react');
-var TestUtils = require('react/addons').addons.TestUtils;
+var TestUtils = require('react-addons-test-utils');
 
 var Paginator = require('../lib/index.jsx');
-
 
 describe('Paginator', function() {
     it('should construct a link for the current page', function() {
