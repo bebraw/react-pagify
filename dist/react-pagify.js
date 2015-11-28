@@ -61,7 +61,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var np = __webpack_require__(2);
 	var segmentize = __webpack_require__(3);
 
-
 	var Paginator = React.createClass({
 	    displayName: 'Paginator',
 
@@ -80,7 +79,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        prevButton: React.PropTypes.node,
 	        nextButton: React.PropTypes.node
 	    },
-	    getDefaultProps:function() {
+	    getDefaultProps: function getDefaultProps() {
 	        return {
 	            onSelect: noop,
 	            showPrevNext: false,
@@ -88,96 +87,101 @@ return /******/ (function(modules) { // webpackBootstrap
 	            ellipsesClassName: '',
 	            prevClassName: 'pagify-prev',
 	            nextClassName: 'pagify-next',
-	            inactiveClassName: 'pagify-disabled',
+	            inactiveClassName: 'pagify-disabled'
 	        };
 	    },
-	    render:function() {
-	        var $__0=
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	          this.props,onSelect=$__0.onSelect,page=$__0.page,ellipsesClassName=$__0.ellipsesClassName,className=$__0.className,showPrevNext=$__0.showPrevNext,alwaysShowPrevNext=$__0.alwaysShowPrevNext,prevClassName=$__0.prevClassName,nextClassName=$__0.nextClassName,inactiveClassName=$__0.inactiveClassName;
+	    render: function render() {
+	        var _this = this;
+
+	        var _props = this.props;
+	        var onSelect = _props.onSelect;
+	        var page = _props.page;
+	        var ellipsesClassName = _props.ellipsesClassName;
+	        var className = _props.className;
+	        var showPrevNext = _props.showPrevNext;
+	        var alwaysShowPrevNext = _props.alwaysShowPrevNext;
+	        var prevClassName = _props.prevClassName;
+	        var nextClassName = _props.nextClassName;
+	        var inactiveClassName = _props.inactiveClassName;
 
 	        var segments = segmentize(this.props);
-	        segments = segments.reduce(function(a, b) {
+	        segments = segments.reduce(function (a, b) {
 	            return a.concat(-1).concat(b);
 	        });
 
-	        var items = segments.map(function(num, i)  {
+	        var items = segments.map(function (num, i) {
 	            if (num >= 0) {
-	                return (
-	                    React.createElement("li", {
-	                        key: 'pagination-' + i, 
-	                        onClick: onSelect.bind(null, num), 
+	                return React.createElement(
+	                    'li',
+	                    {
+	                        key: 'pagination-' + i,
+	                        onClick: onSelect.bind(null, num),
 	                        className: num === page && 'selected'
-	                    }, 
-	                        React.createElement("a", {href: "#", onClick: this.preventDefault}, 
-	                            num + 1
-	                        )
+	                    },
+	                    React.createElement(
+	                        'a',
+	                        { href: '#', onClick: _this.preventDefault },
+	                        num + 1
 	                    )
 	                );
 	            }
 
-	            return (
-	                React.createElement("li", {
-	                    key: 'pagination-' + i, 
+	            return React.createElement(
+	                'li',
+	                {
+	                    key: 'pagination-' + i,
 	                    className: ellipsesClassName
-	                }, 
-	                    "…"
-	                )
+	                },
+	                '…'
 	            );
-	        }.bind(this));
+	        });
 
 	        var lastPage = segments[segments.length - 1];
 
 	        var isFirstPage = page === 0;
 	        var isLastPage = page === lastPage;
 
-	        prevClassName += np.maybeAddInactive(isFirstPage, alwaysShowPrevNext,
-	                                             inactiveClassName);
-	        nextClassName += np.maybeAddInactive(isLastPage, alwaysShowPrevNext,
-	                                             inactiveClassName);
+	        prevClassName += np.maybeAddInactive(isFirstPage, alwaysShowPrevNext, inactiveClassName);
+	        nextClassName += np.maybeAddInactive(isLastPage, alwaysShowPrevNext, inactiveClassName);
 
-	        var prevButton = (
-	            React.createElement("li", {
-	                onClick: onSelect.bind(null, np.prev(page)), 
+	        var prevButton = React.createElement(
+	            'li',
+	            {
+	                onClick: onSelect.bind(null, np.prev(page)),
 	                className: prevClassName
-	            }, 
-	                React.createElement("a", {href: "#", onClick: this.preventDefault}, 
-	                    this.props.prevButton ? this.props.prevButton : 'Previous'
-	                )
+	            },
+	            React.createElement(
+	                'a',
+	                { href: '#', onClick: this.preventDefault },
+	                this.props.prevButton ? this.props.prevButton : 'Previous'
 	            )
 	        );
 
-	        var nextButton = (
-	            React.createElement("li", {
-	                onClick: onSelect.bind(null, np.next(page, lastPage)), 
+	        var nextButton = React.createElement(
+	            'li',
+	            {
+	                onClick: onSelect.bind(null, np.next(page, lastPage)),
 	                className: nextClassName
-	            }, 
-	                React.createElement("a", {href: "#", onClick: this.preventDefault}, 
-	                    this.props.nextButton ? this.props.nextButton : 'Next'
-	                )
+	            },
+	            React.createElement(
+	                'a',
+	                { href: '#', onClick: this.preventDefault },
+	                this.props.nextButton ? this.props.nextButton : 'Next'
 	            )
 	        );
 
-	        return (
-	            React.createElement("ul", {className: className}, 
-	                (alwaysShowPrevNext || (showPrevNext && !isFirstPage)) && prevButton, 
-	                items, 
-	                (alwaysShowPrevNext || (showPrevNext && !isLastPage)) && nextButton
-	            )
+	        return React.createElement(
+	            'ul',
+	            { className: className },
+	            (alwaysShowPrevNext || showPrevNext && !isFirstPage) && prevButton,
+	            items,
+	            (alwaysShowPrevNext || showPrevNext && !isLastPage) && nextButton
 	        );
 	    },
 
-	    preventDefault:function(e) {
+	    preventDefault: function preventDefault(e) {
 	        e.preventDefault();
-	    },
+	    }
 	});
 
 	function paginate(data, o) {
@@ -187,7 +191,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var perPage = o.perPage;
 
 	    var amountOfPages = Math.ceil(data.length / perPage);
-	    var startPage = page < amountOfPages? page: 0;
+	    var startPage = page < amountOfPages ? page : 0;
 
 	    return {
 	        amount: amountOfPages,
@@ -202,7 +206,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = Paginator;
 
-
 /***/ },
 /* 1 */
 /***/ function(module, exports) {
@@ -215,28 +218,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-
 	module.exports = {
 	    // Increment page, unless it is >= lastPage, then return lastPage.
-	    next:function(page, lastPage) {
+	    next: function next(page, lastPage) {
 	        return page >= lastPage ? lastPage : page + 1;
 	    },
 
 	    // Decrement page, unless it is <= firstPage, then return firstPage.
-	    prev:function(page, firstPage) {
+	    prev: function prev(page, firstPage) {
 	        firstPage = firstPage || 0;
 	        return page <= firstPage ? firstPage : page - 1;
 	    },
 
 	    // Return the inactiveClassName if it should be added.
-	    maybeAddInactive:function(isFirstOrLastPage, alwaysShowPrevNext, inactiveClassName) {
+	    maybeAddInactive: function maybeAddInactive(isFirstOrLastPage, alwaysShowPrevNext, inactiveClassName) {
 	        if (isFirstOrLastPage && alwaysShowPrevNext && inactiveClassName) {
 	            return ' ' + inactiveClassName;
 	        }
 	        return '';
 	    }
-	}
-
+	};
 
 /***/ },
 /* 3 */
@@ -249,73 +250,87 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var range = __webpack_require__(6);
 
-
-	module.exports = function(o) {
+	module.exports = function (o) {
 	    var page = o.page;
 	    var pages = o.pages;
-	    var beginPages = o.beginPages? range(Math.min(o.beginPages, pages)): [];
-	    var endPages = o.endPages? range(Math.max(pages - o.endPages, 0), pages): [];
+	    var beginPages = o.beginPages ? range(Math.min(o.beginPages, pages)) : [];
+	    var endPages = o.endPages ? range(Math.max(pages - o.endPages, 0), pages) : [];
 	    var center, ret;
 
-	    if(beginPages.length + endPages.length >= pages) {
+	    if (beginPages.length + endPages.length >= pages) {
 	        return [range(pages)];
 	    }
 
-	    if(page === 0) {
+	    if (page === 0) {
 	        ret = [[0]];
 
-	        if(pages > 1) {
-	            if(!beginPages.length) {
+	        if (pages > 1) {
+	            if (!beginPages.length) {
 	                beginPages = [0, 1];
 	            }
 
-	            ret = [beginPages, difference(endPages, beginPages)].filter(function(a)  {return a.length;});
+	            ret = [beginPages, difference(endPages, beginPages)].filter(function (a) {
+	                return a.length;
+	            });
 	        }
 
 	        return ret;
 	    }
 
-	    if(page === pages - 1) {
+	    if (page === pages - 1) {
 	        endPages = [pages - 2, pages - 1];
 
-	        return [beginPages, difference(endPages, beginPages)].filter(function(a)  {return a.length;});
+	        return [beginPages, difference(endPages, beginPages)].filter(function (a) {
+	            return a.length;
+	        });
 	    }
 
 	    center = [page - 1, page, page + 1];
 
-	    if(intersect(beginPages, center).length) {
-	        beginPages = uniq(beginPages.concat(center)).sort(function(a, b) {
+	    if (intersect(beginPages, center).length) {
+	        beginPages = uniq(beginPages.concat(center)).sort(function (a, b) {
 	            return a > b;
 	        });
 	        center = [];
 	    }
 
-	    if(intersect(center, endPages).length) {
-	        endPages = uniq(center.concat(endPages)).sort(function(a, b) {
+	    if (intersect(center, endPages).length) {
+	        endPages = uniq(center.concat(endPages)).sort(function (a, b) {
 	            return a > b;
 	        });
 	        center = [];
 	    }
 
-	    if(!center.length && beginPages.length === endPages.length &&
-	        beginPages.every(function(page, i)  {return page === endPages[i];})) {
+	    if (!center.length && beginPages.length === endPages.length && beginPages.every(function (page, i) {
+	        return page === endPages[i];
+	    })) {
 	        return [beginPages];
 	    }
 
-	    if(!center.length && intersect(beginPages, endPages).length ||
-	        endPages[0] - beginPages.slice(-1)[0] === 1) {
-	        return [uniq(beginPages.concat(endPages)).sort(function(a, b) {
+	    if (!center.length && intersect(beginPages, endPages).length || endPages[0] - beginPages.slice(-1)[0] === 1) {
+	        return [uniq(beginPages.concat(endPages)).sort(function (a, b) {
 	            return a > b;
 	        })];
 	    }
 
-	    return [beginPages, center, endPages].filter(function(a)  {return a.length;});
+	    if (center[0] - beginPages.slice(-1)[0] === 1) {
+	        return [beginPages.concat(center), endPages];
+	    }
+
+	    if (endPages[0] - center.slice(-1)[0] === 1) {
+	        return [beginPages, center.concat(endPages)];
+	    }
+
+	    return [beginPages, center, endPages].filter(function (a) {
+	        return a.length;
+	    });
 	};
 
 	function difference(a, b) {
-	    return a.filter(function(v)  {return b.indexOf(v) < 0;});
+	    return a.filter(function (v) {
+	        return b.indexOf(v) < 0;
+	    });
 	}
-
 
 /***/ },
 /* 4 */
@@ -451,19 +466,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-
-	module.exports = function(a, b) {
+	module.exports = function (a, b) {
 	    var ret = [];
-	    var i = b? a: 0;
-	    var len = b? b: a;
+	    var i = b ? a : 0;
+	    var len = b ? b : a;
 
-	    for(; i < len; i++) {
+	    for (; i < len; i++) {
 	        ret.push(i);
 	    }
 
 	    return ret;
 	};
-
 
 /***/ }
 /******/ ])
