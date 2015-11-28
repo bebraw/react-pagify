@@ -231,4 +231,22 @@ describe('segmentize', function() {
             endPages: 3,
         })).toEqual([[0, 1, 2, 3, 4, 5, 6]]);
     });
+
+    it('should segmentize ten items correctly at start', function() {
+        expect(segmentize({
+            page: 4,
+            pages: 10,
+            beginPages: 3,
+            endPages: 3,
+        })).toEqual([[0, 1, 2, 3, 4, 5], [7, 8, 9]]);
+    });
+
+    it('should segmentize ten items correctly at end', function() {
+        expect(segmentize({
+            page: 5,
+            pages: 10,
+            beginPages: 3,
+            endPages: 3,
+        })).toEqual([[0, 1, 2], [4, 5, 6, 7, 8, 9]]);
+    });
 });
