@@ -12,7 +12,7 @@
     "dist": "webpack --config ./config/webpack.dist.js",
     "dist-min": "webpack --config ./config/webpack.dist.min.js",
     "dist-modules": "babel ./lib --out-dir ./dist-modules",
-    "watch": "npm-watch",
+    "watch": "jest --watch",
     "lint": "eslint . --ext .js --ext .jsx",
     "preversion": "npm run test && npm run dist-all && npm run dist-modules && git commit --allow-empty -am \"Update dist\"",
     "postpublish": "npm run gh-pages && npm run deploy-gh-pages"
@@ -39,7 +39,6 @@
     "json-loader": "^0.5.3",
     "lodash": "^3.10.1",
     "marked": "^0.3.5",
-    "npm-watch": "^0.0.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-ghfork": "^0.3.2",
