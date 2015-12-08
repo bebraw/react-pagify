@@ -19,6 +19,7 @@ var Paginator = React.createClass({
         ellipsesClassName: React.PropTypes.string,
         prevClassName: React.PropTypes.string,
         nextClassName: React.PropTypes.string,
+        activeClassName: React.PropTypes.string,
         inactiveClassName: React.PropTypes.string,
         prevButton: React.PropTypes.node,
         nextButton: React.PropTypes.node
@@ -31,6 +32,7 @@ var Paginator = React.createClass({
             ellipsesClassName: '',
             prevClassName: 'pagify-prev',
             nextClassName: 'pagify-next',
+            activeClassName: 'selected',
             inactiveClassName: 'pagify-disabled'
         };
     },
@@ -46,6 +48,7 @@ var Paginator = React.createClass({
         var alwaysShowPrevNext = _props.alwaysShowPrevNext;
         var prevClassName = _props.prevClassName;
         var nextClassName = _props.nextClassName;
+        var activeClassName = _props.activeClassName;
         var inactiveClassName = _props.inactiveClassName;
 
         var segments = segmentize(this.props);
@@ -60,7 +63,7 @@ var Paginator = React.createClass({
                     {
                         key: 'pagination-' + i,
                         onClick: onSelect.bind(null, num),
-                        className: num === page && 'selected'
+                        className: num === page && activeClassName || ''
                     },
                     React.createElement(
                         'a',
