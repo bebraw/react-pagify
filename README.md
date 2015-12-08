@@ -45,6 +45,7 @@ module.exports = React.createClass({
                 <Paginator
                     className='pagify-pagination'
                     ellipsesClassName='pagify-ellipsis'
+                    activeClassName='selected'
                     inactiveClassName='inactive'
                     page={paginated.page}
                     pages={paginated.amount}
