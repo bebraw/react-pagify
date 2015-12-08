@@ -92,6 +92,7 @@ module.exports = React.createClass({
 * [rowbare](https://github.com/rowbare) - Allowed usage in Bootstrap by making `className` customizable.
 * [Nadav Spiegelman](https://github.com/nadavspi) - Added optional ellipsesClassName prop, `showPrevNext` prop.
 * [Nick Zarczynski](https://github.com/jacktrades) - Added configuration to always show prev/next buttons and allowed inactive buttons to be styled.
+* [Nimi Wariboko Jr.](https://github.com/nemothekid) - Added support for `activeClassName`.
 
 ## License
 
