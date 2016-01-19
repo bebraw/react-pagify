@@ -19,8 +19,7 @@
   },
   "main": "dist-modules/index.js",
   "dependencies": {
-    "intersect": "^1.0.1",
-    "uniq": "^1.0.1"
+    "segmentize": "^0.1.2"
   },
   "devDependencies": {
     "babel": "^5.8.23",
