@@ -1,9 +1,8 @@
 'use strict';
-
 var React = require('react');
+var segmentize = require('segmentize');
 
 var np = require('./np');
-var segmentize = require('./segmentize');
 
 var Paginator = React.createClass({
     displayName: 'Paginator',
