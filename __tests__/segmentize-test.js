@@ -249,4 +249,39 @@ describe('segmentize', function() {
             endPages: 3,
         })).toEqual([[0, 1, 2], [4, 5, 6, 7, 8, 9]]);
     });
+
+    it('should accept side pages number', function() {
+        expect(segmentize({
+            page: 5,
+            pages: 15,
+            sidePages: 2,
+        })).toEqual([[ 3, 4, 5, 6, 7 ]]);
+    });
+
+    it('should accept side pages number for the first page', function() {
+        expect(segmentize({
+            page: 0,
+            pages: 15,
+            sidePages: 3,
+        })).toEqual([[ 0, 1, 2, 3 ]]);
+    });
+
+    it('should accept side pages number for the last page', function() {
+        expect(segmentize({
+            page: 14,
+            pages: 15,
+            sidePages: 3,
+        })).toEqual([[ 11, 12, 13, 14 ]]);
+    });
+
+    it('should accept side pages number', function() {
+        expect(segmentize({
+            page: 5,
+            pages: 15,
+            sidePages: 2,
+            beginPages: 2,
+            endPages: 2,
+        })).toEqual([[ 0, 1 ], [ 3, 4, 5, 6, 7 ], [ 13, 14 ]]);
+    });
+
 });
