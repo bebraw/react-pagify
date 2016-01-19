@@ -68,6 +68,7 @@ module.exports = React.createClass({
                     pages={paginated.amount}
                     beginPages={1}
                     endPages={1}
+                    sidePages={2}
                     showPrevNext={true}
                     prevButton={'Previous one'}
                     nextButton={'Next one'}
