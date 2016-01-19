@@ -17,95 +17,95 @@ var readme = require('../README.md');
 
 
 module.exports = React.createClass({
-    displayName: 'App',
+  displayName: 'App',
 
-    getInitialState() {
-        var amount = 10000;
+  getInitialState() {
+    var amount = 10000;
 
-        return {
-            data: generateNames(amount),
-            pagination: {
-                page: 0,
-                perPage: 10,
-            },
-        };
-    },
+    return {
+      data: generateNames(amount),
+      pagination: {
+        page: 0,
+        perPage: 10,
+      },
+    };
+  },
 
-    render() {
-        var data = this.state.data || [];
-        var pagination = this.state.pagination || {};
-        var paginated = Paginator.paginate(data, pagination);
+  render() {
+    var data = this.state.data || [];
+    var pagination = this.state.pagination || {};
+    var paginated = Paginator.paginate(data, pagination);
 
-        return (
-            <article>
-                <Fork className='right' project='bebraw/react-pagify' />
+    return (
+      <article>
+        <Fork className='right' project='bebraw/react-pagify' />
 
-                <h2>Demo</h2>
+        <h2>Demo</h2>
 
-                <div className='per-page-container'>
-                    Per page <input type='text' defaultValue={pagination.perPage} onChange={this.onPerPage}></input>
-                </div>
+        <div className='per-page-container'>
+          Per page <input type='text' defaultValue={pagination.perPage} onChange={this.onPerPage}></input>
+        </div>
 
-                <Paginator
-                    page={paginated.page}
-                    pages={paginated.amount}
-                    beginPages={3}
-                    endPages={3}
-                    showPrevNext={true}
-                    alwaysShowPrevNext={true}
-                    onSelect={this.onSelect} />
+        <Paginator
+          page={paginated.page}
+          pages={paginated.amount}
+          beginPages={3}
+          endPages={3}
+          showPrevNext={true}
+          alwaysShowPrevNext={true}
+          onSelect={this.onSelect} />
 
-                <div className='data'>
-                    <h3>Comics</h3>
+        <div className='data'>
+          <h3>Comics</h3>
 
-                    <ul>{paginated.data.map((comic, i) =>
-                        <li key={'comic-' + i}>{comic.name}</li>
-                    )}</ul>
-                </div>
+          <ul>{paginated.data.map((comic, i) =>
+              <li key={'comic-' + i}>{comic.name}</li>
+          )}</ul>
+        </div>
 
-                <Paginator
-                    page={paginated.page}
-                    pages={paginated.amount}
-                    beginPages={1}
-                    endPages={1}
-                    sidePages={2}
-                    showPrevNext={true}
-                    prevButton={'Previous one'}
-                    nextButton={'Next one'}
-                    onSelect={this.onSelect} />
+        <Paginator
+          page={paginated.page}
+          pages={paginated.amount}
+          beginPages={1}
+          endPages={1}
+          sidePages={2}
+          showPrevNext={true}
+          prevButton={'Previous one'}
+          nextButton={'Next one'}
+          onSelect={this.onSelect} />
 
-                <hr></hr>
+        <hr></hr>
 
-                <div dangerouslySetInnerHTML={{__html: readme}}></div>
-            </article>
-        );
-    },
+        <div dangerouslySetInnerHTML={{__html: readme}}></div>
+      </article>
+    );
+  },
 
-    onSelect(page) {
-        var pagination = this.state.pagination || {};
+  onSelect(page) {
+    var pagination = this.state.pagination || {};
 
-        pagination.page = page;
+    pagination.page = page;
 
-        this.setState({
-            pagination: pagination
-        });
-    },
+    this.setState({
+      pagination: pagination
+    });
+  },
 
-    onPerPage() {
-        var pagination = this.state.pagination || {};
+  onPerPage() {
+    var pagination = this.state.pagination || {};
 
-        pagination.perPage = parseInt(event.target.value, 10);
+    pagination.perPage = parseInt(event.target.value, 10);
 
-        this.setState({
-            pagination: pagination
-        });
-    },
+    this.setState({
+      pagination: pagination
+    });
+  },
 });
 
 function generateNames(amount) {
-    return range(amount).map(() => {
-        return {
-            name: cumberbatch()
-        };
-    });
+  return range(amount).map(() => {
+    return {
+      name: cumberbatch()
+    };
+  });
 }
