@@ -1,151 +1,119 @@
-'use strict';
-var React = require('react');
-var segmentize = require('segmentize');
+import React from 'react';
 
-var np = require('./np');
+const pageShape = {
+  beginPages: React.PropTypes.array,
+  previousPages: React.PropTypes.array,
+  centerPage: React.PropTypes.number,
+  nextPages: React.PropTypes.array,
+  endPages: React.PropTypes.array
+};
 
-var Paginator = React.createClass({
-    displayName: 'Paginator',
+class Context extends React.Component {
+  getChildContext() {
+    return Object.assign({}, this.props.segments, {
+      onSelect: this.props.onSelect
+    });
+  }
+  render() {
+    const {onSelect, segments, ...props} = this.props;
 
-    propTypes: {
-        onSelect: React.PropTypes.func,
-        page: React.PropTypes.number,
-        beginPages: React.PropTypes.number,
-        endPages: React.PropTypes.number,
-        showPrevNext: React.PropTypes.bool,
-        alwaysShowPrevNext: React.PropTypes.bool,
-        className: React.PropTypes.string,
-        ellipsesClassName: React.PropTypes.string,
-        prevClassName: React.PropTypes.string,
-        nextClassName: React.PropTypes.string,
-        activeClassName: React.PropTypes.string,
-        inactiveClassName: React.PropTypes.string,
-        prevButton: React.PropTypes.node,
-        nextButton: React.PropTypes.node,
-        ellipsisButton: React.PropTypes.node
-    },
-    getDefaultProps() {
-        return {
-            onSelect: noop,
-            showPrevNext: false,
-            className: 'pagify-pagination',
-            ellipsesClassName: '',
-            prevClassName: 'pagify-prev',
-            nextClassName: 'pagify-next',
-            activeClassName: 'selected',
-            inactiveClassName: 'pagify-disabled',
-            ellipsisButton: '…'
-        };
-    },
-    render() {
-        var {
-            onSelect,
-            page,
-            ellipsesClassName,
-            className,
-            showPrevNext,
-            alwaysShowPrevNext,
-            prevClassName,
-            nextClassName,
-            activeClassName,
-            inactiveClassName,
-            ellipsisButton
-        } = this.props;
-
-        var segments = segmentize(this.props);
-        segments = segments.reduce(function(a, b) {
-            return a.concat(-1).concat(b);
-        });
-
-        var items = segments.map((num, i) => {
-            if (num >= 0) {
-                return (
-                    <li
-                        key={'pagination-' + i}
-                        onClick={onSelect.bind(null, num)}
-                        className={num === page && activeClassName || ''}
-                    >
-                        <a href='#' onClick={this.preventDefault}>
-                            {num + 1}
-                        </a>
-                    </li>
-                );
-            }
-
-            return (
-                <li
-                    key={'pagination-' + i}
-                    className={ellipsesClassName}
-                >
-                    {ellipsisButton}
-                </li>
-            );
-        });
-
-        var lastPage = segments[segments.length - 1];
-
-        var isFirstPage = page === 0;
-        var isLastPage = page === lastPage;
-
-        prevClassName += np.maybeAddInactive(isFirstPage, alwaysShowPrevNext,
-                                             inactiveClassName);
-        nextClassName += np.maybeAddInactive(isLastPage, alwaysShowPrevNext,
-                                             inactiveClassName);
-
-        var prevButton = (
-            <li
-                onClick={onSelect.bind(null, np.prev(page))}
-                className={prevClassName}
-            >
-                <a href='#' onClick={this.preventDefault}>
-                    {this.props.prevButton ? this.props.prevButton : 'Previous'}
-                </a>
-            </li>
-        );
-
-        var nextButton = (
-            <li
-                onClick={onSelect.bind(null, np.next(page, lastPage))}
-                className={nextClassName}
-            >
-                <a href='#' onClick={this.preventDefault}>
-                    {this.props.nextButton ? this.props.nextButton : 'Next'}
-                </a>
-            </li>
-        );
-
-        return (
-            <ul className={className}>
-                {(alwaysShowPrevNext || (showPrevNext && !isFirstPage)) && prevButton}
-                {items}
-                {(alwaysShowPrevNext || (showPrevNext && !isLastPage)) && nextButton}
-            </ul>
-        );
-    },
-
-    preventDefault(e) {
-        e.preventDefault();
-    },
+    return <div {...props}>{this.props.children}</div>;
+  }
+}
+Context.propTypes = {
+  children: React.PropTypes.object,
+  onSelect: React.PropTypes.func,
+  segments: React.PropTypes.shape(pageShape)
+};
+Context.childContextTypes = Object.assign({}, pageShape, {
+  onSelect: React.PropTypes.func
 });
 
+class BeginPages extends React.Component {
+  render() {
+    const props = this.props;
+
+    return <div {...props}>{this.context.beginPages}</div>;
+  }
+}
+BeginPages.contextTypes = {
+  beginPages: React.PropTypes.array,
+  onSelect: React.PropTypes.func
+};
+
+class PreviousPages extends React.Component {
+  render() {
+    const props = this.props;
+
+    return <div {...props}>{this.context.previousPages}</div>;
+  }
+}
+PreviousPages.contextTypes = {
+  previousPages: React.PropTypes.array,
+  onSelect: React.PropTypes.func
+};
+
+class CenterPage extends React.Component {
+  render() {
+    const props = this.props;
+
+    return <div {...props}>{this.context.centerPage}</div>;
+  }
+}
+CenterPage.contextTypes = {
+  centerPage: React.PropTypes.number
+};
+
+class NextPages extends React.Component {
+  render() {
+    const props = this.props;
+
+    return <div {...props}>{this.context.nextPages}</div>;
+  }
+}
+NextPages.contextTypes = {
+  nextPages: React.PropTypes.array,
+  onSelect: React.PropTypes.func
+};
+
+class EndPages extends React.Component {
+  render() {
+    const props = this.props;
+
+    return <div {...props}>{this.context.endPages}</div>;
+  }
+}
+EndPages.contextTypes = {
+  endPages: React.PropTypes.array,
+  onSelect: React.PropTypes.func
+};
+
 function paginate(data, o) {
-    data = data || [];
+  data = data || [];
 
-    var page = o.page || 0;
-    var perPage = o.perPage;
+  var page = o.page || 0;
+  var perPage = o.perPage;
 
-    var amountOfPages = Math.ceil(data.length / perPage);
-    var startPage = page < amountOfPages? page: 0;
+  var amountOfPages = Math.ceil(data.length / perPage);
+  var startPage = page < amountOfPages? page: 0;
 
-    return {
-        amount: amountOfPages,
-        data: data.slice(startPage * perPage, startPage * perPage + perPage),
-        page: startPage
-    };
+  return {
+    amount: amountOfPages,
+    data: data.slice(startPage * perPage, startPage * perPage + perPage),
+    page: startPage
+  };
 }
 
-function noop() {}
+const Paginator = {
+  Context,
+  BeginPages,
+  PreviousPages,
+  CenterPage,
+  NextPages,
+  EndPages
+};
 
-Paginator.paginate = paginate;
-
-module.exports = Paginator;
+export {
+  Paginator,
+  paginate
+};

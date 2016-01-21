@@ -1,31 +1,33 @@
-'use strict';
+import React from 'react';
+import Fork from 'react-ghfork';
+import range from 'lodash/range';
+import cumberbatch from 'cumberbatch-name';
+import segmentize from 'segmentize';
 
-var React = require('react');
-var Fork = require('react-ghfork');
-var range = require('lodash/range');
-var cumberbatch = require('cumberbatch-name');
+import {Paginator, paginate} from '../src/index.jsx';
 
-var Paginator = require('../src/index.jsx');
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-module.exports = React.createClass({
-  displayName: 'App',
+    const amount = 10000;
 
-  getInitialState() {
-    var amount = 10000;
-
-    return {
+    this.state = {
       data: generateNames(amount),
       pagination: {
         page: 0,
         perPage: 10,
       },
     };
-  },
 
+    this.onSelect = this.onSelect.bind(this);
+    this.onPerPage = this.onPerPage.bind(this);
+  }
   render() {
-    var data = this.state.data || [];
-    var pagination = this.state.pagination || {};
-    var paginated = Paginator.paginate(data, pagination);
+    const data = this.state.data || [];
+    const pagination = this.state.pagination || {};
+    const paginated = paginate(data, pagination);
+    const pages = Math.ceil(data.length / pagination.perPage);
 
     return (
       <div>
@@ -35,14 +37,21 @@ module.exports = React.createClass({
           Per page <input type='text' defaultValue={pagination.perPage} onChange={this.onPerPage}></input>
         </div>
 
-        <Paginator
-          page={paginated.page}
-          pages={paginated.amount}
-          beginPages={3}
-          endPages={3}
-          showPrevNext={true}
-          alwaysShowPrevNext={true}
-          onSelect={this.onSelect} />
+        <Paginator.Context segments={segmentize({
+          page: pagination.page,
+          pages: pages,
+          beginPages: 3,
+          endPages: 3,
+          sidePages: 2
+        })} onSelect={this.onSelect}>
+          <div onClick={this.onSelect.bind(null, pagination.page - 1)}>Previous</div>
+          <Paginator.BeginPages />
+          <Paginator.PreviousPages ellipsis={'…'} />
+          <Paginator.CenterPage />
+          <Paginator.NextPages ellipsis={'…'} />
+          <Paginator.EndPages />
+          <div onClick={this.onSelect.bind(null, pagination.page + 1)}>Next</div>
+        </Paginator.Context>
 
         <div className='data'>
           <h3>Comics</h3>
@@ -52,20 +61,24 @@ module.exports = React.createClass({
           )}</ul>
         </div>
 
-        <Paginator
-          page={paginated.page}
-          pages={paginated.amount}
-          beginPages={1}
-          endPages={1}
-          sidePages={2}
-          showPrevNext={true}
-          prevButton={'Previous one'}
-          nextButton={'Next one'}
-          onSelect={this.onSelect} />
+        <Paginator.Context segments={segmentize({
+          page: pagination.page,
+          pages: pages,
+          beginPages: 1,
+          endPages: 1,
+          sidePages: 2
+        })} onSelect={this.onSelect}>
+          <div onClick={this.onSelect.bind(null, pagination.page - 1)}>Previous one</div>
+          <Paginator.BeginPages />
+          <Paginator.PreviousPages ellipsis={'…'} />
+          <Paginator.CenterPage />
+          <Paginator.NextPages ellipsis={'…'} />
+          <Paginator.EndPages />
+          <div onClick={this.onSelect.bind(null, pagination.page + 1)}>Next one</div>
+        </Paginator.Context>
       </div>
     );
-  },
-
+  }
   onSelect(page) {
     var pagination = this.state.pagination || {};
 
@@ -74,8 +87,7 @@ module.exports = React.createClass({
     this.setState({
       pagination: pagination
     });
-  },
-
+  }
   onPerPage() {
     var pagination = this.state.pagination || {};
 
@@ -84,8 +96,8 @@ module.exports = React.createClass({
     this.setState({
       pagination: pagination
     });
-  },
-});
+  }
+}
 
 function generateNames(amount) {
   return range(amount).map(() => {
