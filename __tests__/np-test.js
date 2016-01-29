@@ -1,8 +1,8 @@
 'use strict';
 
-jest.dontMock('../lib/np');
+jest.dontMock('../src/np');
 
-var np = require('../lib/np');
+var np = require('../src/np');
 
 
 describe('next', function() {

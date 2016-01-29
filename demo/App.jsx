@@ -1,20 +1,11 @@
 'use strict';
 
-require('highlight.js/styles/github.css');
-require('react-ghfork/gh-fork-ribbon.ie.css');
-require('react-ghfork/gh-fork-ribbon.css');
-require('./demo.css');
-require('../style.css');
-
 var React = require('react');
 var Fork = require('react-ghfork');
-var range = require('lodash/utility/range');
+var range = require('lodash/range');
 var cumberbatch = require('cumberbatch-name');
 
-var Paginator = require('../lib/index.jsx');
-
-var readme = require('../README.md');
-
+var Paginator = require('../src/index.jsx');
 
 module.exports = React.createClass({
   displayName: 'App',
@@ -37,10 +28,8 @@ module.exports = React.createClass({
     var paginated = Paginator.paginate(data, pagination);
 
     return (
-      <article>
+      <div>
         <Fork className='right' project='bebraw/react-pagify' />
-
-        <h2>Demo</h2>
 
         <div className='per-page-container'>
           Per page <input type='text' defaultValue={pagination.perPage} onChange={this.onPerPage}></input>
@@ -73,11 +62,7 @@ module.exports = React.createClass({
           prevButton={'Previous one'}
           nextButton={'Next one'}
           onSelect={this.onSelect} />
-
-        <hr></hr>
-
-        <div dangerouslySetInnerHTML={{__html: readme}}></div>
-      </article>
+      </div>
     );
   },
 

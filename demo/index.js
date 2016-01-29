@@ -1,13 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './app';
+import App from './App.jsx';
 
-main();
+const app = document.getElementsByClassName('demonstration')[0];
 
-function main() {
-  const app = document.createElement('div');
+ReactDOM.render(<App />, app);
 
-  document.body.appendChild(app);
-
-  ReactDOM.render(<App />, app);
-}

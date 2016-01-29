@@ -5,7 +5,7 @@ jest.autoMockOff();
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
 
-var Paginator = require('../lib/index.jsx');
+var Paginator = require('../src/index.jsx');
 
 describe('Paginator', function() {
     it('should construct a link for the current page', function() {
