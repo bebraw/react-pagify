@@ -253,10 +253,10 @@ const distCommon = {
   entry: path.join(config.paths.src, 'index.jsx'), // XXX: tidy up
   externals: {
     'react': {
-        commonjs: 'react',
-        commonjs2: 'react',
-        amd: 'React',
-        root: 'React'
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'React',
+      root: 'React'
     }
   },
   module: {
