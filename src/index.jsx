@@ -11,7 +11,9 @@ const pageShape = {
 class Context extends React.Component {
   getChildContext() {
     return Object.assign({}, this.props.segments, {
-      onSelect: this.props.onSelect
+      onSelect: this.props.onSelect,
+      ellipsis: this.props.ellipsis,
+      ellipsisClass: this.props.ellipsisClass,
     });
   }
   render() {
@@ -21,19 +23,31 @@ class Context extends React.Component {
   }
 }
 Context.propTypes = {
-  children: React.PropTypes.object,
+  children: React.PropTypes.array,
   onSelect: React.PropTypes.func,
+  ellipsis: React.PropTypes.string,
+  ellipsisClass: React.PropTypes.string,
   segments: React.PropTypes.shape(pageShape)
 };
+Context.defaultProps = {
+  ellipsisClass: 'ellipsis'
+};
 Context.childContextTypes = Object.assign({}, pageShape, {
-  onSelect: React.PropTypes.func
+  onSelect: React.PropTypes.func,
+  ellipsis: React.PropTypes.string,
+  ellipsisClass: React.PropTypes.string
 });
 
 class BeginPages extends React.Component {
   render() {
     const props = this.props;
+    const context = this.context;
+    const pages = context.beginPages;
+    const onSelect = this.context.onSelect;
 
-    return <div {...props}>{this.context.beginPages}</div>;
+    return (<div>{pages.map((page) =>
+      <span {...props} key={`begin-page-${page}`} onClick={(e) => onSelect(page, e)}>{page}</span>
+    )}</div>);
   }
 }
 BeginPages.contextTypes = {
@@ -44,20 +58,38 @@ BeginPages.contextTypes = {
 class PreviousPages extends React.Component {
   render() {
     const props = this.props;
+    const context = this.context;
+    const beginPages = context.beginPages;
+    const previousPages = context.previousPages;
+    const onSelect = context.onSelect;
+    const showEllipsis = previousPages && beginPages ?
+      previousPages[0] - beginPages.slice(-1)[0] > 1 : false;
+    const ellipsis = context.ellipsis;
+    const ellipsisClass = context.ellipsisClass;
 
-    return <div {...props}>{this.context.previousPages}</div>;
+    return (<div>
+      {showEllipsis && <span className={ellipsisClass}>{ellipsis}</span>}
+      {previousPages.map((page) =>
+        <span {...props} key={`previous-page-${page}`} onClick={(e) => onSelect(page, e)}>{page}</span>
+      )}
+    </div>);
   }
 }
 PreviousPages.contextTypes = {
+  beginPages: React.PropTypes.array,
   previousPages: React.PropTypes.array,
-  onSelect: React.PropTypes.func
+  onSelect: React.PropTypes.func,
+  ellipsis: React.PropTypes.string,
+  ellipsisClass: React.PropTypes.string
 };
 
 class CenterPage extends React.Component {
   render() {
     const props = this.props;
+    const context = this.context;
+    const page = context.centerPage;
 
-    return <div {...props}>{this.context.centerPage}</div>;
+    return <span {...props}>{page}</span>;
   }
 }
 CenterPage.contextTypes = {
@@ -67,20 +99,41 @@ CenterPage.contextTypes = {
 class NextPages extends React.Component {
   render() {
     const props = this.props;
+    const context = this.context;
+    const nextPages = context.nextPages;
+    const endPages = context.endPages;
+    const onSelect = context.onSelect;
+    const showEllipsis = nextPages && endPages ?
+      endPages[0] - nextPages.slice(-1)[0] > 1 : false;
+    const ellipsis = context.ellipsis;
+    const ellipsisClass = context.ellipsisClass;
 
-    return <div {...props}>{this.context.nextPages}</div>;
+    return (<div>
+      {nextPages.map((page) =>
+        <span {...props} key={`next-page-${page}`} onClick={(e) => onSelect(page, e)}>{page}</span>
+      )}
+      {showEllipsis && <span className={ellipsisClass}>{ellipsis}</span>}
+    </div>);
   }
 }
 NextPages.contextTypes = {
   nextPages: React.PropTypes.array,
-  onSelect: React.PropTypes.func
+  endPages: React.PropTypes.array,
+  onSelect: React.PropTypes.func,
+  ellipsis: React.PropTypes.string,
+  ellipsisClass: React.PropTypes.string
 };
 
 class EndPages extends React.Component {
   render() {
     const props = this.props;
+    const context = this.context;
+    const pages = context.endPages;
+    const onSelect = context.onSelect;
 
-    return <div {...props}>{this.context.endPages}</div>;
+    return (<div>{pages.map((page) =>
+      <span {...props} key={`end-page-${page}`} onClick={(e) => onSelect(page, e)}>{page}</span>
+    )}</div>);
   }
 }
 EndPages.contextTypes = {

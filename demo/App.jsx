@@ -1,3 +1,4 @@
+/* eslint no-console:0 */
 import React from 'react';
 import Fork from 'react-ghfork';
 import range from 'lodash/range';
@@ -15,7 +16,7 @@ export default class App extends React.Component {
     this.state = {
       data: generateNames(amount),
       pagination: {
-        page: 0,
+        page: 1,
         perPage: 10,
       },
     };
@@ -37,20 +38,21 @@ export default class App extends React.Component {
           Per page <input type='text' defaultValue={pagination.perPage} onChange={this.onPerPage}></input>
         </div>
 
-        <Paginator.Context segments={segmentize({
+        <Paginator.Context className="pagify-pagination"
+        segments={segmentize({
           page: pagination.page,
           pages: pages,
           beginPages: 3,
           endPages: 3,
           sidePages: 2
-        })} onSelect={this.onSelect}>
-          <div onClick={this.onSelect.bind(null, pagination.page - 1)}>Previous</div>
+        })} onSelect={this.onSelect} ellipsis={'…'}>
+          <span onClick={this.onSelect.bind(null, pagination.page - 1)}>Previous</span>
           <Paginator.BeginPages />
-          <Paginator.PreviousPages ellipsis={'…'} />
-          <Paginator.CenterPage />
-          <Paginator.NextPages ellipsis={'…'} />
+          <Paginator.PreviousPages />
+          <Paginator.CenterPage className="selected" />
+          <Paginator.NextPages />
           <Paginator.EndPages />
-          <div onClick={this.onSelect.bind(null, pagination.page + 1)}>Next</div>
+          <span onClick={this.onSelect.bind(null, pagination.page + 1)}>Next</span>
         </Paginator.Context>
 
         <div className='data'>
@@ -61,28 +63,31 @@ export default class App extends React.Component {
           )}</ul>
         </div>
 
-        <Paginator.Context segments={segmentize({
+        <Paginator.Context className="pagify-pagination"
+        segments={segmentize({
           page: pagination.page,
           pages: pages,
           beginPages: 1,
           endPages: 1,
           sidePages: 2
-        })} onSelect={this.onSelect}>
-          <div onClick={this.onSelect.bind(null, pagination.page - 1)}>Previous one</div>
+        })} onSelect={this.onSelect} ellipsis={'…'}>
+          <span onClick={this.onSelect.bind(null, pagination.page - 1)}>Previous one</span>
           <Paginator.BeginPages />
-          <Paginator.PreviousPages ellipsis={'…'} />
-          <Paginator.CenterPage />
-          <Paginator.NextPages ellipsis={'…'} />
+          <Paginator.PreviousPages />
+          <Paginator.CenterPage className="selected" />
+          <Paginator.NextPages />
           <Paginator.EndPages />
-          <div onClick={this.onSelect.bind(null, pagination.page + 1)}>Next one</div>
+          <span onClick={this.onSelect.bind(null, pagination.page + 1)}>Next one</span>
         </Paginator.Context>
       </div>
     );
   }
   onSelect(page) {
-    var pagination = this.state.pagination || {};
+    const state = this.state;
+    const pagination = state.pagination || {};
+    const pages = Math.ceil(state.data.length / pagination.perPage);
 
-    pagination.page = page;
+    pagination.page = Math.min(Math.max(page, 1), pages);
 
     this.setState({
       pagination: pagination

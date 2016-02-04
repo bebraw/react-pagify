@@ -1,24 +1,31 @@
 .pagify-pagination {
     margin: 1em;
     padding: 0;
-
-    list-style: none;
 }
-.pagify-pagination li {
+.pagify-pagination div {
+    display: inline;
+}
+.pagify-pagination span {
     margin: 0;
     margin-right: 1em;
     padding: 0.5em;
 
-    display: inline-block;
+    cursor: pointer;
+    cursor: hand;
 
     background: #ddd;
+}
+.pagify-pagination .ellipsis {
+    background: inherit;
+
+    cursor: default;
 }
 .pagify-pagination a {
     text-decoration: none;
 }
 .pagify-pagination .selected {
     background: #222;
-}
-.pagify-pagination .selected a {
     color: #eee;
+
+    cursor: default;
 }
