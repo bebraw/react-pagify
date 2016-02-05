@@ -1,13 +1,5 @@
 import React from 'react';
 
-const pageShape = {
-  beginPages: React.PropTypes.array,
-  previousPages: React.PropTypes.array,
-  centerPage: React.PropTypes.array,
-  nextPages: React.PropTypes.array,
-  endPages: React.PropTypes.array
-};
-
 class Context extends React.Component {
   getChildContext() {
     return {
@@ -24,12 +16,12 @@ class Context extends React.Component {
 Context.propTypes = {
   children: React.PropTypes.array,
   onSelect: React.PropTypes.func,
-  segments: React.PropTypes.shape(pageShape)
+  segments: React.PropTypes.object
 };
-Context.childContextTypes = Object.assign({}, pageShape, {
+Context.childContextTypes = {
   onSelect: React.PropTypes.func,
-  segments: React.PropTypes.shape(pageShape)
-});
+  segments: React.PropTypes.object
+};
 
 class Bind extends React.Component {
   render() {
@@ -50,8 +42,8 @@ Bind.propTypes = {
   field: React.PropTypes.string.isRequired
 };
 Bind.contextTypes = {
-  segments: React.PropTypes.shape(pageShape),
-  onSelect: React.PropTypes.func
+  onSelect: React.PropTypes.func,
+  segments: React.PropTypes.object
 };
 
 class Ellipsis extends React.Component {
@@ -77,7 +69,7 @@ Ellipsis.propTypes = {
   nextField: React.PropTypes.string.isRequired,
 };
 Ellipsis.contextTypes = {
-  segments: React.PropTypes.shape(pageShape)
+  segments: React.PropTypes.object
 };
 
 function paginate(data, o) {
