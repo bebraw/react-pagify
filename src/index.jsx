@@ -51,25 +51,25 @@ class Ellipsis extends React.Component {
     const context = this.context;
     const props = this.props;
     const segments = context.segments;
-    const outlook = props.outlook;
+    const children = props.children;
     const previousPages = segments[props.previousField];
     const nextPages = segments[props.nextField];
     const showEllipsis = nextPages[0] - previousPages.slice(-1)[0] > 1;
 
     if(showEllipsis) {
-      return <span {...props}>{outlook}</span>;
+      return <span {...props}>{children}</span>;
     }
 
     return null;
   }
 }
 Ellipsis.propTypes = {
-  outlook: React.PropTypes.any.isRequired,
+  children: React.PropTypes.any.isRequired,
   previousField: React.PropTypes.string.isRequired,
   nextField: React.PropTypes.string.isRequired,
 };
 Ellipsis.defaultProps = {
-  outlook: '…'
+  children: '…'
 };
 Ellipsis.contextTypes = {
   segments: React.PropTypes.object

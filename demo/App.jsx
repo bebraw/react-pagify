@@ -85,15 +85,19 @@ export default class App extends React.Component {
 
           <Paginator.Bind field="beginPages" />
 
-          <Paginator.Ellipsis outlook="***" className="ellipsis"
-            previousField="beginPages" nextField="previousPages" />
+          <Paginator.Ellipsis className="ellipsis"
+            previousField="beginPages" nextField="previousPages">
+            ***
+          </Paginator.Ellipsis>
 
           <Paginator.Bind field="previousPages" />
           <Paginator.Bind field="centerPage" className="selected" />
           <Paginator.Bind field="nextPages" />
 
-          <Paginator.Ellipsis outlook="***" className="ellipsis"
-            previousField="nextPages" nextField="endPages" />
+          <Paginator.Ellipsis className="ellipsis"
+            previousField="nextPages" nextField="endPages">
+            ***
+          </Paginator.Ellipsis>
 
           <Paginator.Bind field="endPages" />
 

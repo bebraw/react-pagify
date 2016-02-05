@@ -76,8 +76,10 @@ import segmentize from 'segmentize';
   })} onSelect={(page) => console.log(page)}>
   <Paginator.Bind field="beginPages" />
 
-  <Paginator.Ellipsis outlook="custom" className="ellipsis"
-    previousField="beginPages" nextField="previousPages" />
+  <Paginator.Ellipsis className="ellipsis"
+    previousField="beginPages" nextField="previousPages">
+    ***
+  </Paginator.Ellipsis>
 
   <Paginator.Bind field="previousPages" />
   <Paginator.Bind field="centerPage" />
@@ -89,8 +91,7 @@ import segmentize from 'segmentize';
 </Paginator.Context>
 ```
 
-The component accepts optional `outlook` prop that can be used to customize what it looks like.
-
+The outlook of `Ellipsis` can be customized by passing something custom to it as its child.
 
 > See `demo/` for a full implementation of the ideas.
 
