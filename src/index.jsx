@@ -64,7 +64,7 @@ class Ellipsis extends React.Component {
   }
 }
 Ellipsis.propTypes = {
-  outlook: React.PropTypes.string.isRequired,
+  outlook: React.PropTypes.any.isRequired,
   previousField: React.PropTypes.string.isRequired,
   nextField: React.PropTypes.string.isRequired,
 };
