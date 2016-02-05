@@ -3,6 +3,8 @@
 
 *react-pagify* provides a simple API for building your own custom paginator.
 
+> If you want to learn more about React, read [SurviveJS - Webpack and React](http://survivejs.com/).
+
 ## Usage
 
 *react-pagify* consists of three React components: `Context`, `Segment`, and `Ellipsis`.
