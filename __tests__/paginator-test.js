@@ -2,55 +2,78 @@
 
 jest.autoMockOff();
 
-/*
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
+const React = require('react');
+const TestUtils = require('react-addons-test-utils');
 
-var Paginator = require('../src/index.jsx');
-*/
+const pagify = require('../src/index.jsx');
+const Paginator = pagify.Paginator;
 
 describe('Paginator', function() {
-  /*
-  it('should construct a link for the current page', function() {
-    var amount = 5;
-    var paginator = TestUtils.renderIntoDocument(
-      <Paginator pages={amount} page={1} />
+  it('should be able to bind a value based on context', function() {
+    const className = 'center-page';
+    const paginator = TestUtils.renderIntoDocument(
+      <Paginator.Context segments={{centerPage: [2]}}>
+        <Paginator.Bind className={className} field="centerPage" />
+      </Paginator.Context>
     );
 
-    var links = TestUtils.scryRenderedDOMComponentsWithTag(
-      paginator, 'a');
-    var selected = TestUtils.scryRenderedDOMComponentsWithClass(
-      paginator, 'selected');
+    const centerPage = TestUtils.scryRenderedDOMComponentsWithClass(
+      paginator, className);
 
-    expect(links.length).toEqual(3);
-    expect(selected.length).toEqual(1);
+    expect(centerPage.length).toEqual(1);
   });
 
-  it('should construct links for start, current and end', function() {
-    var amount = 10;
-    var paginator = TestUtils.renderIntoDocument(
-      <Paginator pages={amount} page={5} beginPages={2} endPages={2} />
+  it('should be able to display ellipsis', function() {
+    const className = 'ellipsis';
+    const paginator = TestUtils.renderIntoDocument(
+      <Paginator.Context segments={{
+        beginPages: [1, 2, 3],
+        previousPages: [5, 6, 7]
+      }}>
+        <Paginator.Ellipsis
+          className={className} previousField="beginPages" nextField="previousPages" />
+      </Paginator.Context>
     );
 
-    var links = TestUtils.scryRenderedDOMComponentsWithTag(
-      paginator, 'a');
+    const ellipsis = TestUtils.scryRenderedDOMComponentsWithClass(
+      paginator, className);
 
-    expect(links.length).toEqual(7);
+    expect(ellipsis.length).toEqual(1);
   });
 
-  it('should trigger handler on select', function() {
-    var selectIndex = 2;
-    var select = function(i) {
-      expect(i).toEqual(selectIndex);
-    };
-    var paginator = TestUtils.renderIntoDocument(
-      <Paginator pages={5} page={1} onSelect={select} />
+  it('should not display ellipsis if there is overlap', function() {
+    const className = 'ellipsis';
+    const paginator = TestUtils.renderIntoDocument(
+      <Paginator.Context segments={{
+        beginPages: [1, 2, 3],
+        previousPages: [2, 3, 4]
+      }}>
+        <Paginator.Ellipsis
+          className={className} previousField="beginPages" nextField="previousPages" />
+      </Paginator.Context>
     );
 
-    var links = TestUtils.scryRenderedDOMComponentsWithTag(
-      paginator, 'a');
+    const ellipsis = TestUtils.scryRenderedDOMComponentsWithClass(
+      paginator, className);
 
-    TestUtils.Simulate.click(links[selectIndex]);
+    expect(ellipsis.length).toEqual(0);
   });
-  */
+
+  it('should not display ellipsis if the ranges are next to each other', function() {
+    const className = 'ellipsis';
+    const paginator = TestUtils.renderIntoDocument(
+      <Paginator.Context segments={{
+        beginPages: [1, 2, 3],
+        previousPages: [4, 5, 6]
+      }}>
+        <Paginator.Ellipsis
+          className={className} previousField="beginPages" nextField="previousPages" />
+      </Paginator.Context>
+    );
+
+    const ellipsis = TestUtils.scryRenderedDOMComponentsWithClass(
+      paginator, className);
+
+    expect(ellipsis.length).toEqual(0);
+  });
 });

@@ -14,7 +14,7 @@ class Context extends React.Component {
   }
 }
 Context.propTypes = {
-  children: React.PropTypes.array,
+  children: React.PropTypes.any,
   onSelect: React.PropTypes.func,
   segments: React.PropTypes.object
 };
@@ -67,6 +67,9 @@ Ellipsis.propTypes = {
   outlook: React.PropTypes.string.isRequired,
   previousField: React.PropTypes.string.isRequired,
   nextField: React.PropTypes.string.isRequired,
+};
+Ellipsis.defaultProps = {
+  outlook: '…'
 };
 Ellipsis.contextTypes = {
   segments: React.PropTypes.object
