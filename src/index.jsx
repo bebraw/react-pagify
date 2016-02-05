@@ -3,7 +3,7 @@ import React from 'react';
 const pageShape = {
   beginPages: React.PropTypes.array,
   previousPages: React.PropTypes.array,
-  centerPage: React.PropTypes.number,
+  centerPage: React.PropTypes.array,
   nextPages: React.PropTypes.array,
   endPages: React.PropTypes.array
 };
@@ -87,13 +87,13 @@ class CenterPage extends React.Component {
   render() {
     const props = this.props;
     const context = this.context;
-    const page = context.centerPage;
+    const page = context.centerPage[0];
 
     return <span {...props}>{page}</span>;
   }
 }
 CenterPage.contextTypes = {
-  centerPage: React.PropTypes.number
+  centerPage: React.PropTypes.array
 };
 
 class NextPages extends React.Component {

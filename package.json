@@ -54,7 +54,7 @@
     "react-ghfork": "^0.3.2",
     "remark": "^3.2.2",
     "remark-react": "^1.1.0",
-    "segmentize": "^0.3.0",
+    "segmentize": "^0.4.0",
     "style-loader": "^0.13.0",
     "system-bell-webpack-plugin": "^1.0.0",
     "url-loader": "^0.5.7",
