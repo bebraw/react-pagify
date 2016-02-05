@@ -23,7 +23,7 @@ Context.childContextTypes = {
   segments: React.PropTypes.object
 };
 
-class Bind extends React.Component {
+class Segment extends React.Component {
   render() {
     const context = this.context;
     const props = this.props;
@@ -38,10 +38,10 @@ class Bind extends React.Component {
     )}</div>);
   }
 }
-Bind.propTypes = {
+Segment.propTypes = {
   field: React.PropTypes.string.isRequired
 };
-Bind.contextTypes = {
+Segment.contextTypes = {
   onSelect: React.PropTypes.func,
   segments: React.PropTypes.object
 };
@@ -77,6 +77,6 @@ Ellipsis.contextTypes = {
 
 export default {
   Context,
-  Bind,
+  Segment,
   Ellipsis
 };

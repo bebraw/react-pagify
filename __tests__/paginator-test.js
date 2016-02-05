@@ -12,7 +12,7 @@ describe('Paginator', function() {
     const className = 'center-page';
     const paginator = TestUtils.renderIntoDocument(
       <Paginator.Context segments={{centerPage: [2]}}>
-        <Paginator.Bind className={className} field="centerPage" />
+        <Paginator.Segment className={className} field="centerPage" />
       </Paginator.Context>
     );
 

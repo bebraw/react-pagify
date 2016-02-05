@@ -5,11 +5,11 @@
 
 ## Usage
 
-*react-pagify* consists of three React components: `Context`, `Bind`, and `Ellipsis`.
+*react-pagify* consists of three React components: `Context`, `Segment`, and `Ellipsis`.
 
 Pagination logic can be handled through a package, such as [segmentize](https://www.npmjs.com/package/segmentize). *react-pagify* doesn't tie you to any particular solution by design, though.
 
-### `Context` and `Bind`
+### `Context` and `Segment`
 
 The example below binds `centerPage`. When it's clicked, it will trigger `onSelect` and pass the page number to it. Note that segment data should be given as a object. All values should be within an array even if there is just one.
 
@@ -24,11 +24,11 @@ import Paginator from 'react-pagify';
   segments={{
     centerPage: [4]
   }} onSelect={(page) => console.log(page)}>
-  <Paginator.Bind field="centerPage" />
+  <Paginator.Segment field="centerPage" />
 </Paginator.Context>
 ```
 
-Both `Context` and `Bind` accept custom `props` so you can customize `className` and attach custom behavior as needed.
+Both `Context` and `Segment` accept custom `props` so you can customize `className` and attach custom behavior as needed.
 
 ### Usage with *segmentize*
 
@@ -48,9 +48,9 @@ import segmentize from 'segmentize';
     pages: 4,
     sidePages: 2
   })} onSelect={(page) => console.log(page)}>
-  <Paginator.Bind field="previousPages" />
-  <Paginator.Bind field="centerPage" />
-  <Paginator.Bind field="nextPages" />
+  <Paginator.Segment field="previousPages" />
+  <Paginator.Segment field="centerPage" />
+  <Paginator.Segment field="nextPages" />
 </Paginator.Context>
 ```
 
@@ -74,20 +74,20 @@ import segmentize from 'segmentize';
     pages: 4,
     sidePages: 2
   })} onSelect={(page) => console.log(page)}>
-  <Paginator.Bind field="beginPages" />
+  <Paginator.Segment field="beginPages" />
 
   <Paginator.Ellipsis className="ellipsis"
     previousField="beginPages" nextField="previousPages">
     ***
   </Paginator.Ellipsis>
 
-  <Paginator.Bind field="previousPages" />
-  <Paginator.Bind field="centerPage" />
-  <Paginator.Bind field="nextPages" />
+  <Paginator.Segment field="previousPages" />
+  <Paginator.Segment field="centerPage" />
+  <Paginator.Segment field="nextPages" />
 
   <Paginator.Ellipsis previousField="nextPages" nextField="endPages" />
 
-  <Paginator.Bind field="endPages" />
+  <Paginator.Segment field="endPages" />
 </Paginator.Context>
 ```
 

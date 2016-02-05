@@ -48,19 +48,19 @@ export default class App extends React.Component {
           })} onSelect={this.onSelect}>
           <span onClick={this.onSelect.bind(null, pagination.page - 1)}>Previous</span>
 
-          <Paginator.Bind field="beginPages" />
+          <Paginator.Segment field="beginPages" />
 
           <Paginator.Ellipsis className="ellipsis"
             previousField="beginPages" nextField="previousPages" />
 
-          <Paginator.Bind field="previousPages" />
-          <Paginator.Bind field="centerPage" className="selected" />
-          <Paginator.Bind field="nextPages" />
+          <Paginator.Segment field="previousPages" />
+          <Paginator.Segment field="centerPage" className="selected" />
+          <Paginator.Segment field="nextPages" />
 
           <Paginator.Ellipsis className="ellipsis"
             previousField="nextPages" nextField="endPages" />
 
-          <Paginator.Bind field="endPages" />
+          <Paginator.Segment field="endPages" />
 
           <span onClick={this.onSelect.bind(null, pagination.page + 1)}>Next</span>
         </Paginator.Context>
@@ -83,23 +83,23 @@ export default class App extends React.Component {
           })} onSelect={this.onSelect} ellipsis={'…'}>
           <span onClick={this.onSelect.bind(null, pagination.page - 1)}>Previous one</span>
 
-          <Paginator.Bind field="beginPages" />
+          <Paginator.Segment field="beginPages" />
 
           <Paginator.Ellipsis className="ellipsis"
             previousField="beginPages" nextField="previousPages">
             ***
           </Paginator.Ellipsis>
 
-          <Paginator.Bind field="previousPages" />
-          <Paginator.Bind field="centerPage" className="selected" />
-          <Paginator.Bind field="nextPages" />
+          <Paginator.Segment field="previousPages" />
+          <Paginator.Segment field="centerPage" className="selected" />
+          <Paginator.Segment field="nextPages" />
 
           <Paginator.Ellipsis className="ellipsis"
             previousField="nextPages" nextField="endPages">
             ***
           </Paginator.Ellipsis>
 
-          <Paginator.Bind field="endPages" />
+          <Paginator.Segment field="endPages" />
 
           <span onClick={this.onSelect.bind(null, pagination.page + 1)}>Next one</span>
         </Paginator.Context>
