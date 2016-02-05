@@ -75,29 +75,8 @@ Ellipsis.contextTypes = {
   segments: React.PropTypes.object
 };
 
-function paginate(data, o) {
-  data = data || [];
-
-  var page = o.page || 0;
-  var perPage = o.perPage;
-
-  var amountOfPages = Math.ceil(data.length / perPage);
-  var startPage = page < amountOfPages? page: 0;
-
-  return {
-    amount: amountOfPages,
-    data: data.slice(startPage * perPage, startPage * perPage + perPage),
-    page: startPage
-  };
-}
-
-const Paginator = {
+export default {
   Context,
   Bind,
   Ellipsis
-};
-
-export {
-  Paginator,
-  paginate
 };

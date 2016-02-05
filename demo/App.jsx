@@ -5,7 +5,7 @@ import range from 'lodash/range';
 import cumberbatch from 'cumberbatch-name';
 import segmentize from 'segmentize';
 
-import {Paginator, paginate} from '../src/index.jsx';
+import Paginator from '../src/index.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -122,6 +122,24 @@ export default class App extends React.Component {
       pagination: pagination
     });
   }
+}
+
+// TODO: push to a package?
+function paginate(data, o) {
+  data = data || [];
+
+  // adapt to zero indexed logic
+  var page = o.page - 1 || 0;
+  var perPage = o.perPage;
+
+  var amountOfPages = Math.ceil(data.length / perPage);
+  var startPage = page < amountOfPages? page: 0;
+
+  return {
+    amount: amountOfPages,
+    data: data.slice(startPage * perPage, startPage * perPage + perPage),
+    page: startPage
+  };
 }
 
 function generateNames(amount) {

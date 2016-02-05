@@ -5,8 +5,7 @@ jest.autoMockOff();
 const React = require('react');
 const TestUtils = require('react-addons-test-utils');
 
-const pagify = require('../src/index.jsx');
-const Paginator = pagify.Paginator;
+const Paginator = require('../src/index.jsx').default;
 
 describe('Paginator', function() {
   it('should be able to bind a value based on context', function() {
