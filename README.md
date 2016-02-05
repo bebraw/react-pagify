@@ -1,89 +1,98 @@
 [![build status](https://secure.travis-ci.org/bebraw/react-pagify.png)](http://travis-ci.org/bebraw/react-pagify)
 # react-pagify - Simple pagination for React
 
-*react-pagify* provides a simple interface for pagination. Consider the usage example below.
+*react-pagify* provides a simple API for building your own custom paginator.
 
 ## Usage
 
+*react-pagify* consists of three React components: `Context`, `Bind`, and `Ellipsis`.
+
+Pagination logic can be handled through a package, such as [segmentize](https://www.npmjs.com/package/segmentize). *react-pagify* doesn't tie you to any particular solution by design, though.
+
+### `Context` and `Bind`
+
+The example below binds `centerPage`. When it's clicked, it will trigger `onSelect` and pass the page number to it. Note that segment data should be given as a object. All values should be within an array even if there is just one.
+
 ```javascript
-var Paginator = require('react-pagify');
+...
 
-require('react-pagify/style.css');
+import Paginator from 'react-pagify';
 
-module.exports = React.createClass({
-  getInitialState() {
-    return {
-      data: [
-        ...
-      ],
-      pagination: {
-        page: 0,
-        perPage: 5
-      }
-    };
-  },
-  render() {
-    var data = this.state.data || [];
-    var pagination = this.state.pagination || {};
-    var paginated = Paginator.paginate(data, pagination);
+...
 
-    {/* note that prevButton and nextButton accept React elements as well! */}
-    {/* handy for custom images and such */}
-    return (
-      <article>
-        <div className='per-page-container'>
-          <span>Per page</span>
-          <input
-            type='text'
-            defaultValue={pagination.perPage}
-            onChange={this.onPerPage}>
-          </input>
-        </div>
-
-        <Paginator
-          className='pagify-pagination'
-          ellipsesClassName='pagify-ellipsis'
-          activeClassName='selected'
-          inactiveClassName='inactive'
-          page={paginated.page}
-          pages={paginated.amount}
-          beginPages={3}
-          endPages={3}
-          sidePages={3}
-          showPrevNext={true}
-          alwaysShowPrevNext={true}
-          prevButton={'Previous one'}
-          nextButton={'Next one'}
-          ellipsisButton={'…'}
-          onSelect={this.onSelect}>
-        </Paginator>
-
-        <div className='data'>
-            ...
-        </div>
-      </article>
-    );
-  },
-  onSelect(page) {
-    var pagination = this.state.pagination || {};
-
-    pagination.page = page;
-
-    this.setState({
-      pagination: pagination
-    });
-  },
-  onPerPage(e) {
-    var pagination = this.state.pagination || {};
-
-    pagination.perPage = parseInt(event.target.value, 10);
-
-    this.setState({
-      pagination: pagination
-    });
-  }
-});
+<Paginator.Context className="pagify-pagination"
+  segments={{
+    centerPage: [4]
+  }} onSelect={(page) => console.log(page)}>
+  <Paginator.Bind field="centerPage" />
+</Paginator.Context>
 ```
+
+Both `Context` and `Bind` accept custom `props` so you can customize `className` and attach custom behavior as needed.
+
+### Usage with *segmentize*
+
+You can integrate the solution with *segmentize* like this:
+
+```javascript
+...
+
+import Paginator from 'react-pagify';
+import segmentize from 'segmentize';
+
+...
+
+<Paginator.Context className="pagify-pagination"
+  segments={segmentize({
+    page: 1,
+    pages: 4,
+    sidePages: 2
+  })} onSelect={(page) => console.log(page)}>
+  <Paginator.Bind field="previousPages" />
+  <Paginator.Bind field="centerPage" />
+  <Paginator.Bind field="nextPages" />
+</Paginator.Context>
+```
+
+The idea is the same as earlier. In this case we bind fields that *segmentize* outputs. Each of those fields contains an array of data.
+
+### `Ellipsis`
+
+Given it can be handy to be able to display ellipsis between pages of a paginator, there's a small utility known as `Ellipsis` just for this:
+
+```javascript
+...
+
+import Paginator from 'react-pagify';
+import segmentize from 'segmentize';
+
+...
+
+<Paginator.Context className="pagify-pagination"
+  segments={segmentize({
+    page: 1,
+    pages: 4,
+    sidePages: 2
+  })} onSelect={(page) => console.log(page)}>
+  <Paginator.Bind field="beginPages" />
+
+  <Paginator.Ellipsis outlook="custom" className="ellipsis"
+    previousField="beginPages" nextField="previousPages" />
+
+  <Paginator.Bind field="previousPages" />
+  <Paginator.Bind field="centerPage" />
+  <Paginator.Bind field="nextPages" />
+
+  <Paginator.Ellipsis previousField="nextPages" nextField="endPages" />
+
+  <Paginator.Bind field="endPages" />
+</Paginator.Context>
+```
+
+The component accepts optional `outlook` prop that can be used to customize what it looks like.
+
+
+> See `demo/` for a full implementation of the ideas.
 
 ## Contributors
 
