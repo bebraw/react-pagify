@@ -47,11 +47,12 @@ export default class App extends React.Component {
           sidePages: 2
         })} onSelect={this.onSelect} ellipsis={'…'}>
           <span onClick={this.onSelect.bind(null, pagination.page - 1)}>Previous</span>
-          <Paginator.BeginPages />
-          <Paginator.PreviousPages />
-          <Paginator.CenterPage className="selected" />
-          <Paginator.NextPages />
-          <Paginator.EndPages />
+          <Paginator.Bind field="beginPages" />
+          <Paginator.Bind field="previousPages" />
+          <Paginator.Bind field="centerPage" className="selected" />
+          <Paginator.Bind field="nextPages" />
+          <Paginator.Bind field="endPages" />
+
           <span onClick={this.onSelect.bind(null, pagination.page + 1)}>Next</span>
         </Paginator.Context>
 

@@ -11,6 +11,7 @@ const pageShape = {
 class Context extends React.Component {
   getChildContext() {
     return Object.assign({}, this.props.segments, {
+      segments: this.props.segments,
       onSelect: this.props.onSelect,
       ellipsis: this.props.ellipsis,
       ellipsisClass: this.props.ellipsisClass,
@@ -35,15 +36,39 @@ Context.defaultProps = {
 Context.childContextTypes = Object.assign({}, pageShape, {
   onSelect: React.PropTypes.func,
   ellipsis: React.PropTypes.string,
-  ellipsisClass: React.PropTypes.string
+  ellipsisClass: React.PropTypes.string,
+  segments: React.PropTypes.shape(pageShape)
 });
+
+class Bind extends React.Component {
+  render() {
+    const context = this.context;
+    const props = this.props;
+    const segments = context.segments;
+    const onSelect = context.onSelect;
+    const pages = segments[props.field];
+
+    return (<div>{pages.map((page) =>
+      <span {...props}
+        key={`page-${page}`}
+        onClick={(e) => onSelect(page, e)}>{page}</span>
+    )}</div>);
+  }
+}
+Bind.propTypes = {
+  field: React.PropTypes.string.isRequired
+};
+Bind.contextTypes = {
+  segments: React.PropTypes.shape(pageShape),
+  onSelect: React.PropTypes.func
+};
 
 class BeginPages extends React.Component {
   render() {
     const props = this.props;
     const context = this.context;
     const pages = context.beginPages;
-    const onSelect = this.context.onSelect;
+    const onSelect = context.onSelect;
 
     return (<div>{pages.map((page) =>
       <span {...props} key={`begin-page-${page}`} onClick={(e) => onSelect(page, e)}>{page}</span>
@@ -159,6 +184,7 @@ function paginate(data, o) {
 
 const Paginator = {
   Context,
+  Bind,
   BeginPages,
   PreviousPages,
   CenterPage,
