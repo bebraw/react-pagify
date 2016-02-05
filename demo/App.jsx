@@ -39,13 +39,13 @@ export default class App extends React.Component {
         </div>
 
         <Paginator.Context className="pagify-pagination"
-        segments={segmentize({
-          page: pagination.page,
-          pages: pages,
-          beginPages: 3,
-          endPages: 3,
-          sidePages: 2
-        })} onSelect={this.onSelect}>
+          segments={segmentize({
+            page: pagination.page,
+            pages: pages,
+            beginPages: 3,
+            endPages: 3,
+            sidePages: 2
+          })} onSelect={this.onSelect}>
           <span onClick={this.onSelect.bind(null, pagination.page - 1)}>Previous</span>
 
           <Paginator.Bind field="beginPages" />
@@ -74,13 +74,13 @@ export default class App extends React.Component {
         </div>
 
         <Paginator.Context className="pagify-pagination"
-        segments={segmentize({
-          page: pagination.page,
-          pages: pages,
-          beginPages: 1,
-          endPages: 1,
-          sidePages: 2
-        })} onSelect={this.onSelect} ellipsis={'…'}>
+          segments={segmentize({
+            page: pagination.page,
+            pages: pages,
+            beginPages: 1,
+            endPages: 1,
+            sidePages: 2
+          })} onSelect={this.onSelect} ellipsis={'…'}>
           <span onClick={this.onSelect.bind(null, pagination.page - 1)}>Previous one</span>
 
           <Paginator.Bind field="beginPages" />
