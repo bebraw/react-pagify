@@ -63,6 +63,32 @@ Bind.contextTypes = {
   onSelect: React.PropTypes.func
 };
 
+class Ellipsis extends React.Component {
+  render() {
+    const context = this.context;
+    const props = this.props;
+    const segments = context.segments;
+    const outlook = props.outlook;
+    const previousPages = segments[props.previousField];
+    const nextPages = segments[props.nextField];
+    const showEllipsis = nextPages[0] - previousPages.slice(-1)[0] > 1;
+
+    if(showEllipsis) {
+      return <span {...props}>{outlook}</span>;
+    }
+
+    return null;
+  }
+}
+Ellipsis.propTypes = {
+  outlook: React.PropTypes.string.isRequired,
+  previousField: React.PropTypes.string.isRequired,
+  nextField: React.PropTypes.string.isRequired,
+};
+Ellipsis.contextTypes = {
+  segments: React.PropTypes.shape(pageShape)
+};
+
 class BeginPages extends React.Component {
   render() {
     const props = this.props;
@@ -185,6 +211,8 @@ function paginate(data, o) {
 const Paginator = {
   Context,
   Bind,
+  Ellipsis,
+
   BeginPages,
   PreviousPages,
   CenterPage,
