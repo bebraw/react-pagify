@@ -28,14 +28,16 @@ export default class App extends React.Component {
     const data = this.state.data || [];
     const pagination = this.state.pagination || {};
     const paginated = paginate(data, pagination);
-    const pages = Math.ceil(data.length / pagination.perPage);
+    const pages = Math.ceil(data.length / Math.max(
+      isNaN(pagination.perPage) ? 1 : pagination.perPage, 1)
+    );
 
     return (
       <div>
         <Fork className='right' project='bebraw/react-pagify' />
 
         <div className='per-page-container'>
-          Per page <input type='text' defaultValue={pagination.perPage} onChange={this.onPerPage}></input>
+          Per page <input type='number' min='1' defaultValue={pagination.perPage} onChange={this.onPerPage}></input>
         </div>
 
         <Paginator.Context className="pagify-pagination"
@@ -117,7 +119,7 @@ export default class App extends React.Component {
       pagination: pagination
     });
   }
-  onPerPage() {
+  onPerPage(event) {
     var pagination = this.state.pagination || {};
 
     pagination.perPage = parseInt(event.target.value, 10);
