@@ -13,7 +13,9 @@ Pagination logic can be handled through a package, such as [segmentize](https://
 
 ### `Context` and `Segment`
 
-The example below binds `centerPage`. When it's clicked, it will trigger `onSelect` and pass the page number to it. Note that segment data should be given as a object. All values should be within an array even if there is just one.
+`Context` accepts two props: `segments` and `onSelect`. A segment in turn consists of an object (`segmentName -> [pageNumbers]`). `Segment` accepts matching `segmentName` through a prop and then constructs divs based on that. It also binds `onSelect` automatically so that when you click an individual page div, the page number will be passed to it as a first parameter. The second one matches with DOM event.
+
+The example below binds `centerPage` through `Context` and `Segment`:
 
 ```javascript
 ...
@@ -30,11 +32,11 @@ import Paginator from 'react-pagify';
 </Paginator.Context>
 ```
 
-Both `Context` and `Segment` accept custom `props` so you can customize `className` and attach custom behavior as needed.
+Both `Context` and `Segment` accept custom props so you can customize `className` and attach custom behavior as needed. In the latter case the custom props are applied per each page `div` generated.
 
 ### Usage with *segmentize*
 
-You can integrate the solution with *segmentize* like this:
+*react-pagify* doesn't deal with pagination logic itself. Instead, you can use another package, such as [segmentize](https://www.npmjs.com/package/segmentize), to deal with it. The following example demonstrates basic integration:
 
 ```javascript
 ...
@@ -56,11 +58,11 @@ import segmentize from 'segmentize';
 </Paginator.Context>
 ```
 
-The idea is the same as earlier. In this case we bind fields that *segmentize* outputs. Each of those fields contains an array of data.
+The idea is the same as earlier. In this case we bind fields that *segmentize* outputs. Each of those fields contains an array of data. Refer to *segmentize* documentation for available options.
 
 ### `Ellipsis`
 
-Given it can be handy to be able to display ellipsis between pages of a paginator, there's a small utility known as `Ellipsis` just for this:
+Given it can be handy to be able to display ellipsis between pages of a paginator, there's a small utility known as `Ellipsis` just for this. Internally it uses comparison logic based on given `previousField` and `nextField` props. If there is room between these fields (say the values are `[1, 2]` and `[4, 5]`), it will render ellipsis. You can customize the outlook by passing custom children to it. Consider the example below:
 
 ```javascript
 ...
@@ -93,9 +95,7 @@ import segmentize from 'segmentize';
 </Paginator.Context>
 ```
 
-The outlook of `Ellipsis` can be customized by passing something custom to it as its child.
-
-> See `demo/` for a full implementation of the ideas.
+> See `demo/` for a full implementation of the ideas discussed.
 
 ## Contributors
 
