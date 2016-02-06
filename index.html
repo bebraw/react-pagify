@@ -3,12 +3,107 @@
   <head>
     <meta charset="UTF-8">
     <title>react-pagify - Simple pagination for React</title>
+
     
+
+    
+
+    
+    <link href="style.9635963280d73bce8c42.css" rel="stylesheet">
+    
+
     
   </head>
   <body>
+    <div class="pure-g">
+      <header class="pure-u-1">
+        
+        <h1>react-pagify</h1>
+        
+
+        
+        <div class="description">Simple pagination for React</div>
+        
+      </header>
+
+      <article class="pure-u-1">
+        <h2>Demonstration</h2>
+        <section class="demonstration">
+          <div data-reactid=".2c5g90d36dc" data-react-checksum="1848296794"><div class="right github-fork-ribbon-wrapper" data-reactid=".2c5g90d36dc.0"><div class="github-fork-ribbon" data-reactid=".2c5g90d36dc.0.0"><a href="https://github.com/bebraw/react-pagify" data-reactid=".2c5g90d36dc.0.0.0">Fork me on GitHub</a></div></div><div class="per-page-container" data-reactid=".2c5g90d36dc.1"><span data-reactid=".2c5g90d36dc.1.0">Per page </span><input type="text" value="10" data-reactid=".2c5g90d36dc.1.1"/></div><div class="pagify-pagination" data-reactid=".2c5g90d36dc.2"><span data-reactid=".2c5g90d36dc.2.0">Previous</span><div data-reactid=".2c5g90d36dc.2.1"></div><noscript data-reactid=".2c5g90d36dc.2.2"></noscript><div data-reactid=".2c5g90d36dc.2.3"></div><div data-reactid=".2c5g90d36dc.2.4"><span class="selected" data-reactid=".2c5g90d36dc.2.4.$page-1">1</span></div><div data-reactid=".2c5g90d36dc.2.5"><span data-reactid=".2c5g90d36dc.2.5.$page-2">2</span><span data-reactid=".2c5g90d36dc.2.5.$page-3">3</span></div><span class="ellipsis" data-reactid=".2c5g90d36dc.2.6">…</span><div data-reactid=".2c5g90d36dc.2.7"><span data-reactid=".2c5g90d36dc.2.7.$page-998">998</span><span data-reactid=".2c5g90d36dc.2.7.$page-999">999</span><span data-reactid=".2c5g90d36dc.2.7.$page-1000">1000</span></div><span data-reactid=".2c5g90d36dc.2.8">Next</span></div><div class="data" data-reactid=".2c5g90d36dc.3"><h3 data-reactid=".2c5g90d36dc.3.0">Comics</h3><ul data-reactid=".2c5g90d36dc.3.1"><li data-reactid=".2c5g90d36dc.3.1.$comic-0">Pancakedrink Bummerclap</li><li data-reactid=".2c5g90d36dc.3.1.$comic-1">Waggledisc Hoverbass</li><li data-reactid=".2c5g90d36dc.3.1.$comic-2">Baggyflick Drummerscotch</li><li data-reactid=".2c5g90d36dc.3.1.$comic-3">Vikingsuck Rompercross</li><li data-reactid=".2c5g90d36dc.3.1.$comic-4">Badgerhike Loverdance</li><li data-reactid=".2c5g90d36dc.3.1.$comic-5">Pandadrake Sundercatch</li><li data-reactid=".2c5g90d36dc.3.1.$comic-6">Venomdirt Cucumberflap</li><li data-reactid=".2c5g90d36dc.3.1.$comic-7">Babydumb Lumbergrass</li><li data-reactid=".2c5g90d36dc.3.1.$comic-8">Beaglelick Buttabrown</li><li data-reactid=".2c5g90d36dc.3.1.$comic-9">Blunderplump Bunkerlodge</li></ul></div><div class="pagify-pagination" data-reactid=".2c5g90d36dc.4"><span data-reactid=".2c5g90d36dc.4.0">Previous one</span><div data-reactid=".2c5g90d36dc.4.1"></div><noscript data-reactid=".2c5g90d36dc.4.2"></noscript><div data-reactid=".2c5g90d36dc.4.3"></div><div data-reactid=".2c5g90d36dc.4.4"><span class="selected" data-reactid=".2c5g90d36dc.4.4.$page-1">1</span></div><div data-reactid=".2c5g90d36dc.4.5"><span data-reactid=".2c5g90d36dc.4.5.$page-2">2</span><span data-reactid=".2c5g90d36dc.4.5.$page-3">3</span></div><span class="ellipsis" data-reactid=".2c5g90d36dc.4.6">***</span><div data-reactid=".2c5g90d36dc.4.7"><span data-reactid=".2c5g90d36dc.4.7.$page-1000">1000</span></div><span data-reactid=".2c5g90d36dc.4.8">Next one</span></div></div>
+        </section>
+
+        <h2>Documentation</h2>
+        <section class="documentation">
+          <div><div><p><a href="http://travis-ci.org/bebraw/react-pagify"><img src="https://secure.travis-ci.org/bebraw/react-pagify.png" alt="build status"/></a></p><h1><span>react-pagify - Simple pagination for React</span></h1><p><em><span>react-pagify</span></em><span> provides a simple API for building your own custom paginator.</span></p><blockquote><p><span>If you want to learn more about React, read </span><a href="http://survivejs.com/"><span>SurviveJS - Webpack and React</span></a><span>.</span></p></blockquote><h2><span>Usage</span></h2><p><em><span>react-pagify</span></em><span> consists of three React components: </span><code>Context</code><span>, </span><code>Segment</code><span>, and </span><code>Ellipsis</code><span>.</span></p><p><span>Pagination logic can be handled through a package, such as </span><a href="https://www.npmjs.com/package/segmentize"><span>segmentize</span></a><span>. </span><em><span>react-pagify</span></em><span> doesn&#x27;t tie you to any particular solution by design, though.</span></p><h3><code>Context</code><span> and </span><code>Segment</code></h3><p><code>Context</code><span> accepts two props: </span><code>segments</code><span> and </span><code>onSelect</code><span>. A segment in turn consists of an object (</span><code>segmentName -&amp;gt; [pageNumbers]</code><span>). </span><code>Segment</code><span> accepts matching </span><code>segmentName</code><span> through a prop and then constructs divs based on that. It also binds </span><code>onSelect</code><span> automatically so that when you click an individual page div, the page number will be passed to it as a first parameter. The second one matches with DOM event.</span></p><p><span>The example below binds </span><code>centerPage</code><span> through </span><code>Context</code><span> and </span><code>Segment</code><span>:</span></p><pre><code class="language-javascript">...
+
+import Paginator from &#x27;react-pagify&#x27;;
+
+...
+
+&lt;Paginator.Context className=&quot;pagify-pagination&quot;
+  segments={{
+    centerPage: [4]
+  }} onSelect={(page) =&gt; console.log(page)}&gt;
+  &lt;Paginator.Segment field=&quot;centerPage&quot; /&gt;
+&lt;/Paginator.Context&gt;
+</code></pre><p><span>Both </span><code>Context</code><span> and </span><code>Segment</code><span> accept custom props so you can customize </span><code>className</code><span> and attach custom behavior as needed. In the latter case the custom props are applied per each page </span><code>div</code><span> generated.</span></p><h3><span>Usage with </span><em><span>segmentize</span></em></h3><p><em><span>react-pagify</span></em><span> doesn&#x27;t deal with pagination logic itself. Instead, you can use another package, such as </span><a href="https://www.npmjs.com/package/segmentize"><span>segmentize</span></a><span>, to deal with it. The following example demonstrates basic integration:</span></p><pre><code class="language-javascript">...
+
+import Paginator from &#x27;react-pagify&#x27;;
+import segmentize from &#x27;segmentize&#x27;;
+
+...
+
+&lt;Paginator.Context className=&quot;pagify-pagination&quot;
+  segments={segmentize({
+    page: 1,
+    pages: 4,
+    sidePages: 2
+  })} onSelect={(page) =&gt; console.log(page)}&gt;
+  &lt;Paginator.Segment field=&quot;previousPages&quot; /&gt;
+  &lt;Paginator.Segment field=&quot;centerPage&quot; /&gt;
+  &lt;Paginator.Segment field=&quot;nextPages&quot; /&gt;
+&lt;/Paginator.Context&gt;
+</code></pre><p><span>The idea is the same as earlier. In this case we bind fields that </span><em><span>segmentize</span></em><span> outputs. Each of those fields contains an array of data. Refer to </span><em><span>segmentize</span></em><span> documentation for available options.</span></p><h3><code>Ellipsis</code></h3><p><span>Given it can be handy to be able to display ellipsis between pages of a paginator, there&#x27;s a small utility known as </span><code>Ellipsis</code><span> just for this. Internally it uses comparison logic based on given </span><code>previousField</code><span> and </span><code>nextField</code><span> props. If there is room between these fields (say the values are </span><code>[1, 2]</code><span> and </span><code>[4, 5]</code><span>), it will render ellipsis. You can customize the outlook by passing custom children to it. Consider the example below:</span></p><pre><code class="language-javascript">...
+
+import Paginator from &#x27;react-pagify&#x27;;
+import segmentize from &#x27;segmentize&#x27;;
+
+...
+
+&lt;Paginator.Context className=&quot;pagify-pagination&quot;
+  segments={segmentize({
+    page: 1,
+    pages: 4,
+    sidePages: 2
+  })} onSelect={(page) =&gt; console.log(page)}&gt;
+  &lt;Paginator.Segment field=&quot;beginPages&quot; /&gt;
+
+  &lt;Paginator.Ellipsis className=&quot;ellipsis&quot;
+    previousField=&quot;beginPages&quot; nextField=&quot;previousPages&quot;&gt;
+    ***
+  &lt;/Paginator.Ellipsis&gt;
+
+  &lt;Paginator.Segment field=&quot;previousPages&quot; /&gt;
+  &lt;Paginator.Segment field=&quot;centerPage&quot; /&gt;
+  &lt;Paginator.Segment field=&quot;nextPages&quot; /&gt;
+
+  &lt;Paginator.Ellipsis previousField=&quot;nextPages&quot; nextField=&quot;endPages&quot; /&gt;
+
+  &lt;Paginator.Segment field=&quot;endPages&quot; /&gt;
+&lt;/Paginator.Context&gt;
+</code></pre><blockquote><p><span>See </span><code>demo/</code><span> for a full implementation of the ideas discussed.</span></p></blockquote><h2><span>Contributors</span></h2><ul><li><a href="https://github.com/rowbare"><span>rowbare</span></a><span> - Allowed usage in Bootstrap by making </span><code>className</code><span> customizable.</span></li><li><a href="https://github.com/nadavspi"><span>Nadav Spiegelman</span></a><span> - Added optional ellipsesClassName prop, </span><code>showPrevNext</code><span> prop.</span></li><li><a href="https://github.com/jacktrades"><span>Nick Zarczynski</span></a><span> - Added configuration to always show prev/next buttons and allowed inactive buttons to be styled.</span></li><li><a href="https://github.com/nemothekid"><span>Nimi Wariboko Jr.</span></a><span> - Added support for </span><code>activeClassName</code><span>.</span></li><li><a href="https://github.com/sapegin"><span>Artem Sapegin</span></a><span> - Added </span><code>Add ellipsisButton</code><span> and </span><code>sidePages</code><span> props.</span></li></ul><h2><span>License</span></h2><p><em><span>react-pagify</span></em><span> is available under MIT. See LICENSE for more details.</span></p></div></div>
+        </section>
+      </article>
+    </div>
+
     
-    <script src="bundle.js"></script>
+      <script src="manifest.6a6a472e0711bfe6295c.js"></script>
+    
+      <script src="vendors.20e75ab2dc0ad7e5b9ca.js"></script>
+    
+      <script src="style.9635963280d73bce8c42.js"></script>
+    
+      <script src="app.ec8ea2cd4b4b59d31836.js"></script>
     
   </body>
 </html>
