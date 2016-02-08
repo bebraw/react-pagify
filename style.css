@@ -16,16 +16,15 @@
     background: #ddd;
 }
 .pagify-pagination .ellipsis {
+    margin-right: 1em;
     background: inherit;
-
     cursor: default;
 }
 .pagify-pagination a {
     text-decoration: none;
 }
-.pagify-pagination .selected {
+.pagify-pagination .selected span {
     background: #222;
     color: #eee;
-
     cursor: default;
 }
