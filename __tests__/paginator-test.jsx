@@ -185,4 +185,32 @@ describe('Paginator', function() {
 
     expect(selectedPage).toEqual(targetPage);
   });
+
+  it('should allow only props to be customized', function() {
+    let selectedPage = 0;
+    const targetPage = 5;
+    const className = 'button';
+    const onSelect = (page) => {
+      selectedPage = page;
+    };
+    const paginator = TestUtils.renderIntoDocument(
+      <Paginator.Context tags={{
+        link: {
+          props: {
+            className
+          }
+        }
+      }} segments={{centerPage: [2]}} onSelect={onSelect}>
+        <Paginator.Button page={targetPage}>Target</Paginator.Button>
+      </Paginator.Context>
+    );
+
+    const button = TestUtils.findRenderedDOMComponentWithClass(
+      paginator, className
+    );
+
+    TestUtils.Simulate.click(button);
+
+    expect(selectedPage).toEqual(targetPage);
+  });
 });

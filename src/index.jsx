@@ -1,4 +1,5 @@
 import React from 'react';
+import deepAssign from 'deep-assign';
 
 const defaultTags = {
   container: {
@@ -30,7 +31,7 @@ class Context extends React.Component {
     };
   }
   get tags() {
-    return {...defaultTags, ...this.props.tags};
+    return deepAssign({}, defaultTags, this.props.tags);
   }
   render() {
     const {onSelect, segments, ...props} = this.props;

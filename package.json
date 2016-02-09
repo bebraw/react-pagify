@@ -81,7 +81,9 @@
   "license": "MIT",
   "jest": {
     "scriptPreprocessor": "./node_modules/babel-jest",
-    "testFileExtensions": ["jsx"]
+    "testFileExtensions": [
+      "jsx"
+    ]
   },
   "watch": {
     "test": "{src,__tests__}/*.jsx"
@@ -89,5 +91,8 @@
   "pre-push": [
     "test",
     "test:lint"
-  ]
+  ],
+  "dependencies": {
+    "deep-assign": "^2.0.0"
+  }
 }
