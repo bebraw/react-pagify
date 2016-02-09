@@ -97,9 +97,9 @@ import segmentize from 'segmentize';
 
 > See `demo/` for a full implementation of the ideas discussed.
 
-### Cutomize tags
+### Customize Tags
 
-By default Pagify use `div`s for container, segments and ellipses, and `span`s for “links”. You can cutomize these tags as well as define default props:
+By default *react-pagify* uses `div`s for container, segments and ellipses, and `span`s for links. You can customize these tags and define custom props for htme:
 
 ```javascript
 ...
@@ -110,23 +110,23 @@ import Paginator from 'react-pagify';
 
 <Paginator.Context className="pagination"
   tags={{
-      container: {
-          tag: 'ul'
-      },
-      segment: {
-          tag: 'li'
-      },
-      ellipsis: {
-          tag: 'li'
-      },
-      link: {
-          tag: 'a',
-          props: {
-              href: '#'
-          }
+    container: {
+      tag: 'ul'
+    },
+    segment: {
+      tag: 'li'
+    },
+    ellipsis: {
+      tag: 'li'
+    },
+    link: {
+      tag: 'a',
+      props: {
+        href: '#'
       }
+    }
   }}
-segments={{
+  segments={{
     centerPage: [4]
   }} onSelect={(page) => console.log(page)}>
   <Paginator.Segment field="centerPage" />
@@ -139,7 +139,7 @@ segments={{
 * [Nadav Spiegelman](https://github.com/nadavspi) - Added optional ellipsesClassName prop, `showPrevNext` prop.
 * [Nick Zarczynski](https://github.com/jacktrades) - Added configuration to always show prev/next buttons and allowed inactive buttons to be styled.
 * [Nimi Wariboko Jr.](https://github.com/nemothekid) - Added support for `activeClassName`.
-* [Artem Sapegin](https://github.com/sapegin) - Added `Add ellipsisButton` and `sidePages` props.
+* [Artem Sapegin](https://github.com/sapegin) - Added `Added ellipsisButton` and `sidePages` props. Allowed paginator tags to be customized (important for Bootstrap).
 
 ## License
 
