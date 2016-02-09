@@ -7,7 +7,7 @@
 
 ## Usage
 
-*react-pagify* consists of three React components: `Context`, `Segment`, and `Ellipsis`.
+*react-pagify* consists of four React components: `Context`, `Segment`, `Button`, and `Ellipsis`.
 
 Pagination logic can be handled through a package, such as [segmentize](https://www.npmjs.com/package/segmentize). *react-pagify* doesn't tie you to any particular solution by design, though.
 
@@ -59,6 +59,26 @@ import segmentize from 'segmentize';
 ```
 
 The idea is the same as earlier. In this case we bind fields that *segmentize* outputs. Each of those fields contains an array of data. Refer to *segmentize* documentation for available options.
+
+### `Button`
+
+Given it's handy to be able to implement **previous** and **next** buttons, there's a little shortcut just for that:
+
+```javascript
+...
+
+import Paginator from 'react-pagify';
+
+...
+
+<Paginator.Context className="pagify-pagination"
+  segments={{
+    centerPage: [currentPage]
+  }} onSelect={(page) => console.log(page)}>
+  <Paginator.Button page={currentPage - 1}>Previous</Paginator.Button>
+  <Paginator.Button page={currentPage + 1}>Next</Paginator.Button>
+</Paginator.Context>
+```
 
 ### `Ellipsis`
 

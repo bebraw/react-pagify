@@ -48,7 +48,7 @@ export default class App extends React.Component {
             endPages: 3,
             sidePages: 2
           })} onSelect={this.onSelect}>
-          <span onClick={this.onSelect.bind(null, pagination.page - 1)}>Previous</span>
+          <Paginator.Button page={pagination.page - 1}>Previous</Paginator.Button>
 
           <Paginator.Segment field="beginPages" />
 
@@ -64,7 +64,7 @@ export default class App extends React.Component {
 
           <Paginator.Segment field="endPages" />
 
-          <span onClick={this.onSelect.bind(null, pagination.page + 1)}>Next</span>
+          <Paginator.Button page={pagination.page + 1}>Next</Paginator.Button>
         </Paginator.Context>
 
         <div className='data'>
@@ -83,7 +83,7 @@ export default class App extends React.Component {
             endPages: 1,
             sidePages: 2
           })} onSelect={this.onSelect} ellipsis={'…'}>
-          <span onClick={this.onSelect.bind(null, pagination.page - 1)}>Previous one</span>
+          <Paginator.Button page={pagination.page - 1}>Previous one</Paginator.Button>
 
           <Paginator.Segment field="beginPages" />
 
@@ -103,7 +103,7 @@ export default class App extends React.Component {
 
           <Paginator.Segment field="endPages" />
 
-          <span onClick={this.onSelect.bind(null, pagination.page + 1)}>Next one</span>
+          <Paginator.Button page={pagination.page + 1}>Next one</Paginator.Button>
         </Paginator.Context>
       </div>
     );

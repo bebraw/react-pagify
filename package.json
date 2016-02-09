@@ -80,10 +80,11 @@
   ],
   "license": "MIT",
   "jest": {
-    "scriptPreprocessor": "./node_modules/babel-jest"
+    "scriptPreprocessor": "./node_modules/babel-jest",
+    "testFileExtensions": ["jsx"]
   },
   "watch": {
-    "test": "{src,__tests__}/*.js"
+    "test": "{src,__tests__}/*.jsx"
   },
   "pre-push": [
     "test",

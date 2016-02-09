@@ -79,6 +79,33 @@ Segment.contextTypes = {
   tags: React.PropTypes.object
 };
 
+class Button extends React.Component {
+  render() {
+    const context = this.context;
+    const props = this.props;
+    const onSelect = context.onSelect;
+    const tags = context.tags;
+    const Tag = tags.segment.tag;
+    const Link = tags.link.tag;
+    const page = props.page;
+    const children = props.children;
+
+    return (<Tag {...tags.segment.props} {...props}>
+      <Link
+        {...tags.link.props}
+        onClick={(e) => onSelect(page, e)}>{children}</Link>
+    </Tag>);
+  }
+}
+Button.propTypes = {
+  children: React.PropTypes.any,
+  page: React.PropTypes.number.isRequired
+};
+Button.contextTypes = {
+  onSelect: React.PropTypes.func,
+  tags: React.PropTypes.object
+};
+
 class Ellipsis extends React.Component {
   render() {
     const context = this.context;
@@ -110,5 +137,6 @@ Ellipsis.contextTypes = {
 export default {
   Context,
   Segment,
+  Button,
   Ellipsis
 };

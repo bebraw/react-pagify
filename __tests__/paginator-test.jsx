@@ -87,11 +87,11 @@ describe('Paginator', function() {
       }} />
     );
 
-    const container = TestUtils.scryRenderedDOMComponentsWithClass(
+    const container = TestUtils.findRenderedDOMComponentWithClass(
       paginator, className);
 
-    expect(container[0].tagName).toEqual('UL');
-    expect(container[0].title).toEqual('42');
+    expect(container.tagName).toEqual('UL');
+    expect(container.title).toEqual('42');
   });
 
   it('should use custom tags and props for rendering segments', function() {
@@ -107,11 +107,11 @@ describe('Paginator', function() {
       </Paginator.Context>
     );
 
-    const centerPage = TestUtils.scryRenderedDOMComponentsWithClass(
+    const centerPage = TestUtils.findRenderedDOMComponentWithClass(
       paginator, className);
 
-    expect(centerPage[0].tagName).toEqual('LI');
-    expect(centerPage[0].title).toEqual('42');
+    expect(centerPage.tagName).toEqual('LI');
+    expect(centerPage.title).toEqual('42');
   });
 
   it('should use custom tags and props for rendering ellipses', function() {
@@ -130,11 +130,11 @@ describe('Paginator', function() {
       </Paginator.Context>
     );
 
-    const ellipsis = TestUtils.scryRenderedDOMComponentsWithClass(
+    const ellipsis = TestUtils.findRenderedDOMComponentWithClass(
       paginator, className);
 
-    expect(ellipsis[0].tagName).toEqual('LI');
-    expect(ellipsis[0].title).toEqual('42');
+    expect(ellipsis.tagName).toEqual('LI');
+    expect(ellipsis.title).toEqual('42');
   });
 
   it('should use custom tags and props for rendering links', function() {
@@ -150,10 +150,39 @@ describe('Paginator', function() {
       </Paginator.Context>
     );
 
-    const centerPage = TestUtils.scryRenderedDOMComponentsWithClass(
+    const centerPage = TestUtils.findRenderedDOMComponentWithClass(
       paginator, className);
 
-    expect(centerPage[0].tagName).toEqual('A');
-    expect(centerPage[0].className).toEqual('link');
+    expect(centerPage.tagName).toEqual('A');
+    expect(centerPage.className).toEqual('link');
+  });
+
+  it('should allow custom buttons to be used', function() {
+    let selectedPage = 0;
+    const targetPage = 5;
+    const className = 'button';
+    const onSelect = (page) => {
+      selectedPage = page;
+    };
+    const paginator = TestUtils.renderIntoDocument(
+      <Paginator.Context tags={{
+        link: {
+          tag: 'span',
+          props: {
+            className
+          }
+        }
+      }} segments={{centerPage: [2]}} onSelect={onSelect}>
+        <Paginator.Button page={targetPage}>Target</Paginator.Button>
+      </Paginator.Context>
+    );
+
+    const button = TestUtils.findRenderedDOMComponentWithClass(
+      paginator, className
+    );
+
+    TestUtils.Simulate.click(button);
+
+    expect(selectedPage).toEqual(targetPage);
   });
 });
