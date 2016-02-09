@@ -11,7 +11,9 @@ const defaultTags = {
   },
   ellipsis: {
     tag: 'div',
-    props: {}
+    props: {
+        children: '…'
+    }
   },
   link: {
     tag: 'span',
@@ -84,25 +86,21 @@ class Ellipsis extends React.Component {
     const segments = context.segments;
     const tags = context.tags;
     const Tag = tags.ellipsis.tag;
-    const children = props.children;
     const previousPages = segments[props.previousField];
     const nextPages = segments[props.nextField];
     const showEllipsis = nextPages[0] - previousPages.slice(-1)[0] > 1;
 
     if(showEllipsis) {
-      return <Tag {...tags.ellipsis.props} {...props}>{children}</Tag>;
+      return <Tag {...tags.ellipsis.props} {...props}/>;
     }
 
     return null;
   }
 }
 Ellipsis.propTypes = {
-  children: React.PropTypes.any.isRequired,
+  children: React.PropTypes.any,
   previousField: React.PropTypes.string.isRequired,
   nextField: React.PropTypes.string.isRequired,
-};
-Ellipsis.defaultProps = {
-  children: '…'
 };
 Ellipsis.contextTypes = {
   segments: React.PropTypes.object,
