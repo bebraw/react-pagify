@@ -13,7 +13,7 @@ const defaultTags = {
   ellipsis: {
     tag: 'div',
     props: {
-        children: '…'
+      children: '…'
     }
   },
   link: {
