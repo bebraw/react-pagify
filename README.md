@@ -97,6 +97,42 @@ import segmentize from 'segmentize';
 
 > See `demo/` for a full implementation of the ideas discussed.
 
+### Cutomize tags
+
+By default Pagify use `div`s for container, segments and ellipses, and `span`s for “links”. You can cutomize these tags as well as define default props:
+
+```javascript
+...
+
+import Paginator from 'react-pagify';
+
+...
+
+<Paginator.Context className="pagination"
+  tags={{
+      container: {
+          tag: 'ul'
+      },
+      segment: {
+          tag: 'li'
+      },
+      ellipsis: {
+          tag: 'li'
+      },
+      link: {
+          tag: 'a',
+          props: {
+              href: '#'
+          }
+      }
+  }}
+segments={{
+    centerPage: [4]
+  }} onSelect={(page) => console.log(page)}>
+  <Paginator.Segment field="centerPage" />
+</Paginator.Context>
+```
+
 ## Contributors
 
 * [rowbare](https://github.com/rowbare) - Allowed usage in Bootstrap by making `className` customizable.
