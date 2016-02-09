@@ -1,40 +1,42 @@
 import React from 'react';
 
+const defaultTags = {
+  container: {
+    tag: 'div',
+    props: {}
+  },
+  segment: {
+    tag: 'div',
+    props: {}
+  },
+  ellipsis: {
+    tag: 'div',
+    props: {}
+  },
+  link: {
+    tag: 'span',
+    props: {}
+  }
+};
+
 class Context extends React.Component {
   getChildContext() {
     return {
       segments: this.props.segments,
-      tags: this.props.tags,
-      onSelect: this.props.onSelect
+      onSelect: this.props.onSelect,
+      tags: this.tags
     };
   }
+  get tags() {
+    return {...defaultTags, ...this.props.tags};
+  }
   render() {
-    const {onSelect, segments, tags, ...props} = this.props;
-    const Container = tags.container.tag;
+    const {onSelect, segments, ...props} = this.props;
+    const Container = this.tags.container;
 
-    return <Container {...tags.container.props} {...props}>{this.props.children}</Container>;
+    return <Container.tag {...Container.props} {...props}>{this.props.children}</Container.tag>;
   }
 }
-Context.defaultProps = {
-  tags: {
-    container: {
-      tag: 'div',
-      props: {}
-    },
-    segment: {
-      tag: 'div',
-      props: {}
-    },
-    ellipsis: {
-      tag: 'div',
-      props: {}
-    },
-    link: {
-      tag: 'span',
-      props: {}
-    }
-  }
-};
 Context.propTypes = {
   children: React.PropTypes.any,
   onSelect: React.PropTypes.func,
