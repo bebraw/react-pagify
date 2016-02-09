@@ -165,15 +165,8 @@ describe('Paginator', function() {
       selectedPage = page;
     };
     const paginator = TestUtils.renderIntoDocument(
-      <Paginator.Context tags={{
-        link: {
-          tag: 'span',
-          props: {
-            className
-          }
-        }
-      }} segments={{centerPage: [2]}} onSelect={onSelect}>
-        <Paginator.Button page={targetPage}>Target</Paginator.Button>
+      <Paginator.Context segments={{centerPage: [2]}} onSelect={onSelect}>
+        <Paginator.Button className={className} page={targetPage}>Target</Paginator.Button>
       </Paginator.Context>
     );
 
@@ -181,7 +174,7 @@ describe('Paginator', function() {
       paginator, className
     );
 
-    TestUtils.Simulate.click(button);
+    TestUtils.Simulate.click(button.children[0]);
 
     expect(selectedPage).toEqual(targetPage);
   });
