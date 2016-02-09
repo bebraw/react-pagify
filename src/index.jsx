@@ -1,5 +1,5 @@
 import React from 'react';
-import deepAssign from 'deep-assign';
+import merge from 'lodash.merge';
 
 const defaultTags = {
   container: {
@@ -31,7 +31,7 @@ class Context extends React.Component {
     };
   }
   get tags() {
-    return deepAssign({}, defaultTags, this.props.tags);
+    return merge({}, defaultTags, this.props.tags);
   }
   render() {
     const {onSelect, segments, ...props} = this.props;
