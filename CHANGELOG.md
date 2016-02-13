@@ -1,3 +1,8 @@
+2.0.1 / 2016-02-13
+==================
+
+  * Remove *lodash* from `dist` bundle. Now it's handled as a `peerDependency`. Thanks @FredericHeem!
+
 2.0.0 / 2016-02-09
 ==================
 
