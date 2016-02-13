@@ -160,6 +160,7 @@ if (TARGET === 'gh-pages' || TARGET === 'gh-pages:stats') {
     entry: {
       app: config.paths.demo,
       vendors: [
+        'lodash',
         'react'
       ],
       style: STYLE_ENTRIES
@@ -252,6 +253,12 @@ const distCommon = {
   },
   entry: path.join(config.paths.src, 'index.jsx'), // XXX: tidy up
   externals: {
+    'lodash': {
+      commonjs: 'lodash',
+      commonjs2: 'lodash',
+      amd: '_',
+      root: '_'
+    },
     'react': {
       commonjs: 'react',
       commonjs2: 'react',
