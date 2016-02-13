@@ -160,6 +160,7 @@ import Paginator from 'react-pagify';
 * [Nick Zarczynski](https://github.com/jacktrades) - Added configuration to always show prev/next buttons and allowed inactive buttons to be styled.
 * [Nimi Wariboko Jr.](https://github.com/nemothekid) - Added support for `activeClassName`.
 * [Artem Sapegin](https://github.com/sapegin) - Added `Added ellipsisButton` and `sidePages` props. Allowed paginator tags to be customized (important for Bootstrap).
+* [Frederic Heem](https://github.com/FredericHeem) - Moved lodash to `peerDependencies`.
 
 ## License
 
