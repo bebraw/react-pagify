@@ -2,7 +2,7 @@
   "name": "react-pagify",
   "description": "Simple pagination for React",
   "author": "Juho Vepsalainen <bebraw@gmail.com>",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "scripts": {
     "start": "webpack-dev-server",
     "test": "jest",
@@ -92,6 +92,5 @@
     "test",
     "test:lint"
   ],
-  "dependencies": {
-  }
+  "dependencies": {}
 }
