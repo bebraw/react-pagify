@@ -46,7 +46,6 @@
     "html-webpack-plugin": "^2.7.2",
     "jest-cli": "^0.8.2",
     "json-loader": "^0.5.4",
-    "lodash": "^4.0.1",
     "purecss": "^0.6.0",
     "react": "^0.14.7",
     "react-addons-test-utils": "^0.14.7",
@@ -63,7 +62,8 @@
     "webpack-merge": "^0.7.3"
   },
   "peerDependencies": {
-    "react": ">=0.13.* <1.0.0 || > 0.14.0-alpha"
+    "react": ">=0.13.* <1.0.0 || > 0.14.0-alpha",
+    "lodash": "^4.3.0"
   },
   "repository": {
     "type": "git",
@@ -93,6 +93,5 @@
     "test:lint"
   ],
   "dependencies": {
-    "lodash.merge": "^4.1.0"
   }
 }
