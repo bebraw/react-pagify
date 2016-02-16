@@ -153,6 +153,10 @@ import Paginator from 'react-pagify';
 </Paginator.Context>
 ```
 
+## Related Projects
+
+* [react-pagify-preset-bootstrap](https://www.npmjs.com/package/react-pagify-preset-bootstrap) - Bootstrap 3 preset by @sapegin.
+
 ## Contributors
 
 * [rowbare](https://github.com/rowbare) - Allowed usage in Bootstrap by making `className` customizable.
