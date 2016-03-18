@@ -1,3 +1,8 @@
+2.0.2 / 2016-03-18
+==================
+
+  * Use local *lodash* import over a global one. Thanks @Coobaha!
+
 2.0.1 / 2016-02-13
 ==================
 
