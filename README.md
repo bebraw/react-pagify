@@ -165,6 +165,7 @@ import Paginator from 'react-pagify';
 * [Nimi Wariboko Jr.](https://github.com/nemothekid) - Added support for `activeClassName`.
 * [Artem Sapegin](https://github.com/sapegin) - Added `Added ellipsisButton` and `sidePages` props. Allowed paginator tags to be customized (important for Bootstrap).
 * [Frederic Heem](https://github.com/FredericHeem) - Moved lodash to `peerDependencies`.
+* [Alexander Ryzhikov](https://github.com/Coobaha) - Fixed global lodash import.
 
 ## License
 
