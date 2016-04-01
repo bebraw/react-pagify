@@ -1,3 +1,8 @@
+2.0.3 / 2016-04-01
+==================
+
+  * Fix *lodash* `external` definition. It's not included to the `dist` bundle anymore. #22.
+
 2.0.2 / 2016-03-18
 ==================
 
