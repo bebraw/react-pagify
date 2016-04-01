@@ -253,11 +253,11 @@ const distCommon = {
   },
   entry: path.join(config.paths.src, 'index.jsx'), // XXX: tidy up
   externals: {
-    'lodash': {
-      commonjs: 'lodash',
-      commonjs2: 'lodash',
-      amd: '_',
-      root: '_'
+    'lodash/merge': {
+      commonjs: 'lodash/merge',
+      commonjs2: 'lodash/merge',
+      amd:  ['lodash', 'merge'],
+      root: ['_', 'merge']
     },
     'react': {
       commonjs: 'react',
