@@ -21,7 +21,8 @@ export default class App extends React.Component {
       },
     };
 
-    this.onSelect = this.onSelect.bind(this);
+    this.selectPage = this.selectPage.bind(this);
+    this.goToLastPage = this.goToLastPage.bind(this);
     this.onPerPage = this.onPerPage.bind(this);
   }
   render() {
@@ -38,6 +39,8 @@ export default class App extends React.Component {
 
         <div className='per-page-container'>
           Per page <input type='number' min='1' defaultValue={pagination.perPage} onChange={this.onPerPage}></input>
+
+          <a className='go-to-last-page' href="#" onClick={this.goToLastPage}>Go to the last page</a>
         </div>
 
         <Paginator.Context className="pagify-pagination"
@@ -47,7 +50,7 @@ export default class App extends React.Component {
             beginPages: 3,
             endPages: 3,
             sidePages: 2
-          })} onSelect={this.onSelect}>
+          })} onSelect={this.selectPage}>
           <Paginator.Button page={pagination.page - 1}>Previous</Paginator.Button>
 
           <Paginator.Segment field="beginPages" />
@@ -82,7 +85,7 @@ export default class App extends React.Component {
             beginPages: 1,
             endPages: 1,
             sidePages: 2
-          })} onSelect={this.onSelect} ellipsis={'…'}>
+          })} onSelect={this.selectPage} ellipsis={'…'}>
           <Paginator.Button page={pagination.page - 1}>Previous one</Paginator.Button>
 
           <Paginator.Segment field="beginPages" />
@@ -108,7 +111,14 @@ export default class App extends React.Component {
       </div>
     );
   }
-  onSelect(page) {
+  goToLastPage() {
+    const state = this.state;
+    const pagination = state.pagination || {};
+    const pages = Math.ceil(state.data.length / pagination.perPage);
+
+    this.selectPage(pages);
+  }
+  selectPage(page) {
     const state = this.state;
     const pagination = state.pagination || {};
     const pages = Math.ceil(state.data.length / pagination.perPage);

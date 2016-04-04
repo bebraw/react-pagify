@@ -53,6 +53,10 @@ header .description {
     letter-spacing: 0.01em;
 }
 
+.go-to-last-page {
+    float: right;
+}
+
 article {
     display: block !important;
 
