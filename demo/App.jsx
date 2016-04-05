@@ -154,7 +154,7 @@ function paginate(data, o) {
   return {
     amount: amountOfPages,
     data: data.slice(startPage * perPage, startPage * perPage + perPage),
-    page: startPage
+    page: startPage + 1
   };
 }
 
