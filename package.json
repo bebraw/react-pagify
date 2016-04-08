@@ -62,7 +62,7 @@
     "webpack-merge": "^0.7.3"
   },
   "peerDependencies": {
-    "react": ">= 0.13.* < 1.0.0 || > 0.14.0-alpha",
+    "react": ">= 0.13.* < 16.0.0",
     "lodash": ">= 4.3.0 < 5.0.0"
   },
   "repository": {
