@@ -3,9 +3,7 @@ import React from 'react';
 import Fork from 'react-ghfork';
 import range from 'lodash/range';
 import cumberbatch from 'cumberbatch-name';
-import segmentize from 'segmentize';
 
-import Paginator from '../src/index.jsx';
 import DemoPaginator from './DemoPaginator.jsx';
 
 export default class App extends React.Component {
@@ -55,37 +53,9 @@ export default class App extends React.Component {
           )}</ul>
         </div>
 
-        {/* Full, verbose example. */}
-        <Paginator.Context className="pagify-pagination"
-          segments={segmentize({
-            page: pagination.page,
-            pages: pages,
-            beginPages: 1,
-            endPages: 1,
-            sidePages: 2
-          })} onSelect={this.selectPage} ellipsis={'…'}>
-          <Paginator.Button page={pagination.page - 1}>Previous one</Paginator.Button>
-
-          <Paginator.Segment field="beginPages" />
-
-          <Paginator.Ellipsis className="ellipsis"
-            previousField="beginPages" nextField="previousPages">
-            ***
-          </Paginator.Ellipsis>
-
-          <Paginator.Segment field="previousPages" />
-          <Paginator.Segment field="centerPage" className="selected" />
-          <Paginator.Segment field="nextPages" />
-
-          <Paginator.Ellipsis className="ellipsis"
-            previousField="nextPages" nextField="endPages">
-            ***
-          </Paginator.Ellipsis>
-
-          <Paginator.Segment field="endPages" />
-
-          <Paginator.Button page={pagination.page + 1}>Next one</Paginator.Button>
-        </Paginator.Context>
+        <DemoPaginator pagination={pagination} pages={pages} ellipsis="***"
+          labels={{previous: 'Previous one', next: 'Next one'}}
+          onSelect={this.selectPage} />
       </div>
     );
   }
