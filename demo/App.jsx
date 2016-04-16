@@ -6,6 +6,7 @@ import cumberbatch from 'cumberbatch-name';
 import segmentize from 'segmentize';
 
 import Paginator from '../src/index.jsx';
+import DemoPaginator from './DemoPaginator.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -43,32 +44,8 @@ export default class App extends React.Component {
           <a className='go-to-last-page' href="#" onClick={this.goToLastPage}>Go to the last page</a>
         </div>
 
-        <Paginator.Context className="pagify-pagination"
-          segments={segmentize({
-            page: pagination.page,
-            pages: pages,
-            beginPages: 3,
-            endPages: 3,
-            sidePages: 2
-          })} onSelect={this.selectPage}>
-          <Paginator.Button page={pagination.page - 1}>Previous</Paginator.Button>
-
-          <Paginator.Segment field="beginPages" />
-
-          <Paginator.Ellipsis className="ellipsis"
-            previousField="beginPages" nextField="previousPages" />
-
-          <Paginator.Segment field="previousPages" />
-          <Paginator.Segment field="centerPage" className="selected" />
-          <Paginator.Segment field="nextPages" />
-
-          <Paginator.Ellipsis className="ellipsis"
-            previousField="nextPages" nextField="endPages" />
-
-          <Paginator.Segment field="endPages" />
-
-          <Paginator.Button page={pagination.page + 1}>Next</Paginator.Button>
-        </Paginator.Context>
+        {/* You can wrap the paginator to a custom component of its own. */}
+        <DemoPaginator pagination={pagination} pages={pages} onSelect={this.selectPage} />
 
         <div className='data'>
           <h3>Comics</h3>
@@ -78,6 +55,7 @@ export default class App extends React.Component {
           )}</ul>
         </div>
 
+        {/* Full, verbose example. */}
         <Paginator.Context className="pagify-pagination"
           segments={segmentize({
             page: pagination.page,
