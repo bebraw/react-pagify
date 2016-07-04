@@ -127,8 +127,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var _props = this.props;
 	      var onSelect = _props.onSelect;
 	      var segments = _props.segments;
+	      var tags = _props.tags;
 	
-	      var props = _objectWithoutProperties(_props, ['onSelect', 'segments']);
+	      var props = _objectWithoutProperties(_props, ['onSelect', 'segments', 'tags']);
 	
 	      var Container = this.tags.container;
 	
@@ -173,13 +174,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'render',
 	    value: function render() {
 	      var context = this.context;
-	      var props = this.props;
+	      var _props2 = this.props;
+	      var field = _props2.field;
+	
+	      var props = _objectWithoutProperties(_props2, ['field']);
+	
 	      var segments = context.segments;
 	      var onSelect = context.onSelect;
 	      var tags = context.tags;
 	      var Tag = tags.segment.tag;
 	      var Link = tags.link.tag;
-	      var pages = segments[props.field];
+	      var pages = segments[field];
 	
 	      return _react2.default.createElement(
 	        Tag,
@@ -224,13 +229,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'render',
 	    value: function render() {
 	      var context = this.context;
-	      var props = this.props;
+	      var _props3 = this.props;
+	      var page = _props3.page;
+	      var children = _props3.children;
+	
+	      var props = _objectWithoutProperties(_props3, ['page', 'children']);
+	
 	      var onSelect = context.onSelect;
 	      var tags = context.tags;
 	      var Tag = tags.segment.tag;
 	      var Link = tags.link.tag;
-	      var page = props.page;
-	      var children = props.children;
 	
 	      return _react2.default.createElement(
 	        Tag,
@@ -272,12 +280,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'render',
 	    value: function render() {
 	      var context = this.context;
-	      var props = this.props;
+	      var _props4 = this.props;
+	      var previousField = _props4.previousField;
+	      var nextField = _props4.nextField;
+	
+	      var props = _objectWithoutProperties(_props4, ['previousField', 'nextField']);
+	
 	      var segments = context.segments;
 	      var tags = context.tags;
 	      var Tag = tags.ellipsis.tag;
-	      var previousPages = segments[props.previousField];
-	      var nextPages = segments[props.nextField];
+	      var previousPages = segments[previousField];
+	      var nextPages = segments[nextField];
 	      var showEllipsis = nextPages[0] - previousPages.slice(-1)[0] > 1;
 	
 	      if (showEllipsis) {
