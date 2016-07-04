@@ -34,7 +34,7 @@ class Context extends React.Component {
     return merge({}, defaultTags, this.props.tags);
   }
   render() {
-    const {onSelect, segments, ...props} = this.props;
+    const {onSelect, segments, tags, ...props} = this.props;
     const Container = this.tags.container;
 
     return <Container.tag {...Container.props} {...props}>{this.props.children}</Container.tag>;
@@ -55,13 +55,13 @@ Context.childContextTypes = {
 class Segment extends React.Component {
   render() {
     const context = this.context;
-    const props = this.props;
+    const { field, ...props } = this.props;
     const segments = context.segments;
     const onSelect = context.onSelect;
     const tags = context.tags;
     const Tag = tags.segment.tag;
     const Link = tags.link.tag;
-    const pages = segments[props.field];
+    const pages = segments[field];
 
     return (<Tag {...tags.segment.props} {...props}>{pages.map((page) =>
       <Link
@@ -83,13 +83,11 @@ Segment.contextTypes = {
 class Button extends React.Component {
   render() {
     const context = this.context;
-    const props = this.props;
+    const { page, children, ...props } = this.props;
     const onSelect = context.onSelect;
     const tags = context.tags;
     const Tag = tags.segment.tag;
     const Link = tags.link.tag;
-    const page = props.page;
-    const children = props.children;
 
     return (<Tag {...tags.segment.props} {...props}>
       <Link
@@ -110,12 +108,12 @@ Button.contextTypes = {
 class Ellipsis extends React.Component {
   render() {
     const context = this.context;
-    const props = this.props;
+    const { previousField, nextField, ...props } = this.props;
     const segments = context.segments;
     const tags = context.tags;
     const Tag = tags.ellipsis.tag;
-    const previousPages = segments[props.previousField];
-    const nextPages = segments[props.nextField];
+    const previousPages = segments[previousField];
+    const nextPages = segments[nextField];
     const showEllipsis = nextPages[0] - previousPages.slice(-1)[0] > 1;
 
     if(showEllipsis) {
