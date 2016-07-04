@@ -34,7 +34,7 @@ class Context extends React.Component {
     return merge({}, defaultTags, this.props.tags);
   }
   render() {
-    const {onSelect, segments, tags, ...props} = this.props;
+    const {onSelect, segments, tags, ...props} = this.props; // eslint-disable-line max-len, no-unused-vars
     const Container = this.tags.container;
 
     return <Container.tag {...Container.props} {...props}>{this.props.children}</Container.tag>;
