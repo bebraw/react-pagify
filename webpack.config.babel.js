@@ -2,22 +2,25 @@ import * as path from 'path';
 
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+//import HtmlWebpackRemarkPlugin from 'html-webpack-remark-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import SystemBellPlugin from 'system-bell-webpack-plugin';
-import Clean from 'clean-webpack-plugin';
+import CleanPlugin from 'clean-webpack-plugin';
 import merge from 'webpack-merge';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 
-import renderJSX from './lib/render.jsx';
 import App from './demo/App.jsx';
 import pkg from './package.json';
+
+//import js from 'highlight.js/lib/languages/javascript';
 
 const RENDER_UNIVERSAL = true;
 const TARGET = process.env.npm_lifecycle_event;
 const ROOT_PATH = __dirname;
 const config = {
   paths: {
+    readme: path.join(ROOT_PATH, 'README.md'),
     dist: path.join(ROOT_PATH, 'dist'),
     src: path.join(ROOT_PATH, 'src'),
     demo: path.join(ROOT_PATH, 'demo'),
@@ -96,12 +99,23 @@ if (TARGET === 'start') {
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': '"development"'
       }),
-      new HtmlWebpackPlugin(Object.assign({}, {
+      new HtmlWebpackPlugin({
         title: pkg.name + ' - ' + pkg.description,
         template: 'lib/index_template.ejs',
 
-        inject: false
-      }, renderJSX(__dirname, pkg))),
+        // Context for the template
+        name: pkg.name,
+        description: pkg.description,
+        demonstration: RENDER_UNIVERSAL ? ReactDOM.renderToString(<App />) : ''
+      }),
+      // XXX: broken?
+      /*new HtmlWebpackRemarkPlugin({
+        key: 'documentation',
+        file: config.paths.readme,
+        languages: {
+          js
+        }
+      }),*/
       new webpack.HotModuleReplacementPlugin()
     ],
     module: {
@@ -171,7 +185,7 @@ if (TARGET === 'gh-pages' || TARGET === 'gh-pages:stats') {
       chunkFilename: '[chunkhash].js'
     },
     plugins: [
-      new Clean(['gh-pages'], {
+      new CleanPlugin(['gh-pages'], {
         verbose: false
       }),
       new ExtractTextPlugin('[name].[chunkhash].css'),
@@ -179,13 +193,23 @@ if (TARGET === 'gh-pages' || TARGET === 'gh-pages:stats') {
           // This affects the react lib size
         'process.env.NODE_ENV': '"production"'
       }),
-      new HtmlWebpackPlugin(Object.assign({}, {
+      new HtmlWebpackPlugin({
         title: pkg.name + ' - ' + pkg.description,
         template: 'lib/index_template.ejs',
-        inject: false
-      }, renderJSX(
-        __dirname, pkg, RENDER_UNIVERSAL ? ReactDOM.renderToString(<App />) : '')
-      )),
+
+        // Context for the template
+        name: pkg.name,
+        description: pkg.description,
+        demonstration: RENDER_UNIVERSAL ? ReactDOM.renderToString(<App />) : ''
+      }),
+      // XXX: broken?
+      /*new HtmlWebpackRemarkPlugin({
+        key: 'documentation',
+        file: config.paths.readme,
+        languages: {
+          js
+        }
+      }),*/
       new NamedModulesPlugin(),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
