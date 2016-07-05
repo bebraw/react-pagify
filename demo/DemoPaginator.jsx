@@ -15,7 +15,12 @@ const DemoPaginator = ({
       endPages: 3,
       sidePages: 2
     })} onSelect={onSelect}>
-    <Paginator.Button page={pagination.page - 1}>{labels.previous}</Paginator.Button>
+    <Paginator.Button
+      className={pagination.page > 1 ? '' : 'disabled'}
+      page={pagination.page - 1}
+    >
+      {labels.previous}
+    </Paginator.Button>
 
     <Paginator.Segment field="beginPages" />
 
@@ -31,7 +36,12 @@ const DemoPaginator = ({
 
     <Paginator.Segment field="endPages" />
 
-    <Paginator.Button page={pagination.page + 1}>{labels.next}</Paginator.Button>
+    <Paginator.Button
+      className={pagination.page + 1 < pages ? '' : 'disabled'}
+      page={pagination.page + 1}
+    >
+      {labels.next}
+    </Paginator.Button>
   </Paginator.Context>
 );
 DemoPaginator.defaultProps = {

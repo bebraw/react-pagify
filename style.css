@@ -15,6 +15,11 @@
 
     background: #ddd;
 }
+.pagify-pagination .disabled span {
+    opacity: .4;
+    cursor: not-allowed;
+    box-shadow: none;
+}
 .pagify-pagination .ellipsis {
     margin-right: 1em;
     background: inherit;
