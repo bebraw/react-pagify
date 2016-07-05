@@ -1,3 +1,13 @@
+2.1.1 / 2016-07-05
+==================
+
+  * Add `.pagify-pagination .disabled span` style. This is useful if you want to disable previous/next button. #27
+
+2.1.0 / 2016-07-05
+==================
+
+  * Fix React 15 compatibility errors/warnings. It shouldn't pass extra props to elements anymore.
+
 2.0.4 / 2016-04-08
 ==================
 
