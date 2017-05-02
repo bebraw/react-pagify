@@ -1,3 +1,8 @@
+2.2.0 / 2017-05-02
+==================
+
+  * Chore - Upgrade to use `prop-types`. This change was needed for React 15.5 to work without warnings. #29
+
 2.1.1 / 2016-07-05
 ==================
 
