@@ -49,9 +49,8 @@
     "json-loader": "^0.5.4",
     "lodash": "^4.13.1",
     "purecss": "^0.6.0",
-    "react": "^15.2.0",
-    "react-addons-test-utils": "^15.2.0",
-    "react-dom": "^15.2.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "react-ghfork": "^0.3.5",
     "segmentize": "^0.4.1",
     "style-loader": "^0.13.1",
@@ -62,7 +61,7 @@
     "webpack-merge": "^0.14.0"
   },
   "peerDependencies": {
-    "react": ">= 0.13.* < 16.0.0",
+    "react": ">= 0.15.3 < 16.0.0",
     "lodash": ">= 4.3.0 < 5.0.0"
   },
   "repository": {
@@ -92,5 +91,7 @@
     "test",
     "test:lint"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "prop-types": "^15.5.8"
+  }
 }

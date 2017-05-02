@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import merge from 'lodash/merge';
 
 const defaultTags = {
@@ -41,15 +42,15 @@ class Context extends React.Component {
   }
 }
 Context.propTypes = {
-  children: React.PropTypes.any,
-  onSelect: React.PropTypes.func,
-  segments: React.PropTypes.object,
-  tags: React.PropTypes.object
+  children: PropTypes.any,
+  onSelect: PropTypes.func,
+  segments: PropTypes.object,
+  tags: PropTypes.object
 };
 Context.childContextTypes = {
-  onSelect: React.PropTypes.func,
-  segments: React.PropTypes.object,
-  tags: React.PropTypes.object
+  onSelect: PropTypes.func,
+  segments: PropTypes.object,
+  tags: PropTypes.object
 };
 
 class Segment extends React.Component {
@@ -72,12 +73,12 @@ class Segment extends React.Component {
   }
 }
 Segment.propTypes = {
-  field: React.PropTypes.string.isRequired
+  field: PropTypes.string.isRequired
 };
 Segment.contextTypes = {
-  onSelect: React.PropTypes.func,
-  segments: React.PropTypes.object,
-  tags: React.PropTypes.object
+  onSelect: PropTypes.func,
+  segments: PropTypes.object,
+  tags: PropTypes.object
 };
 
 class Button extends React.Component {
@@ -97,12 +98,12 @@ class Button extends React.Component {
   }
 }
 Button.propTypes = {
-  children: React.PropTypes.any,
-  page: React.PropTypes.number.isRequired
+  children: PropTypes.any,
+  page: PropTypes.number.isRequired
 };
 Button.contextTypes = {
-  onSelect: React.PropTypes.func,
-  tags: React.PropTypes.object
+  onSelect: PropTypes.func,
+  tags: PropTypes.object
 };
 
 class Ellipsis extends React.Component {
@@ -124,13 +125,13 @@ class Ellipsis extends React.Component {
   }
 }
 Ellipsis.propTypes = {
-  children: React.PropTypes.any,
-  previousField: React.PropTypes.string.isRequired,
-  nextField: React.PropTypes.string.isRequired,
+  children: PropTypes.any,
+  previousField: PropTypes.string.isRequired,
+  nextField: PropTypes.string.isRequired,
 };
 Ellipsis.contextTypes = {
-  segments: React.PropTypes.object,
-  tags: React.PropTypes.object
+  segments: PropTypes.object,
+  tags: PropTypes.object
 };
 
 export default {
