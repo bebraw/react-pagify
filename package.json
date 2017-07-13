@@ -19,6 +19,9 @@
     "postpublish": "npm run gh-pages && npm run gh-pages:deploy"
   },
   "main": "dist-modules",
+  "files": [
+    "dist-modules"
+  ],
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-core": "^6.10.4",
