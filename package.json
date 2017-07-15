@@ -20,7 +20,8 @@
   },
   "main": "dist-modules",
   "files": [
-    "dist-modules"
+    "dist-modules",
+    "style.css"
   ],
   "devDependencies": {
     "babel-cli": "^6.10.1",
