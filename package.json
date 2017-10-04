@@ -48,14 +48,14 @@
     "highlight.js": "^9.5.0",
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.22.0",
-    "html-webpack-remark-plugin": "^0.1.0",
+    "html-webpack-remark-plugin": "^0.3.0",
     "jest-cli": "^13.0.0",
     "json-loader": "^0.5.4",
     "lodash": "^4.13.1",
     "purecss": "^0.6.0",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-ghfork": "^0.3.5",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-ghfork": "^0.5.1",
     "segmentize": "^0.4.1",
     "style-loader": "^0.13.1",
     "system-bell-webpack-plugin": "^1.0.0",
@@ -65,7 +65,7 @@
     "webpack-merge": "^0.14.0"
   },
   "peerDependencies": {
-    "react": ">= 0.15.3 < 16.0.0",
+    "react": ">= 0.15.3 < 17.0.0",
     "lodash": ">= 4.3.0 < 5.0.0"
   },
   "repository": {
@@ -96,6 +96,6 @@
     "test:lint"
   ],
   "dependencies": {
-    "prop-types": "^15.5.8"
+    "prop-types": "^15.6.0"
   }
 }
