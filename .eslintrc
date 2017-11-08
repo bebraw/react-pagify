@@ -1,5 +1,5 @@
 {
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "prettier"],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -7,20 +7,20 @@
     "jasmine": true
   },
   "plugins": [
+    "prettier",
     "react"
   ],
   "globals": {
     "jest": false
   },
-  "ecmaFeatures": {
-    "jsx": true,
-    "globalReturn": false
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "globalReturn": false
+    },
   },
   "rules": {
-    "no-underscore-dangle": 0,
     "no-use-before-define": 0,
-    "quotes": [2, "single"],
-    "comma-dangle": 0,
     "jsx-quotes": 0,
     "react/display-name": 0,
     "react/jsx-no-undef": 1,
@@ -31,7 +31,6 @@
     "react/no-multi-comp": 0,
     "react/prop-types": 2,
     "react/react-in-jsx-scope": 1,
-    "react/self-closing-comp": 1,
-    "react/wrap-multilines": 1
+    "react/self-closing-comp": 1
   }
 }

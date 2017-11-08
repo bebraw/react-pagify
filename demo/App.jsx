@@ -37,7 +37,7 @@ export default class App extends React.Component {
         <Fork className='right' project='bebraw/react-pagify' />
 
         <div className='per-page-container'>
-          Per page <input type='number' min='1' defaultValue={pagination.perPage} onChange={this.onPerPage}></input>
+          Per page <input type='number' min='1' defaultValue={pagination.perPage} onChange={this.onPerPage} />
 
           <a className='go-to-last-page' href="#" onClick={this.goToLastPage}>Go to the last page</a>
         </div>

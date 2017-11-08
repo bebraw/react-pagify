@@ -1,139 +1,88 @@
-import * as path from 'path';
+import * as path from "path";
 
-import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-//import HtmlWebpackRemarkPlugin from 'html-webpack-remark-plugin';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import SystemBellPlugin from 'system-bell-webpack-plugin';
-import CleanPlugin from 'clean-webpack-plugin';
-import merge from 'webpack-merge';
-import React from 'react';
-import ReactDOM from 'react-dom/server';
+import webpack from "webpack";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import ExtractTextPlugin from "extract-text-webpack-plugin";
+import CleanPlugin from "clean-webpack-plugin";
+import merge from "webpack-merge";
 
-import App from './demo/App.jsx';
-import pkg from './package.json';
+import pkg from "./package.json";
 
-//import js from 'highlight.js/lib/languages/javascript';
-
-const RENDER_UNIVERSAL = true;
 const TARGET = process.env.npm_lifecycle_event;
 const ROOT_PATH = __dirname;
 const config = {
   paths: {
-    readme: path.join(ROOT_PATH, 'README.md'),
-    dist: path.join(ROOT_PATH, 'dist'),
-    src: path.join(ROOT_PATH, 'src'),
-    demo: path.join(ROOT_PATH, 'demo'),
-    tests: path.join(ROOT_PATH, 'tests')
+    readme: path.join(ROOT_PATH, "README.md"),
+    dist: path.join(ROOT_PATH, "dist"),
+    src: path.join(ROOT_PATH, "src"),
+    demo: path.join(ROOT_PATH, "demo"),
+    tests: path.join(ROOT_PATH, "tests"),
   },
-  filename: 'react-pagify',
-  library: 'ReactPagify'
+  filename: "react-pagify",
+  library: "ReactPagify",
 };
-const CSS_PATHS = [
-  config.paths.demo,
-  path.join(ROOT_PATH, 'style.css'),
-  path.join(ROOT_PATH, 'node_modules/purecss'),
-  path.join(ROOT_PATH, 'node_modules/highlight.js/styles/github.css'),
-  path.join(ROOT_PATH, 'node_modules/react-ghfork/gh-fork-ribbon.ie.css'),
-  path.join(ROOT_PATH, 'node_modules/react-ghfork/gh-fork-ribbon.css')
-];
-const STYLE_ENTRIES = [
-  'purecss',
-  'highlight.js/styles/github.css',
-  'react-ghfork/gh-fork-ribbon.ie.css',
-  'react-ghfork/gh-fork-ribbon.css',
-  './demo/main.css',
-  './style.css'
-];
 
 process.env.BABEL_ENV = TARGET;
 
 const demoCommon = {
   resolve: {
-    extensions: ['', '.js', '.jsx', '.css', '.png', '.jpg']
+    extensions: [".js", ".jsx", ".css", ".png", ".jpg"],
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        loaders: ['eslint'],
-        include: [
-          config.paths.demo,
-          config.paths.src
-        ]
-      }
-    ],
     loaders: [
       {
         test: /\.png$/,
-        loader: 'url?limit=100000&mimetype=image/png',
-        include: config.paths.demo
+        use: {
+          loader: "url-loader",
+          options: {
+            limit: 100000,
+            mimetype: "image/png",
+          },
+        },
+        include: config.paths.demo,
       },
       {
         test: /\.jpg$/,
-        loader: 'file',
-        include: config.paths.demo
+        use: "file-loader",
+        include: config.paths.demo,
       },
-      {
-        test: /\.json$/,
-        loader: 'json',
-        include: [
-          path.join(ROOT_PATH, 'package.json'),
-          path.join(ROOT_PATH, 'node_modules/cumberbatch-name/words.json')
-        ]
-      }
-    ]
+    ],
   },
-  plugins: [
-    new SystemBellPlugin()
-  ]
 };
 
-if (TARGET === 'start') {
+if (TARGET === "start") {
   module.exports = merge(demoCommon, {
-    devtool: 'eval-source-map',
+    devtool: "eval-source-map",
     entry: {
-      demo: [config.paths.demo].concat(STYLE_ENTRIES)
+      demo: config.paths.demo,
     },
     plugins: [
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': '"development"'
+        "process.env.NODE_ENV": '"development"',
       }),
       new HtmlWebpackPlugin({
-        title: pkg.name + ' - ' + pkg.description,
-        template: 'lib/index_template.ejs',
+        title: pkg.name + " - " + pkg.description,
+        template: "lib/index_template.ejs",
 
         // Context for the template
         name: pkg.name,
         description: pkg.description,
-        demonstration: RENDER_UNIVERSAL ? ReactDOM.renderToString(<App />) : ''
+        demonstration: "",
       }),
-      // XXX: broken?
-      /*new HtmlWebpackRemarkPlugin({
-        key: 'documentation',
-        file: config.paths.readme,
-        languages: {
-          js
-        }
-      }),*/
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
     ],
     module: {
       loaders: [
         {
           test: /\.css$/,
-          loaders: ['style', 'css'],
-          include: CSS_PATHS
+          use: ["style-loader", "css-loader"],
         },
         {
           test: /\.jsx?$/,
-          loaders: ['babel?cacheDirectory'],
-          include: [
-            config.paths.demo,
-            config.paths.src
-          ]
-        }
-      ]
+          use: "babel-loader",
+          include: [config.paths.demo, config.paths.src],
+        },
+      ],
     },
     devServer: {
       historyApiFallback: true,
@@ -142,187 +91,144 @@ if (TARGET === 'start') {
       progress: true,
       host: process.env.HOST,
       port: process.env.PORT,
-      stats: 'errors-only'
-    }
+      stats: "errors-only",
+    },
   });
 }
 
-function NamedModulesPlugin(options) {
-  this.options = options || {};
-}
-NamedModulesPlugin.prototype.apply = function(compiler) {
-  compiler.plugin('compilation', function(compilation) {
-    compilation.plugin('before-module-ids', function(modules) {
-      modules.forEach(function(module) {
-        if(module.id === null && module.libIdent) {
-          var id = module.libIdent({
-            context: this.options.context || compiler.options.context
-          });
-
-          // Skip CSS files since those go through ExtractTextPlugin
-          if(!id.endsWith('.css')) {
-            module.id = id;
-          }
-        }
-      }, this);
-    }.bind(this));
-  }.bind(this));
-};
-
-if (TARGET === 'gh-pages' || TARGET === 'gh-pages:stats') {
+if (TARGET === "gh-pages" || TARGET === "gh-pages:stats") {
   module.exports = merge(demoCommon, {
     entry: {
       app: config.paths.demo,
-      vendors: [
-        'lodash',
-        'react'
-      ],
-      style: STYLE_ENTRIES
     },
     output: {
-      path: './gh-pages',
-      filename: '[name].[chunkhash].js',
-      chunkFilename: '[chunkhash].js'
+      path: path.join(ROOT_PATH, "gh-pages"),
+      filename: "[name].[chunkhash].js",
+      chunkFilename: "[chunkhash].js",
     },
     plugins: [
-      new CleanPlugin(['gh-pages'], {
-        verbose: false
+      new CleanPlugin(["gh-pages"], {
+        verbose: false,
       }),
-      new ExtractTextPlugin('[name].[chunkhash].css'),
+      new ExtractTextPlugin("[name].[chunkhash].css"),
       new webpack.DefinePlugin({
-          // This affects the react lib size
-        'process.env.NODE_ENV': '"production"'
+        // This affects the react lib size
+        "process.env.NODE_ENV": '"production"',
       }),
       new HtmlWebpackPlugin({
-        title: pkg.name + ' - ' + pkg.description,
-        template: 'lib/index_template.ejs',
+        title: pkg.name + " - " + pkg.description,
+        template: "lib/index_template.ejs",
 
         // Context for the template
         name: pkg.name,
         description: pkg.description,
-        demonstration: RENDER_UNIVERSAL ? ReactDOM.renderToString(<App />) : ''
+        demonstration: "",
       }),
-      // XXX: broken?
-      /*new HtmlWebpackRemarkPlugin({
-        key: 'documentation',
-        file: config.paths.readme,
-        languages: {
-          js
-        }
-      }),*/
-      new NamedModulesPlugin(),
-      new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
-          warnings: false
-        }
+          warnings: false,
+        },
       }),
       new webpack.optimize.CommonsChunkPlugin({
-        names: ['vendors', 'manifest']
-      })
+        name: "vendor",
+        minChunks: isVendor,
+      }),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: "manifest",
+      }),
     ],
     module: {
       loaders: [
         {
           test: /\.css$/,
-          loader: ExtractTextPlugin.extract('style', 'css'),
-          include: CSS_PATHS
+          use: ExtractTextPlugin.extract({
+            use: "css-loader",
+            fallback: "style-loader",
+          }),
         },
         {
           test: /\.jsx?$/,
-          loaders: ['babel'],
-          include: [
-            config.paths.demo,
-            config.paths.src
-          ]
-        }
-      ]
-    }
+          use: "babel-loader",
+          include: [config.paths.demo, config.paths.src],
+        },
+      ],
+    },
   });
 }
 
+function isVendor({ resource }) {
+  return (
+    resource && resource.indexOf("node_modules") >= 0 && resource.match(/\.js$/)
+  );
+}
+
 // !TARGET === prepush hook for test
-if (TARGET === 'test' || TARGET === 'test:tdd' || !TARGET) {
+if (TARGET === "test" || TARGET === "test:tdd" || !TARGET) {
   module.exports = merge(demoCommon, {
     module: {
-      preLoaders: [
-        {
-          test: /\.jsx?$/,
-          loaders: ['eslint'],
-          include: [
-            config.paths.tests
-          ]
-        }
-      ],
       loaders: [
         {
           test: /\.jsx?$/,
-          loaders: ['babel?cacheDirectory'],
-          include: [
-            config.paths.src,
-            config.paths.tests
-          ]
-        }
-      ]
-    }
-  })
+          use: "babel-loader",
+          include: [config.paths.src, config.paths.tests],
+        },
+      ],
+    },
+  });
 }
 
 const distCommon = {
-  devtool: 'source-map',
+  devtool: "source-map",
   output: {
     path: config.paths.dist,
-    libraryTarget: 'umd',
-    library: config.library
+    libraryTarget: "umd",
+    library: config.library,
   },
-  entry: path.join(config.paths.src, 'index.jsx'), // XXX: tidy up
+  entry: path.join(config.paths.src, "index.jsx"), // XXX: tidy up
   externals: {
-    'lodash/merge': {
-      commonjs: 'lodash/merge',
-      commonjs2: 'lodash/merge',
-      amd:  ['lodash', 'merge'],
-      root: ['_', 'merge']
+    "lodash/merge": {
+      commonjs: "lodash/merge",
+      commonjs2: "lodash/merge",
+      amd: ["lodash", "merge"],
+      root: ["_", "merge"],
     },
-    'react': {
-      commonjs: 'react',
-      commonjs2: 'react',
-      amd: 'React',
-      root: 'React'
-    }
+    react: {
+      commonjs: "react",
+      commonjs2: "react",
+      amd: "React",
+      root: "React",
+    },
   },
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel'],
-        include: config.paths.src
-      }
-    ]
+        use: "babel-loader",
+        include: config.paths.src,
+      },
+    ],
   },
-  plugins: [
-    new SystemBellPlugin()
-  ]
 };
 
-if (TARGET === 'dist') {
+if (TARGET === "dist") {
   module.exports = merge(distCommon, {
     output: {
-      filename: config.filename + '.js'
-    }
+      filename: config.filename + ".js",
+    },
   });
 }
 
-if (TARGET === 'dist:min') {
+if (TARGET === "dist:min") {
   module.exports = merge(distCommon, {
     output: {
-      filename: config.filename + '.min.js'
+      filename: config.filename + ".min.js",
     },
     plugins: [
       new webpack.optimize.UglifyJsPlugin({
         compress: {
-          warnings: false
-        }
-      })
-    ]
+          warnings: false,
+        },
+      }),
+    ],
   });
 }
