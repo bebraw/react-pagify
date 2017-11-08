@@ -1,4 +1,4 @@
-[![build status](https://secure.travis-ci.org/bebraw/react-pagify.png)](http://travis-ci.org/bebraw/react-pagify)
+[![build status](https://secure.travis-ci.org/bebraw/react-pagify.svg)](http://travis-ci.org/bebraw/react-pagify)
 # react-pagify - Simple pagination for React
 
 *react-pagify* provides a simple API for building your own custom paginator.
