@@ -66,7 +66,7 @@ class Segment extends React.Component {
 
     return (<Tag {...tags.segment.props} {...props}>{pages.map((page) =>
       <Link
-        {...tags.link.props}
+        { ...Link === 'a' ? context.segments.urls[page] : {...tags.link.props } }
         key={`page-${page}`}
         onClick={(e) => onSelect(page, e)}>{page}</Link>
     )}</Tag>);
