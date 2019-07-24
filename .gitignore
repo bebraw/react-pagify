@@ -1,4 +1,3 @@
-dist-modules/
 node_modules/
 gh-pages/
 *.log

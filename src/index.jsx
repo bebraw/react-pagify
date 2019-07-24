@@ -64,9 +64,18 @@ class Segment extends React.Component {
     const Link = tags.link.tag;
     const pages = segments[field];
 
+    let containsUrls = false;
+    let urls = {};
+    if (Link === 'a' && segments.pageNumberToURLs) {
+      containsUrls = true;
+      for (let [key, value] of Object.entries(segments.pageNumberToURLs)) {
+        urls[key]= { href: value};
+      }
+    }
+
     return (<Tag {...tags.segment.props} {...props}>{pages.map((page) =>
       <Link
-        { ...Link === 'a' ? context.segments.urls[page] : {...tags.link.props } }
+        { ...containsUrls ? urls[page] : {...tags.link.props } }
         key={`page-${page}`}
         onClick={(e) => onSelect(page, e)}>{page}</Link>
     )}</Tag>);
